@@ -32,6 +32,7 @@ public class TouchInput
     public Vector3 draggingLastPos = Vector3.zero;
     public Vector3 draggingDirection = Vector3.zero;
     public Direction draggingDirectionName = Direction.Start;
+    public List<Touch> currentTouch;
     public TouchInput()
     {
         horizontalInput = 0;
@@ -183,6 +184,9 @@ public static class MobileInputReader
         input.horizontalInput = Input.GetAxisRaw("Horizontal");
 
         int validFingers = 0;
+
+        input.currentTouch = new List<Touch>(Input.touches);
+
         if (Input.touchCount > 0)
         {
             foreach (Touch touch in Input.touches)
