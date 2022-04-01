@@ -22,7 +22,6 @@ namespace KargaGames.Drawing
 
         Vector3 lastPos = Vector3.one * float.MaxValue;
 
-
         public virtual void Awake()
         {
             lineRenderer = GetComponent<LineRenderer>();
@@ -30,7 +29,6 @@ namespace KargaGames.Drawing
 
         public virtual void FixedUpdate()
         {
-
 
 
         }
