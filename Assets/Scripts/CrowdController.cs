@@ -28,6 +28,11 @@ public class CrowdController : MonoBehaviour
         StickmanPositions = new List<List<StickmanPosition>>();
         StickmanList = new List<Stickman>();
 
+        foreach(Stickman stickman in GetComponentsInChildren<Stickman>())
+        {
+            AddStickman(stickman);
+        }
+
     }
 
     // Update is called once per frame
@@ -40,6 +45,19 @@ public class CrowdController : MonoBehaviour
     public void AddStickman(Stickman newStickman)
     {
         StickmanList.Add(newStickman);
+        newStickman.SetCrowd(this);
+    }
+
+    public void RePositionStickmans()
+    {
+        ClearPositions();
+
+        GeneratePositions();
+
+        RePositionClosePoints();
+
+        AssignPointsToStickmans();
+
     }
 
     public void ClearPositions()
@@ -55,10 +73,9 @@ public class CrowdController : MonoBehaviour
         StickmanPositions = new List<List<StickmanPosition>>();
     }
 
-    public void RePositionStickmans()
-    {
-        ClearPositions();
 
+    public void GeneratePositions()
+    {
         float totalDistance = _spline.CalculateLength();
 
         totalDistance -= totalDistance % HorizontalDistanceBetweenStickmans;
@@ -67,14 +84,14 @@ public class CrowdController : MonoBehaviour
 
         if (totalDistance >= HorizontalDistanceBetweenStickmans)
         {
-            for (int i = 0; i < 50; i++)
+            for (int i = 0; i < StickmanList.Count; i++)
             {
 
                 StickmanPosition position = Instantiate(positionPrefab);
 
                 int xIndex = (int)((currentDistance % totalDistance) / HorizontalDistanceBetweenStickmans);
 
-                if(StickmanPositions.Count <= xIndex)
+                if (StickmanPositions.Count <= xIndex)
                 {
                     StickmanPositions.Add(new List<StickmanPosition>());
                 }
@@ -92,7 +109,7 @@ public class CrowdController : MonoBehaviour
         else
         {
 
-            for (int i = 0; i < 50; i++)
+            for (int i = 0; i < StickmanList.Count; i++)
             {
 
                 StickmanPosition position = Instantiate(positionPrefab);
@@ -111,9 +128,6 @@ public class CrowdController : MonoBehaviour
             }
 
         }
-
-        RePositionClosePoints();
-
     }
 
     public void RePositionClosePoints()
@@ -125,6 +139,20 @@ public class CrowdController : MonoBehaviour
         }
 
 
+    }
+
+
+    public void AssignPointsToStickmans()
+    {
+        int k = 0;
+        for(int i=0; i< StickmanPositions.Count;i++)
+        {
+            for(int j = 0; j< StickmanPositions[i].Count; j++)
+            {
+                StickmanList[k].SetDesiredPosition(StickmanPositions[i][j]);
+                k++;
+            }
+        }
     }
 
     

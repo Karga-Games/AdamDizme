@@ -154,8 +154,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   positioner: {fileID: 426238966916378807}
+  Distance: 0
   Height: 0
   indicator: {fileID: 426238968275736656}
+  ListCoordinate: {x: 0, y: 0}
 --- !u!1 &426238968275736657
 GameObject:
   m_ObjectHideFlags: 0
@@ -174,7 +176,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &426238968275736656
 Transform:
   m_ObjectHideFlags: 0
