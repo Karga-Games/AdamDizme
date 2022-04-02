@@ -7,7 +7,7 @@ using Dreamteck.Splines;
 public class SplineGenerator : SplineByDrawing
 {
 
-    public SplineComputer Road;
+    public CrowdController CrowdSpline;
     public float RoadWidth;
     public float YZFactor;
 
@@ -23,12 +23,17 @@ public class SplineGenerator : SplineByDrawing
         base.Update();
     }
 
+    public void SetCrowdController(CrowdController controller)
+    {
+        CrowdSpline = controller;
+    }
+
     public override void GenerateSplineFromLine(KargaGames.Drawing.Line line)
     {
         Vector3[] linePoints = new Vector3[line.GetLineRenderer().positionCount];
         line.GetLineRenderer().GetPositions(linePoints);
 
-        linePoints = RePositionSplinePoints(linePoints, DrawingArea, Road);
+        linePoints = RePositionSplinePoints(linePoints, DrawingArea, CrowdSpline.GetSpline());
 
         SplinePoint[] splinePoints = new SplinePoint[linePoints.Length];
 
@@ -40,9 +45,9 @@ public class SplineGenerator : SplineByDrawing
             i++;
         }
 
-        splineComputer.SetPoints(splinePoints,SplineComputer.Space.Local);
 
-        splineComputer.RebuildImmediate();
+        CrowdSpline.UpdateSpline(splinePoints);
+        
 
     }
 

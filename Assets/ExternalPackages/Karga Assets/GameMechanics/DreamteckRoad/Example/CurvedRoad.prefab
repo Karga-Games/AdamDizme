@@ -66,12 +66,12 @@ MonoBehaviour:
       tangent: {x: 0, y: 0, z: 0}
       tangent2: {x: 0, y: 0, z: 0}
     - _type: 0
-      position: {x: 0, y: 0, z: 35.0823}
+      position: {x: 0, y: 0, z: 100}
       color: {r: 1, g: 1, b: 1, a: 1}
       normal: {x: 0, y: 1, z: 0}
       size: 1
-      tangent: {x: 0, y: 0, z: 35.0823}
-      tangent2: {x: 0, y: 0, z: 35.0823}
+      tangent: {x: 0, y: 0, z: 100}
+      tangent2: {x: 0, y: 0, z: 100}
     closed: 0
     type: 0
     linearAverageDirection: 1
@@ -95,55 +95,55 @@ MonoBehaviour:
     color: {r: 1, g: 1, b: 1, a: 1}
     size: 1
     percent: 0
-  - position: {x: 0, y: 0, z: 3.8980331}
+  - position: {x: 0, y: 0, z: 11.111112}
     up: {x: 0, y: 1, z: 0}
     forward: {x: 0, y: 0, z: 1}
     color: {r: 1, g: 1, b: 1, a: 1}
     size: 1
     percent: 0.1111111111111111
-  - position: {x: 0, y: 0, z: 7.7960663}
+  - position: {x: 0, y: 0, z: 22.222223}
     up: {x: 0, y: 1, z: 0}
     forward: {x: 0, y: 0, z: 1}
     color: {r: 1, g: 1, b: 1, a: 1}
     size: 1
     percent: 0.2222222222222222
-  - position: {x: 0, y: 0, z: 11.694099}
+  - position: {x: 0, y: 0, z: 33.333336}
     up: {x: 0, y: 1, z: 0}
     forward: {x: 0, y: 0, z: 1}
     color: {r: 1, g: 1, b: 1, a: 1}
     size: 1
     percent: 0.3333333333333333
-  - position: {x: 0, y: 0, z: 15.592133}
+  - position: {x: 0, y: 0, z: 44.444447}
     up: {x: 0, y: 1, z: 0}
     forward: {x: 0, y: 0, z: 1}
     color: {r: 1, g: 1, b: 1, a: 1}
     size: 1
     percent: 0.4444444444444444
-  - position: {x: 0, y: 0, z: 19.490166}
+  - position: {x: 0, y: 0, z: 55.555557}
     up: {x: 0, y: 1, z: 0}
     forward: {x: 0, y: 0, z: 1}
     color: {r: 1, g: 1, b: 1, a: 1}
     size: 1
     percent: 0.5555555555555556
-  - position: {x: 0, y: 0, z: 23.388199}
+  - position: {x: 0, y: 0, z: 66.66667}
     up: {x: 0, y: 1, z: 0}
     forward: {x: 0, y: 0, z: 1}
     color: {r: 1, g: 1, b: 1, a: 1}
     size: 1
     percent: 0.6666666666666666
-  - position: {x: 0, y: 0, z: 27.286232}
+  - position: {x: 0, y: 0, z: 77.77778}
     up: {x: 0, y: 1, z: 0}
     forward: {x: 0, y: 0, z: 1}
     color: {r: 1, g: 1, b: 1, a: 1}
     size: 1
     percent: 0.7777777777777778
-  - position: {x: 0, y: 0, z: 31.184265}
+  - position: {x: 0, y: 0, z: 88.88889}
     up: {x: 0, y: 1, z: 0}
     forward: {x: 0, y: 0, z: 1}
     color: {r: 1, g: 1, b: 1, a: 1}
     size: 1
     percent: 0.8888888888888888
-  - position: {x: 0, y: 0, z: 35.0823}
+  - position: {x: 0, y: 0, z: 100}
     up: {x: 0, y: 1, z: 0}
     forward: {x: 0, y: 0, z: 1}
     color: {r: 1, g: 1, b: 1, a: 1}
@@ -156,55 +156,55 @@ MonoBehaviour:
     color: {r: 1, g: 1, b: 1, a: 1}
     size: 1
     percent: 0
-  - position: {x: 0, y: 0, z: 3.8980331}
+  - position: {x: 0, y: 0, z: 11.111111}
     up: {x: 0, y: 1, z: 0}
     forward: {x: 0, y: 0, z: 1}
     color: {r: 1, g: 1, b: 1, a: 1}
     size: 1
     percent: 0.1111111111111111
-  - position: {x: 0, y: 0, z: 7.7960663}
+  - position: {x: 0, y: 0, z: 22.222221}
     up: {x: 0, y: 1, z: 0}
     forward: {x: 0, y: 0, z: 1}
     color: {r: 1, g: 1, b: 1, a: 1}
     size: 1
     percent: 0.2222222222222222
-  - position: {x: 0, y: 0, z: 11.694099}
+  - position: {x: 0, y: 0, z: 33.333336}
     up: {x: 0, y: 1, z: 0}
     forward: {x: 0, y: 0, z: 1}
     color: {r: 1, g: 1, b: 1, a: 1}
     size: 1
     percent: 0.3333333333333333
-  - position: {x: 0, y: 0, z: 15.592133}
+  - position: {x: 0, y: 0, z: 44.444447}
     up: {x: 0, y: 1, z: 0}
     forward: {x: 0, y: 0, z: 1}
     color: {r: 1, g: 1, b: 1, a: 1}
     size: 1
     percent: 0.4444444444444444
-  - position: {x: 0, y: 0, z: 19.490166}
+  - position: {x: 0, y: 0, z: 55.555557}
     up: {x: 0, y: 1, z: 0}
     forward: {x: 0, y: 0, z: 1}
     color: {r: 1, g: 1, b: 1, a: 1}
     size: 1
     percent: 0.5555555555555556
-  - position: {x: 0, y: 0, z: 23.388199}
+  - position: {x: 0, y: 0, z: 66.66667}
     up: {x: 0, y: 1, z: 0}
     forward: {x: 0, y: 0, z: 1}
     color: {r: 1, g: 1, b: 1, a: 1}
     size: 1
     percent: 0.6666666666666666
-  - position: {x: 0, y: 0, z: 27.286232}
+  - position: {x: 0, y: 0, z: 77.77778}
     up: {x: 0, y: 1, z: 0}
     forward: {x: 0, y: 0, z: 1}
     color: {r: 1, g: 1, b: 1, a: 1}
     size: 1
     percent: 0.7777777777777778
-  - position: {x: 0, y: 0, z: 31.184265}
+  - position: {x: 0, y: 0, z: 88.88889}
     up: {x: 0, y: 1, z: 0}
     forward: {x: 0, y: 0, z: 1}
     color: {r: 1, g: 1, b: 1, a: 1}
     size: 1
     percent: 0.8888888888888888
-  - position: {x: 0, y: 0, z: 35.0823}
+  - position: {x: 0, y: 0, z: 100}
     up: {x: 0, y: 1, z: 0}
     forward: {x: 0, y: 0, z: 1}
     color: {r: 1, g: 1, b: 1, a: 1}
@@ -218,55 +218,55 @@ MonoBehaviour:
       color: {r: 1, g: 1, b: 1, a: 1}
       size: 1
       percent: 0
-    - position: {x: 0, y: 0, z: 3.8980331}
+    - position: {x: 0, y: 0, z: 11.111111}
       up: {x: 0, y: 1, z: 0}
       forward: {x: 0, y: 0, z: 1}
       color: {r: 1, g: 1, b: 1, a: 1}
       size: 1
       percent: 0.1111111111111111
-    - position: {x: 0, y: 0, z: 7.7960663}
+    - position: {x: 0, y: 0, z: 22.222221}
       up: {x: 0, y: 1, z: 0}
       forward: {x: 0, y: 0, z: 1}
       color: {r: 1, g: 1, b: 1, a: 1}
       size: 1
       percent: 0.2222222222222222
-    - position: {x: 0, y: 0, z: 11.694099}
+    - position: {x: 0, y: 0, z: 33.333336}
       up: {x: 0, y: 1, z: 0}
       forward: {x: 0, y: 0, z: 1}
       color: {r: 1, g: 1, b: 1, a: 1}
       size: 1
       percent: 0.3333333333333333
-    - position: {x: 0, y: 0, z: 15.592133}
+    - position: {x: 0, y: 0, z: 44.444447}
       up: {x: 0, y: 1, z: 0}
       forward: {x: 0, y: 0, z: 1}
       color: {r: 1, g: 1, b: 1, a: 1}
       size: 1
       percent: 0.4444444444444444
-    - position: {x: 0, y: 0, z: 19.490166}
+    - position: {x: 0, y: 0, z: 55.555557}
       up: {x: 0, y: 1, z: 0}
       forward: {x: 0, y: 0, z: 1}
       color: {r: 1, g: 1, b: 1, a: 1}
       size: 1
       percent: 0.5555555555555556
-    - position: {x: 0, y: 0, z: 23.388199}
+    - position: {x: 0, y: 0, z: 66.66667}
       up: {x: 0, y: 1, z: 0}
       forward: {x: 0, y: 0, z: 1}
       color: {r: 1, g: 1, b: 1, a: 1}
       size: 1
       percent: 0.6666666666666666
-    - position: {x: 0, y: 0, z: 27.286232}
+    - position: {x: 0, y: 0, z: 77.77778}
       up: {x: 0, y: 1, z: 0}
       forward: {x: 0, y: 0, z: 1}
       color: {r: 1, g: 1, b: 1, a: 1}
       size: 1
       percent: 0.7777777777777778
-    - position: {x: 0, y: 0, z: 31.184265}
+    - position: {x: 0, y: 0, z: 88.88889}
       up: {x: 0, y: 1, z: 0}
       forward: {x: 0, y: 0, z: 1}
       color: {r: 1, g: 1, b: 1, a: 1}
       size: 1
       percent: 0.8888888888888888
-    - position: {x: 0, y: 0, z: 35.0823}
+    - position: {x: 0, y: 0, z: 100}
       up: {x: 0, y: 1, z: 0}
       forward: {x: 0, y: 0, z: 1}
       color: {r: 1, g: 1, b: 1, a: 1}
@@ -287,7 +287,6 @@ MonoBehaviour:
   _sampleMode: 0
   _subscribers:
   - {fileID: 7263674314116956075}
-  - {fileID: 0}
   nodes: []
 --- !u!33 &7263674314116956085
 MeshFilter:
@@ -373,55 +372,55 @@ MonoBehaviour:
       color: {r: 1, g: 1, b: 1, a: 1}
       size: 1
       percent: 0
-    - position: {x: 0, y: 0, z: 3.8980331}
+    - position: {x: 0, y: 0, z: 11.111111}
       up: {x: 0, y: 1, z: 0}
       forward: {x: 0, y: 0, z: 1}
       color: {r: 1, g: 1, b: 1, a: 1}
       size: 1
       percent: 0.1111111111111111
-    - position: {x: 0, y: 0, z: 7.7960663}
+    - position: {x: 0, y: 0, z: 22.222221}
       up: {x: 0, y: 1, z: 0}
       forward: {x: 0, y: 0, z: 1}
       color: {r: 1, g: 1, b: 1, a: 1}
       size: 1
       percent: 0.2222222222222222
-    - position: {x: 0, y: 0, z: 11.694099}
+    - position: {x: 0, y: 0, z: 33.333336}
       up: {x: 0, y: 1, z: 0}
       forward: {x: 0, y: 0, z: 1}
       color: {r: 1, g: 1, b: 1, a: 1}
       size: 1
       percent: 0.3333333333333333
-    - position: {x: 0, y: 0, z: 15.592133}
+    - position: {x: 0, y: 0, z: 44.444447}
       up: {x: 0, y: 1, z: 0}
       forward: {x: 0, y: 0, z: 1}
       color: {r: 1, g: 1, b: 1, a: 1}
       size: 1
       percent: 0.4444444444444444
-    - position: {x: 0, y: 0, z: 19.490166}
+    - position: {x: 0, y: 0, z: 55.555557}
       up: {x: 0, y: 1, z: 0}
       forward: {x: 0, y: 0, z: 1}
       color: {r: 1, g: 1, b: 1, a: 1}
       size: 1
       percent: 0.5555555555555556
-    - position: {x: 0, y: 0, z: 23.388199}
+    - position: {x: 0, y: 0, z: 66.66667}
       up: {x: 0, y: 1, z: 0}
       forward: {x: 0, y: 0, z: 1}
       color: {r: 1, g: 1, b: 1, a: 1}
       size: 1
       percent: 0.6666666666666666
-    - position: {x: 0, y: 0, z: 27.286232}
+    - position: {x: 0, y: 0, z: 77.77778}
       up: {x: 0, y: 1, z: 0}
       forward: {x: 0, y: 0, z: 1}
       color: {r: 1, g: 1, b: 1, a: 1}
       size: 1
       percent: 0.7777777777777778
-    - position: {x: 0, y: 0, z: 31.184265}
+    - position: {x: 0, y: 0, z: 88.88889}
       up: {x: 0, y: 1, z: 0}
       forward: {x: 0, y: 0, z: 1}
       color: {r: 1, g: 1, b: 1, a: 1}
       size: 1
       percent: 0.8888888888888888
-    - position: {x: 0, y: 0, z: 35.0823}
+    - position: {x: 0, y: 0, z: 100}
       up: {x: 0, y: 1, z: 0}
       forward: {x: 0, y: 0, z: 1}
       color: {r: 1, g: 1, b: 1, a: 1}
@@ -440,7 +439,7 @@ MonoBehaviour:
     size: 1
     percent: 0
   clipToSample:
-    position: {x: 0, y: 0, z: 35.0823}
+    position: {x: 0, y: 0, z: 100}
     up: {x: 0, y: 1, z: 0}
     forward: {x: 0, y: 0, z: 1}
     color: {r: 1, g: 1, b: 1, a: 1}
@@ -488,30 +487,30 @@ MonoBehaviour:
     owner: {fileID: 7263674314116956075}
     meshes:
     - vertices:
+      - {x: 3.44, y: -0.3, z: 0.5}
+      - {x: -3.44, y: -0.3, z: 0.5}
       - {x: 3.44, y: -0.1, z: 0.5}
       - {x: -3.44, y: -0.1, z: 0.5}
-      - {x: 3.44, y: 0.1, z: 0.5}
-      - {x: -3.44, y: 0.1, z: 0.5}
-      - {x: 3.44, y: 0.1, z: -0.5}
-      - {x: -3.44, y: 0.1, z: -0.5}
       - {x: 3.44, y: -0.1, z: -0.5}
       - {x: -3.44, y: -0.1, z: -0.5}
-      - {x: 3.44, y: 0.1, z: 0.5}
-      - {x: -3.44, y: 0.1, z: 0.5}
-      - {x: 3.44, y: 0.1, z: -0.5}
-      - {x: -3.44, y: 0.1, z: -0.5}
-      - {x: 3.44, y: -0.1, z: -0.5}
+      - {x: 3.44, y: -0.3, z: -0.5}
+      - {x: -3.44, y: -0.3, z: -0.5}
       - {x: 3.44, y: -0.1, z: 0.5}
       - {x: -3.44, y: -0.1, z: 0.5}
-      - {x: -3.44, y: -0.1, z: -0.5}
-      - {x: -3.44, y: -0.1, z: 0.5}
-      - {x: -3.44, y: 0.1, z: 0.5}
-      - {x: -3.44, y: 0.1, z: -0.5}
-      - {x: -3.44, y: -0.1, z: -0.5}
       - {x: 3.44, y: -0.1, z: -0.5}
-      - {x: 3.44, y: 0.1, z: -0.5}
-      - {x: 3.44, y: 0.1, z: 0.5}
+      - {x: -3.44, y: -0.1, z: -0.5}
+      - {x: 3.44, y: -0.3, z: -0.5}
+      - {x: 3.44, y: -0.3, z: 0.5}
+      - {x: -3.44, y: -0.3, z: 0.5}
+      - {x: -3.44, y: -0.3, z: -0.5}
+      - {x: -3.44, y: -0.3, z: 0.5}
+      - {x: -3.44, y: -0.1, z: 0.5}
+      - {x: -3.44, y: -0.1, z: -0.5}
+      - {x: -3.44, y: -0.3, z: -0.5}
+      - {x: 3.44, y: -0.3, z: -0.5}
+      - {x: 3.44, y: -0.1, z: -0.5}
       - {x: 3.44, y: -0.1, z: 0.5}
+      - {x: 3.44, y: -0.3, z: 0.5}
       normals:
       - {x: 0, y: 0, z: 1}
       - {x: 0, y: 0, z: 1}
@@ -643,11 +642,11 @@ MonoBehaviour:
       subMeshes:
       - triangles: 0000000002000000030000000000000003000000010000000800000004000000050000000800000005000000090000000a00000006000000070000000a000000070000000b0000000c0000000d0000000e0000000c0000000e0000000f000000100000001100000012000000100000001200000013000000140000001500000016000000140000001600000017000000
       bounds:
-        center: {x: 0, y: 0, z: 0}
-        extents: {x: 3.44, y: 0.1, z: 0.5}
-        max: {x: 3.44, y: 0.1, z: 0.5}
-        min: {x: -3.44, y: -0.1, z: -0.5}
-        size: {x: 6.88, y: 0.2, z: 1}
+        center: {x: 0, y: -0.15, z: 0}
+        extents: {x: 3.44, y: 0.15, z: 0.5}
+        max: {x: 3.44, y: 0, z: 0.5}
+        min: {x: -3.44, y: -0.3, z: -0.5}
+        size: {x: 6.88, y: 0.3, z: 1}
       vertexGroups:
       - value: 0.5
         percent: 1
@@ -657,7 +656,7 @@ MonoBehaviour:
         ids: 040000000500000006000000070000000a0000000b0000000c0000000f00000012000000130000001400000015000000
       _mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
       _rotation: {x: 0, y: 0, z: 0}
-      _offset: {x: 0, y: 0, z: 0}
+      _offset: {x: 0, y: -0.2, z: 0}
       _scale: {x: 6.88, y: 0.2, z: 1}
       _uvScale: {x: 1, y: 1}
       _uvOffset: {x: 0, y: 0}
