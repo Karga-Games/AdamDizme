@@ -35,7 +35,7 @@ namespace KargaGames.Drawing
 
         }
 
-        public void GenerateSplineFromLine(Line line)
+        public virtual void GenerateSplineFromLine(Line line)
         {
             Vector3[] linePoints = new Vector3[line.GetLineRenderer().positionCount];
             line.GetLineRenderer().GetPositions(linePoints);
@@ -52,6 +52,9 @@ namespace KargaGames.Drawing
             splineComputer.SetPoints(splinePoints);
 
         }
+
+
+        
 
     }
 

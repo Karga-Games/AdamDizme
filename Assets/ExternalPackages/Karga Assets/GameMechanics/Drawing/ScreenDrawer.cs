@@ -17,18 +17,9 @@ namespace KargaGames.Drawing
 
         protected Vector2 lastfingerPosition;
 
-        bool limitArea =false;
         public virtual void Start()
         {
             MobileInputReader.SetInputMode(InputType.TouchControl);
-
-            if(DrawingArea!= null)
-            {
-                limitArea = true;
-
-            }
-
-
         }
 
         public virtual void Update()
@@ -102,7 +93,9 @@ namespace KargaGames.Drawing
                 currentLine = Instantiate(linePrefab,transform);
             }
 
-            currentLine.DrawWithPoint(transform.InverseTransformPoint(currentPos));
+            Vector3 currentLocalPos = transform.InverseTransformPoint(currentPos);
+
+            currentLine.DrawWithPoint(currentLocalPos);
         }
 
 
@@ -116,7 +109,7 @@ namespace KargaGames.Drawing
         {
             if (currentLine != null)
             {
-                Destroy(currentLine);
+                Destroy(currentLine.gameObject);
             }
         }
 
