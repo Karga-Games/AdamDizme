@@ -51,7 +51,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 2100000, guid: 4941a29777912c04e9423baeec6f8b8d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -145,7 +145,7 @@ MonoBehaviour:
   startWidth: 0.02
   endWidth: 0.02
   threshold: 0.001
-  endcapvertices: 0
-  cornervertices: 0
-  lineMaterial: {fileID: 0}
+  endcapvertices: 10
+  cornervertices: 10
+  lineMaterial: {fileID: 2100000, guid: 4941a29777912c04e9423baeec6f8b8d, type: 2}
   maxVertexCount: 1000

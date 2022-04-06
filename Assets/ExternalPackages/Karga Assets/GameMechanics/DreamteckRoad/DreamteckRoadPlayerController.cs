@@ -88,7 +88,7 @@ public class DreamteckRoadPlayerController : PlayerController
                 if (autoMove)
                 {
                     MoveForward();
-                }
+                }/*
                 else
                 {
                     if (inputReader.currentInput != null)
@@ -98,7 +98,7 @@ public class DreamteckRoadPlayerController : PlayerController
                             MoveForward();
                         }
                     }
-                }
+                }*/
 
             }
 

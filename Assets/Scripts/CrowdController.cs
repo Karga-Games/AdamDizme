@@ -10,29 +10,15 @@ public class CrowdController : MonoBehaviour
     public float HorizontalDistanceBetweenStickmans;
     public float VerticalDistanceBetweenStickmans;
 
+    public GameObject PositionsParent;
+    public GameObject StickmansParent;
+
     SplineComputer _spline;
     List<List<StickmanPosition>> StickmanPositions;
     List<Stickman> StickmanList;
     // Start is called before the first frame update
     void Start()
     {
-
-        _spline = GetComponent<SplineComputer>();
-
-        SplineGenerator _splineGenerator = FindObjectOfType<SplineGenerator>();
-        if(_splineGenerator != null)
-        {
-            _splineGenerator.SetCrowdController(this);
-        }
-
-        StickmanPositions = new List<List<StickmanPosition>>();
-        StickmanList = new List<Stickman>();
-
-        foreach(Stickman stickman in GetComponentsInChildren<Stickman>())
-        {
-            AddStickman(stickman);
-        }
-
     }
 
     // Update is called once per frame
@@ -41,11 +27,41 @@ public class CrowdController : MonoBehaviour
         
     }
 
+    public void SetupController()
+    {
+        _spline = GetComponent<SplineComputer>();
 
-    public void AddStickman(Stickman newStickman)
+        SplineGenerator _splineGenerator = FindObjectOfType<SplineGenerator>();
+        if (_splineGenerator != null)
+        {
+            _splineGenerator.SetCrowdController(this);
+        }
+
+        StickmanPositions = new List<List<StickmanPosition>>();
+        StickmanList = new List<Stickman>();
+    }
+
+
+    public void AddStickman(Stickman newStickman, bool reposition = true)
     {
         StickmanList.Add(newStickman);
-        newStickman.SetCrowd(this);
+        newStickman.transform.SetParent(StickmansParent.transform);
+        newStickman.Join(this);
+
+        if (reposition)
+        {
+            RePositionStickmans();
+        }
+    }
+
+    public void RemoveStickman(Stickman stickman, bool reposition = false)
+    {
+        StickmanList.Remove(stickman);
+
+        if (reposition)
+        {
+            RePositionStickmans();
+        }
     }
 
     public void RePositionStickmans()
@@ -87,7 +103,7 @@ public class CrowdController : MonoBehaviour
             for (int i = 0; i < StickmanList.Count; i++)
             {
 
-                StickmanPosition position = Instantiate(positionPrefab);
+                StickmanPosition position = Instantiate(positionPrefab, PositionsParent.transform);
 
                 int xIndex = (int)((currentDistance % totalDistance) / HorizontalDistanceBetweenStickmans);
 
@@ -112,7 +128,7 @@ public class CrowdController : MonoBehaviour
             for (int i = 0; i < StickmanList.Count; i++)
             {
 
-                StickmanPosition position = Instantiate(positionPrefab);
+                StickmanPosition position = Instantiate(positionPrefab, PositionsParent.transform);
 
                 int xIndex = 0;
 

@@ -11,10 +11,13 @@ public class SplineGenerator : SplineByDrawing
     public float RoadWidth;
     public float YZFactor;
 
+
+    PlayerController playerController;
     // Start is called before the first frame update
     public override void Start()
     {
         base.Start();
+        playerController = FindObjectOfType<PlayerController>();
     }
 
     // Update is called once per frame
@@ -47,7 +50,11 @@ public class SplineGenerator : SplineByDrawing
 
 
         CrowdSpline.UpdateSpline(splinePoints);
-        
+
+        if (!GameSceneManager.gameOver)
+        {
+            playerController.autoMove = true;
+        }
 
     }
 
