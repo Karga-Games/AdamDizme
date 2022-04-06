@@ -42,6 +42,7 @@ GameObject:
   - component: {fileID: 484687986062659789}
   - component: {fileID: -2850575752234001619}
   - component: {fileID: 1331001264333666169}
+  - component: {fileID: 7892821309878678618}
   m_Layer: 0
   m_Name: Stickman
   m_TagString: Untagged
@@ -83,6 +84,8 @@ MonoBehaviour:
   collectableMaterial: {fileID: 2100000, guid: 8503d2e0863af664eac9dc1050862d52, type: 2}
   collectedMaterial: {fileID: 2100000, guid: 3549efd8870a1314cb414b12d4a12a22, type: 2}
   deadMaterial: {fileID: 2100000, guid: 0be67d33b7b1e8c42b2cdc751f953013, type: 2}
+  _collider: {fileID: -2850575752234001619}
+  _deadCollider: {fileID: 7892821309878678618}
 --- !u!65 &-2850575752234001619
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -112,6 +115,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!65 &7892821309878678618
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 484687986062659790}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Size: {x: 0.20499682, y: 0.20814475, z: 0.8936213}
+  m_Center: {x: 0.025378212, y: 0.37112755, z: 0.037534535}
 --- !u!1 &536741355450113701
 GameObject:
   m_ObjectHideFlags: 0

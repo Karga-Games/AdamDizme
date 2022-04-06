@@ -19,7 +19,8 @@ public class Stickman : MonoBehaviour
     Animator animator;
     Vector3 velocity;
     Vector3 lastPosition;
-    BoxCollider _collider;
+    public BoxCollider _collider;
+    public BoxCollider _deadCollider;
     Rigidbody _rigidbody;
     bool alive = true;
     // Start is called before the first frame update
@@ -29,8 +30,6 @@ public class Stickman : MonoBehaviour
         animator = GetComponentInChildren<Animator>();
 
         _renderer = GetComponentInChildren<SkinnedMeshRenderer>();
-
-        _collider = GetComponent<BoxCollider>();
 
         _rigidbody = GetComponent<Rigidbody>();
 
@@ -54,6 +53,8 @@ public class Stickman : MonoBehaviour
 
             UpdateAnimation();
         }
+
+        animator.SetBool("alive",alive);
 
     }
 
@@ -90,13 +91,13 @@ public class Stickman : MonoBehaviour
             {
                 Stand();
             }
-            else if(velocity.sqrMagnitude > 0)
+            else if(velocity.sqrMagnitude > 0.01)
             {
                 Run();
             }
             else
             {
-                Stand();
+                Idle();
             }
 
         }
@@ -148,12 +149,16 @@ public class Stickman : MonoBehaviour
     public void Dead()
     {
         ChangeMaterial(deadMaterial);
-        crowd.RemoveStickman(this);
+        crowd.RemoveStickman(this,true,0.5f);
         crowd = null;
         transform.SetParent(null);
         _rigidbody.useGravity = true;
         _rigidbody.isKinematic = false;
         alive = false;
+
+        _collider.enabled = false;
+        _deadCollider.enabled = true;
+
     }
 
     public void ChangeMaterial(Material mat)
@@ -168,7 +173,7 @@ public class Stickman : MonoBehaviour
 
         if(stickman != null)
         {
-            if (stickman.crowd == null)
+            if (stickman.crowd == null && crowd != null && stickman.alive)
             {
                 crowd.AddStickman(stickman);
             }

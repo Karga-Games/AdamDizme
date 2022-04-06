@@ -11,8 +11,8 @@ public class SplineGenerator : SplineByDrawing
     public float RoadWidth;
     public float YZFactor;
 
-
     PlayerController playerController;
+
     // Start is called before the first frame update
     public override void Start()
     {
@@ -36,6 +36,14 @@ public class SplineGenerator : SplineByDrawing
         Vector3[] linePoints = new Vector3[line.GetLineRenderer().positionCount];
         line.GetLineRenderer().GetPositions(linePoints);
 
+        GenerateSplineFromPointList(linePoints);
+
+    }
+
+    public void GenerateSplineFromPointList(Vector3[] pointList)
+    {
+        Vector3[] linePoints = pointList;
+
         linePoints = RePositionSplinePoints(linePoints, DrawingArea, CrowdSpline.GetSpline());
 
         SplinePoint[] splinePoints = new SplinePoint[linePoints.Length];
@@ -55,7 +63,6 @@ public class SplineGenerator : SplineByDrawing
         {
             playerController.autoMove = true;
         }
-
     }
 
     public Vector3[] RePositionSplinePoints(Vector3[] points, RectTransform DrawingArea, SplineComputer Road)

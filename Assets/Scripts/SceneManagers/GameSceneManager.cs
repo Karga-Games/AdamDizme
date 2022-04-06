@@ -84,39 +84,51 @@ public class GameSceneManager : MonoBehaviour
 
     public void LevelPassed()
     {
-        //PlaySound("LevelPass");
-        //Elephant.LevelCompleted(Account.Level);
-        gameOver = true;
-
-        _camera.followSpeed = LevelEndFollowSpeed;
-        _camera.lookSpeed = LevelEndLookSpeed;
-        _camera.FollowOffset = LevelEndCameraFollow;
-        _camera.TargetOffset = LevelEndCameraLook;
-
-        if (LevelEndUI != null)
+        if (!gameOver)
         {
-            LevelEndUI.SetActive(true);
+
+            //PlaySound("LevelPass");
+            //Elephant.LevelCompleted(Account.Level);
+            gameOver = true;
+
+            /*
+            _camera.followSpeed = LevelEndFollowSpeed;
+            _camera.lookSpeed = LevelEndLookSpeed;
+            _camera.FollowOffset = LevelEndCameraFollow;
+            _camera.TargetOffset = LevelEndCameraLook;
+            */
+
+            if (LevelEndUI != null)
+            {
+                LevelEndUI.SetActive(true);
+            }
+            Debug.Log("Level Ended!");
+            Account.Level++;
         }
-        Debug.Log("Level Ended!");
-        Account.Level++;
     }
 
     public void LevelFailed()
     {
-        //PlaySound("LevelFail");
-        //Elephant.LevelFailed(Account.Level);
-        gameOver = true;
-
-        _camera.followSpeed = LevelFailFollowSpeed;
-        _camera.lookSpeed = LevelFailLookSpeed;
-        _camera.FollowOffset = LevelFailCameraFollow;
-        _camera.TargetOffset = LevelFailCameraLook;
-
-        if (LevelFailedUI != null)
+        if (!gameOver)
         {
-            LevelFailedUI.SetActive(true);
+            //PlaySound("LevelFail");
+            //Elephant.LevelFailed(Account.Level);
+            gameOver = true;
+
+            /*
+            _camera.followSpeed = LevelFailFollowSpeed;
+            _camera.lookSpeed = LevelFailLookSpeed;
+            _camera.FollowOffset = LevelFailCameraFollow;
+            _camera.TargetOffset = LevelFailCameraLook;
+            */
+
+            if (LevelFailedUI != null)
+            {
+                LevelFailedUI.SetActive(true);
+            }
+            Debug.Log("Level Failed!");
         }
-        Debug.Log("Level Failed!");
+        
     }
 
     public void NextLevel()

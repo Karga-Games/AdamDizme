@@ -2,6 +2,7 @@ using Dreamteck.Splines;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using KargaGames.Drawing;
 
 public class CrowdController : MonoBehaviour
 {
@@ -16,15 +17,41 @@ public class CrowdController : MonoBehaviour
     SplineComputer _spline;
     List<List<StickmanPosition>> StickmanPositions;
     List<Stickman> StickmanList;
+    GameSceneManager gameSceneManager;
+    SplineByDrawing splineDrawer;
+    SplineGenerator splineGenerator;
+    GameObject drawingUI;
+    RunnerPlayerController playerController;
+
+    CameraController cameraController;
     // Start is called before the first frame update
     void Start()
     {
+        gameSceneManager = FindObjectOfType<GameSceneManager>();
+        splineDrawer = FindObjectOfType<SplineByDrawing>();
+        splineGenerator = FindObjectOfType<SplineGenerator>();
+        drawingUI = GameObject.FindGameObjectWithTag("DrawingArea");
+
+        cameraController = FindObjectOfType<CameraController>();
+        playerController = FindObjectOfType<RunnerPlayerController>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if(StickmanList.Count == 0 && !GameSceneManager.gameOver)
+        {
+            Fail();
+
+        }
+    }
+
+    public void Fail()
+    {
+        gameSceneManager.LevelFailed();
+        splineDrawer.enabled = false;
+        drawingUI.SetActive(false);
+        playerController.speed = 0;
     }
 
     public void SetupController()
@@ -42,6 +69,11 @@ public class CrowdController : MonoBehaviour
     }
 
 
+    public Stickman GetLastMan()
+    {
+        return StickmanList[StickmanList.Count-1];
+    }
+
     public void AddStickman(Stickman newStickman, bool reposition = true)
     {
         StickmanList.Add(newStickman);
@@ -54,13 +86,17 @@ public class CrowdController : MonoBehaviour
         }
     }
 
-    public void RemoveStickman(Stickman stickman, bool reposition = false)
+    public void RemoveStickman(Stickman stickman, bool reposition = false, float repositionDelay = 0f)
     {
         StickmanList.Remove(stickman);
 
         if (reposition)
         {
-            RePositionStickmans();
+            StartCoroutine(GeneralFunctions.executeAfterSec(() => {
+
+                RePositionStickmans();
+
+            },repositionDelay));
         }
     }
 
