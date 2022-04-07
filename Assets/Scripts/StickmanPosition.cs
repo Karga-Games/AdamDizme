@@ -29,6 +29,10 @@ public class StickmanPosition : MonoBehaviour
 
     public void SetSpline(SplineComputer spline)
     {
+        if (positioner == null)
+        {
+            positioner = GetComponent<SplinePositioner>();
+        }
         positioner.spline = spline;
     }
 

@@ -10,38 +10,40 @@ public class Stickman : MonoBehaviour
     public float positionResolution;
     bool reached = false;
 
-
     public Material collectableMaterial;
     public Material collectedMaterial;
     public Material deadMaterial;
 
-    SkinnedMeshRenderer _renderer;
+    SkinnedMeshRenderer _srenderer;
+    MeshRenderer _renderer;
     Animator animator;
     Vector3 velocity;
     Vector3 lastPosition;
-    public BoxCollider _collider;
-    public BoxCollider _deadCollider;
+    public BoxCollider _Bcollider;
+    public Collider _deadCollider;
     Rigidbody _rigidbody;
     bool alive = true;
+
+    public bool changeDeadCollider = false;
     // Start is called before the first frame update
 
     private void Awake()
     {
+
         animator = GetComponentInChildren<Animator>();
 
-        _renderer = GetComponentInChildren<SkinnedMeshRenderer>();
+        _srenderer = GetComponentInChildren<SkinnedMeshRenderer>();
+
+        _renderer = GetComponentInChildren<MeshRenderer>();
 
         _rigidbody = GetComponent<Rigidbody>();
 
         alive = true;
-    }
-    void Start()
-    {
-        
-    }
 
+    }
+    
     // Update is called once per frame
-    void Update()
+    public void Update()
     {
         if (alive)
         {
@@ -54,7 +56,10 @@ public class Stickman : MonoBehaviour
             UpdateAnimation();
         }
 
-        animator.SetBool("alive",alive);
+        if(animator != null)
+        {
+            animator.SetBool("alive", alive);
+        }
 
     }
 
@@ -149,26 +154,39 @@ public class Stickman : MonoBehaviour
     public void Dead()
     {
         ChangeMaterial(deadMaterial);
-        crowd.RemoveStickman(this,true,0.5f);
+        crowd.RemoveStickman(this);
         crowd = null;
         transform.SetParent(null);
         _rigidbody.useGravity = true;
         _rigidbody.isKinematic = false;
         alive = false;
 
-        _collider.enabled = false;
-        _deadCollider.enabled = true;
+        if (changeDeadCollider)
+        {
+            _Bcollider.enabled = false;
+            _deadCollider.enabled = true;
+        }
 
     }
 
     public void ChangeMaterial(Material mat)
     {
-        _renderer.material = mat;
+        if(_srenderer != null)
+        {
+            _srenderer.material = mat;
+        }
+
+        if(_renderer != null)
+        {
+            _renderer.material = mat;
+        }
     }
 
-
-    private void OnCollisionEnter(Collision collision)
+    
+    public void OnCollisionEnter(Collision collision)
     {
+        //base.OnCollisionEnter(collision);
+
         Stickman stickman = collision.gameObject.GetComponent<Stickman>();
 
         if(stickman != null)
@@ -188,5 +206,5 @@ public class Stickman : MonoBehaviour
         }
 
     }
-
+    
 }

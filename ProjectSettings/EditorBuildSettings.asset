@@ -9,6 +9,6 @@ EditorBuildSettings:
     path: Assets/Scenes/StartScene.unity
     guid: 830771dc8c786a14da431db23cb288df
   - enabled: 1
-    path: Assets/Scenes/GameScene.unity
+    path: Assets/Scenes/GameScene_Stickman.unity
     guid: e16daa61c3ef7664fafe965be314aa52
   m_configObjects: {}

@@ -14,18 +14,18 @@ public class CrowdController : MonoBehaviour
     public GameObject PositionsParent;
     public GameObject StickmansParent;
 
-    SplineComputer _spline;
-    List<List<StickmanPosition>> StickmanPositions;
-    List<Stickman> StickmanList;
-    GameSceneManager gameSceneManager;
-    SplineByDrawing splineDrawer;
-    SplineGenerator splineGenerator;
-    GameObject drawingUI;
-    RunnerPlayerController playerController;
+    protected SplineComputer _spline;
+    protected List<List<StickmanPosition>> StickmanPositions;
+    protected List<Stickman> StickmanList;
+    protected GameSceneManager gameSceneManager;
+    protected SplineByDrawing splineDrawer;
+    protected SplineGenerator splineGenerator;
+    protected GameObject drawingUI;
+    protected RunnerPlayerController playerController;
 
-    CameraController cameraController;
+    protected CameraController cameraController;
     // Start is called before the first frame update
-    void Start()
+    public virtual void Start()
     {
         gameSceneManager = FindObjectOfType<GameSceneManager>();
         splineDrawer = FindObjectOfType<SplineByDrawing>();
@@ -37,16 +37,15 @@ public class CrowdController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    public virtual void Update()
     {
         if(StickmanList.Count == 0 && !GameSceneManager.gameOver)
         {
             Fail();
-
         }
     }
 
-    public void Fail()
+    public virtual void Fail()
     {
         gameSceneManager.LevelFailed();
         splineDrawer.enabled = false;
@@ -54,7 +53,7 @@ public class CrowdController : MonoBehaviour
         playerController.speed = 0;
     }
 
-    public void SetupController()
+    public virtual void SetupController()
     {
         _spline = GetComponent<SplineComputer>();
 
@@ -69,12 +68,12 @@ public class CrowdController : MonoBehaviour
     }
 
 
-    public Stickman GetLastMan()
+    public virtual Stickman GetLastMan()
     {
         return StickmanList[StickmanList.Count-1];
     }
 
-    public void AddStickman(Stickman newStickman, bool reposition = true)
+    public virtual void AddStickman(Stickman newStickman, bool reposition = true)
     {
         StickmanList.Add(newStickman);
         newStickman.transform.SetParent(StickmansParent.transform);
@@ -86,7 +85,7 @@ public class CrowdController : MonoBehaviour
         }
     }
 
-    public void RemoveStickman(Stickman stickman, bool reposition = false, float repositionDelay = 0f)
+    public virtual void RemoveStickman(Stickman stickman, bool reposition = false, float repositionDelay = 0f)
     {
         StickmanList.Remove(stickman);
 
@@ -100,7 +99,13 @@ public class CrowdController : MonoBehaviour
         }
     }
 
-    public void RePositionStickmans()
+    public void RePositionVertical()
+    {
+
+
+    }
+
+    public virtual void RePositionStickmans()
     {
         ClearPositions();
 
@@ -112,7 +117,7 @@ public class CrowdController : MonoBehaviour
 
     }
 
-    public void ClearPositions()
+    public virtual void ClearPositions()
     {
         foreach (List<StickmanPosition> positionList in StickmanPositions)
         {
@@ -126,11 +131,11 @@ public class CrowdController : MonoBehaviour
     }
 
 
-    public void GeneratePositions()
+    public virtual void GeneratePositions()
     {
         float totalDistance = _spline.CalculateLength();
 
-        totalDistance -= totalDistance % HorizontalDistanceBetweenStickmans;
+        totalDistance = Mathf.FloorToInt(totalDistance / HorizontalDistanceBetweenStickmans) * HorizontalDistanceBetweenStickmans;
 
         float currentDistance = 0;
 
@@ -141,7 +146,32 @@ public class CrowdController : MonoBehaviour
 
                 StickmanPosition position = Instantiate(positionPrefab, PositionsParent.transform);
 
-                int xIndex = (int)((currentDistance % totalDistance) / HorizontalDistanceBetweenStickmans);
+                float mod = currentDistance % totalDistance;
+
+                if(Mathf.Abs(mod - totalDistance) < 0.01)
+                {
+                    mod = 0;
+                }
+
+                float div = (currentDistance / totalDistance);
+
+                if(Mathf.Abs(Mathf.Round(div) - div) < 0.01)
+                {
+                    div = Mathf.Round(div);
+                }
+
+                float xIndexHolder = (mod / HorizontalDistanceBetweenStickmans);
+
+                int xIndex = 0;
+
+                if (Mathf.Abs(Mathf.Round(xIndexHolder) - xIndexHolder) < 0.01)
+                {
+                    xIndex = Mathf.RoundToInt(xIndexHolder);
+                }
+                else
+                {
+                    xIndex = (int)xIndexHolder;
+                }
 
                 if (StickmanPositions.Count <= xIndex)
                 {
@@ -150,9 +180,9 @@ public class CrowdController : MonoBehaviour
 
                 StickmanPositions[xIndex].Add(position);
 
-                int yIndex = (int)(currentDistance / totalDistance);
+                int yIndex = (int)div;
 
-                position.Position(currentDistance % totalDistance, new Vector2(0, (yIndex * VerticalDistanceBetweenStickmans)), new Vector2Int(xIndex, yIndex), _spline);
+                position.Position(mod, new Vector2(0, (yIndex * VerticalDistanceBetweenStickmans)), new Vector2Int(xIndex, yIndex), _spline);
                 position.positioner.RebuildImmediate();
                 currentDistance += HorizontalDistanceBetweenStickmans;
 
@@ -182,19 +212,19 @@ public class CrowdController : MonoBehaviour
         }
     }
 
-    public void RePositionClosePoints()
+    public virtual void RePositionClosePoints()
     {
-
+        
         for(int i = StickmanPositions.Count - 1; i >= 0; i--)
         {
             RePositionCloseColumn(i);
         }
-
+        
 
     }
 
 
-    public void AssignPointsToStickmans()
+    public virtual void AssignPointsToStickmans()
     {
         int k = 0;
         for(int i=0; i< StickmanPositions.Count;i++)
@@ -208,7 +238,7 @@ public class CrowdController : MonoBehaviour
     }
 
     
-    public void RePositionCloseColumn(int xIndex)
+    public virtual void RePositionCloseColumn(int xIndex)
     {
 
         for(int i = xIndex -1; i >= 0; i--)
@@ -223,9 +253,9 @@ public class CrowdController : MonoBehaviour
 
     }
 
-    public void MigrateColumn(int from, int to)
+    public virtual void MigrateColumn(int from, int to)
     {
-
+        
         int yIndexOffset = StickmanPositions[to].Count;
 
         StickmanPosition basePosition = StickmanPositions[to][0];
@@ -244,7 +274,7 @@ public class CrowdController : MonoBehaviour
         }
 
         StickmanPositions.Remove(StickmanPositions[from]);
-
+        
     }
 
     public SplineComputer GetSpline()
@@ -252,7 +282,7 @@ public class CrowdController : MonoBehaviour
         return _spline;
     }
 
-    public void UpdateSpline(SplinePoint[] points)
+    public virtual void UpdateSpline(SplinePoint[] points)
     {
         if (_spline != null)
         {

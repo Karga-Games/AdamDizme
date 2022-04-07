@@ -77,6 +77,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7dab9924c5c6954690e977836091023, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  LinkedPoint: {fileID: 0}
+  DestroyOnUnstack: 0
+  CanStack: 0
+  RigidbodyAfterUnlinked: 0
+  _rb: {fileID: 0}
+  _collider: {fileID: -2850575752234001619}
+  DestroyEffect: {fileID: 0}
+  WaveTargetScale: {x: 0, y: 0, z: 0}
+  WaveTime: 0
+  WaveTransport: 0
+  WaveTransportDelay: 0
+  immortal: 0
+  UnlinkWave: 1
   crowd: {fileID: 0}
   desiredPosition: {fileID: 0}
   movementSpeed: 5
@@ -84,8 +97,9 @@ MonoBehaviour:
   collectableMaterial: {fileID: 2100000, guid: 8503d2e0863af664eac9dc1050862d52, type: 2}
   collectedMaterial: {fileID: 2100000, guid: 3549efd8870a1314cb414b12d4a12a22, type: 2}
   deadMaterial: {fileID: 2100000, guid: 0be67d33b7b1e8c42b2cdc751f953013, type: 2}
-  _collider: {fileID: -2850575752234001619}
+  _Bcollider: {fileID: -2850575752234001619}
   _deadCollider: {fileID: 7892821309878678618}
+  changeDeadCollider: 1
 --- !u!65 &-2850575752234001619
 BoxCollider:
   m_ObjectHideFlags: 0
