@@ -34,6 +34,8 @@ public class CrowdController : MonoBehaviour
 
     public Vector3 velocity;
     Vector3 lastPosition;
+
+    bool setup = false;
     // Start is called before the first frame update
     public virtual void Start()
     {
@@ -44,24 +46,28 @@ public class CrowdController : MonoBehaviour
 
         cameraController = FindObjectOfType<CameraController>();
         playerController = FindObjectOfType<RunnerPlayerController>();
+        
     }
 
     // Update is called once per frame
     public virtual void Update()
     {
-        if(StickmanList.Count == 0 && !GameSceneManager.gameOver)
+        if (setup)
         {
-            Fail();
+            if (StickmanList.Count == 0 && !GameSceneManager.gameOver)
+            {
+                Fail();
+            }
+
+            lastFixTime += Time.deltaTime;
+
+            if (lastFixTime > 0.5f)
+            {
+                FixWorking = false;
+            }
+
+            CalculateVelocity();
         }
-
-        lastFixTime += Time.deltaTime;
-
-        if(lastFixTime > 0.5f)
-        {
-            FixWorking = false;
-        }
-
-        CalculateVelocity();
     }
     public void CalculateVelocity()
     {
@@ -87,7 +93,12 @@ public class CrowdController : MonoBehaviour
         }
 
         StickmanPositions = new List<List<StickmanPosition>>();
-        StickmanList = new List<Stickman>();
+        if(StickmanList == null)
+        {
+            StickmanList = new List<Stickman>();
+        }
+
+        setup = true;
     }
 
     public virtual Stickman GetLastMan()
@@ -361,6 +372,7 @@ public class CrowdController : MonoBehaviour
 
     public void AddToColumn(int columnIndex, int Count)
     {
+
         if (Count > 0)
         {
             for (int i = 0; i < Count; i++)
@@ -378,10 +390,10 @@ public class CrowdController : MonoBehaviour
                         position.ListCoordinate.y += 1;
                         position.Height += VerticalDistanceBetweenStickmans;
                         position.ParentColumn = StickmanPositions[columnIndex];
-                        position.positioner.RebuildImmediate();
 
 
                         newStickman.desiredPosition = position;
+
                     }
                 }
             }
