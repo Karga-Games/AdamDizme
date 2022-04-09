@@ -391,6 +391,7 @@ public class CrowdController : MonoBehaviour
                         position.Height += VerticalDistanceBetweenStickmans;
                         position.ParentColumn = StickmanPositions[columnIndex];
 
+                        position.positioner.Rebuild();
 
                         newStickman.desiredPosition = position;
 
@@ -418,6 +419,8 @@ public class CrowdController : MonoBehaviour
 
             FixColumn(columnIndex);
         }
+
+
 
     }
     public void MultiplyColumn(int columnIndex, float factor)

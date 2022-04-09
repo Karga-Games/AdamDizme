@@ -22,15 +22,20 @@ namespace KargaGames.Drawing
 
         Vector3 lastPos = Vector3.one * float.MaxValue;
 
+        public bool autoDraw;
+        
+
         public virtual void Awake()
         {
             lineRenderer = GetComponent<LineRenderer>();
         }
 
-        public virtual void FixedUpdate()
+        public virtual void Update()
         {
-
-
+            if (autoDraw)
+            {
+                DrawWithPosition();
+            }
         }
 
         public virtual void RemoveFirstPoint()
@@ -104,6 +109,7 @@ namespace KargaGames.Drawing
         {
             return lineRenderer;
         }
+
     }
 }
 

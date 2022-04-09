@@ -232,6 +232,7 @@ public class Stickman : MonoBehaviour
         desiredPosition.RemovePosition();
         _rigidbody.useGravity = true;
         _rigidbody.isKinematic = false;
+        
         alive = false;
 
         if (changeDeadCollider)
