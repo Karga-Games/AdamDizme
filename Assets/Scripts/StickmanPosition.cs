@@ -10,8 +10,10 @@ public class StickmanPosition : MonoBehaviour
     public float Distance;
     public float Height;
     public Transform indicator;
-
+    public Stickman followingStickman;
     public Vector2Int ListCoordinate;
+
+    public List<StickmanPosition> ParentColumn;
     // Start is called before the first frame update
     void Start()
     {
@@ -47,6 +49,16 @@ public class StickmanPosition : MonoBehaviour
         Distance = distance;
         ListCoordinate = coord;
         positioner.SetDistance(distance);
+
+    }
+
+    public void RemovePosition()
+    {
+
+        ParentColumn.Remove(this);
+
+
+        Destroy(gameObject);
 
     }
 }

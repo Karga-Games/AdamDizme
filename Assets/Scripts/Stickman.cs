@@ -25,6 +25,8 @@ public class Stickman : MonoBehaviour
     bool alive = true;
 
     public bool changeDeadCollider = false;
+
+    float animationTime;
     // Start is called before the first frame update
 
     private void Awake()
@@ -83,6 +85,7 @@ public class Stickman : MonoBehaviour
             transform.localPosition = Vector3.Lerp(transform.localPosition, desiredPosition.transform.localPosition + new Vector3(0, desiredPosition.Height, 0), Time.deltaTime * movementSpeed);
         }
     }
+   
 
     public void UpdateAnimation()
     {
@@ -142,6 +145,7 @@ public class Stickman : MonoBehaviour
         reached = false;
 
         desiredPosition = position;
+        desiredPosition.followingStickman = this;
     }
 
     public void Join(CrowdController crowd)
@@ -154,9 +158,13 @@ public class Stickman : MonoBehaviour
     public void Dead()
     {
         ChangeMaterial(deadMaterial);
-        crowd.RemoveStickman(this);
+        if(crowd != null)
+        {
+            crowd.RemoveStickman(this, true, 0.2f);
+        }
         crowd = null;
         transform.SetParent(null);
+        desiredPosition.RemovePosition();
         _rigidbody.useGravity = true;
         _rigidbody.isKinematic = false;
         alive = false;

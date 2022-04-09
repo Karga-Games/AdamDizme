@@ -6,8 +6,9 @@ using KargaGames.Drawing;
 
 public class CrowdController : MonoBehaviour
 {
-
+    public Stickman stickmanPrefab;
     public StickmanPosition positionPrefab;
+    public ColumnHeader ColumnPrefab;
     public float HorizontalDistanceBetweenStickmans;
     public float VerticalDistanceBetweenStickmans;
 
@@ -24,6 +25,12 @@ public class CrowdController : MonoBehaviour
     protected RunnerPlayerController playerController;
 
     protected CameraController cameraController;
+
+    float totalDistance;
+
+    bool FixWorking = false;
+    float lastFixTime = 0;
+    int fixCommand = 0;
     // Start is called before the first frame update
     public virtual void Start()
     {
@@ -42,6 +49,13 @@ public class CrowdController : MonoBehaviour
         if(StickmanList.Count == 0 && !GameSceneManager.gameOver)
         {
             Fail();
+        }
+
+        lastFixTime += Time.deltaTime;
+
+        if(lastFixTime > 0.5f)
+        {
+            FixWorking = false;
         }
     }
 
@@ -67,7 +81,6 @@ public class CrowdController : MonoBehaviour
         StickmanList = new List<Stickman>();
     }
 
-
     public virtual Stickman GetLastMan()
     {
         return StickmanList[StickmanList.Count-1];
@@ -87,23 +100,101 @@ public class CrowdController : MonoBehaviour
 
     public virtual void RemoveStickman(Stickman stickman, bool reposition = false, float repositionDelay = 0f)
     {
+
+        Vector2Int coord = stickman.desiredPosition.ListCoordinate;
+
         StickmanList.Remove(stickman);
 
         if (reposition)
         {
+            fixCommand++;
+
+            float commandIndex = fixCommand;
             StartCoroutine(GeneralFunctions.executeAfterSec(() => {
 
-                RePositionStickmans();
+                if(commandIndex == fixCommand)
+                {
+                    //RePositionStickmans();
+
+                    if (!FixWorking)
+                    {
+                        FixWorking = true;
+                        lastFixTime = 0;
+
+                        StickmanPositions.RemoveAll(item => item == null);
+                        StickmanPositions.RemoveAll(item => item.Count == 0);
+
+
+                        FixColumns();
+                        FixRows();
+
+                    }
+
+
+                }
+
+
 
             },repositionDelay));
         }
     }
 
-    public void RePositionVertical()
+
+    public void FixColumns()
+    {
+        for (int i = 0; i < StickmanPositions.Count; i++)
+        {
+            FixColumn(i);
+        }
+    }
+
+    public void FixColumn(int columnIndex)
     {
 
+        StickmanPositions[columnIndex].RemoveAll(item => item == null);
+
+        for(int i = 0; i< StickmanPositions[columnIndex].Count; i++)
+        {
+            if(StickmanPositions[columnIndex][i].ListCoordinate.y != i)
+            {
+                StickmanPositions[columnIndex][i].ListCoordinate.y = i;
+                StickmanPositions[columnIndex][i].Height = i * VerticalDistanceBetweenStickmans;
+            }
+        }
+    }
+    
+    public void FixRows()
+    {
+
+            StickmanPositions.RemoveAll(item => item == null);
+            StickmanPositions.RemoveAll(item => item.Count == 0);
+
+            for (int i = 0; i < StickmanPositions.Count; i++)
+            {
+                foreach (StickmanPosition position in StickmanPositions[i])
+                {
+                    if (position.ListCoordinate.x != i)
+                    {
+                        position.ListCoordinate.x = i;
+
+                        float mod = (i * HorizontalDistanceBetweenStickmans) % totalDistance;
+
+                        if (Mathf.Abs(mod - totalDistance) < 0.01)
+                        {
+                            mod = 0;
+                        }
+
+                        position.Distance = mod;
+                        position.positioner.SetDistance(mod);
+                        position.positioner.RebuildImmediate();
+                    }
+                }
+            }
+        
+        
 
     }
+
 
     public virtual void RePositionStickmans()
     {
@@ -130,10 +221,9 @@ public class CrowdController : MonoBehaviour
         StickmanPositions = new List<List<StickmanPosition>>();
     }
 
-
     public virtual void GeneratePositions()
     {
-        float totalDistance = _spline.CalculateLength();
+        totalDistance = _spline.CalculateLength();
 
         totalDistance = Mathf.FloorToInt(totalDistance / HorizontalDistanceBetweenStickmans) * HorizontalDistanceBetweenStickmans;
 
@@ -145,6 +235,7 @@ public class CrowdController : MonoBehaviour
             {
 
                 StickmanPosition position = Instantiate(positionPrefab, PositionsParent.transform);
+
 
                 float mod = currentDistance % totalDistance;
 
@@ -180,6 +271,8 @@ public class CrowdController : MonoBehaviour
 
                 StickmanPositions[xIndex].Add(position);
 
+                position.ParentColumn = StickmanPositions[xIndex];
+
                 int yIndex = (int)div;
 
                 position.Position(mod, new Vector2(0, (yIndex * VerticalDistanceBetweenStickmans)), new Vector2Int(xIndex, yIndex), _spline);
@@ -205,9 +298,23 @@ public class CrowdController : MonoBehaviour
 
                 StickmanPositions[xIndex].Add(position);
 
+                position.ParentColumn = StickmanPositions[xIndex];
+
                 position.Position(currentDistance % totalDistance, new Vector2(0, (i * VerticalDistanceBetweenStickmans)), new Vector2Int(0, i), _spline);
                 position.positioner.RebuildImmediate();
             }
+
+        }
+
+
+        foreach(List<StickmanPosition> positionColumn in StickmanPositions)
+        {
+
+            ColumnHeader column = Instantiate(ColumnPrefab, PositionsParent.transform);
+
+            column.crowd = this;
+            column.columnIndex = positionColumn[0].ListCoordinate.x;
+            column.transform.position = positionColumn[0].transform.position;
 
         }
     }
@@ -223,6 +330,46 @@ public class CrowdController : MonoBehaviour
 
     }
 
+    public void AddToColumn(int columnIndex, int Count)
+    {
+        if (Count > 0)
+        {
+            for (int i = 0; i < Count; i++)
+            {
+                Stickman newStickman = Instantiate(stickmanPrefab, StickmansParent.transform);
+                StickmanList.Add(newStickman);
+                newStickman.Join(this);
+
+                StickmanPosition position = Instantiate(StickmanPositions[columnIndex][StickmanPositions[columnIndex].Count - 1], PositionsParent.transform);
+                StickmanPositions[columnIndex].Add(position);
+                position.ListCoordinate.y += 1;
+                position.Height += VerticalDistanceBetweenStickmans;
+                position.positioner.RebuildImmediate();
+
+                newStickman.desiredPosition = position;
+
+            }
+
+        }
+        else
+        {
+            for (int i = 0; i < Mathf.Abs(Count); i++)
+            {
+                if (StickmanPositions[columnIndex][StickmanPositions[columnIndex].Count - 1 - i] != null)
+                {
+                    StickmanPositions[columnIndex][StickmanPositions[columnIndex].Count - 1 - i].followingStickman.Dead();
+                }
+
+            }
+
+            FixColumn(columnIndex);
+        }
+
+    }
+    public void MultiplyColumn(int columnIndex, float factor)
+    {
+
+    }
 
     public virtual void AssignPointsToStickmans()
     {

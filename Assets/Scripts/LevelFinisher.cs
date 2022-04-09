@@ -70,8 +70,8 @@ public class LevelFinisher : MonoBehaviour
         if (!passed)
         {
             passed = true; 
-            Stickman stickman = other.GetComponent<Stickman>();
-            if (stickman != null)
+            ColumnHeader column = other.GetComponent<ColumnHeader>();
+            if (column != null)
             {
                 FinishReached();
             }
