@@ -197,7 +197,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetFPS: 60
-  targetScene: GameScene
+  targetScene: GameScene_Ball
 --- !u!4 &906353446
 Transform:
   m_ObjectHideFlags: 0
@@ -277,6 +277,16 @@ PrefabInstance:
     - target: {fileID: 2925839045275378780, guid: f25f96609787dbe45b0e146c06412cf9,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8599003790986943579, guid: f25f96609787dbe45b0e146c06412cf9,
+        type: 3}
+      propertyPath: Sounds.Array.data[0].pitch
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8599003790986943579, guid: f25f96609787dbe45b0e146c06412cf9,
+        type: 3}
+      propertyPath: Sounds.Array.data[0].volume
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
