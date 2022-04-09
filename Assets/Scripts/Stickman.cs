@@ -8,7 +8,7 @@ public class Stickman : MonoBehaviour
     public StickmanPosition desiredPosition;
     public float movementSpeed;
     public float positionResolution;
-    bool reached = false;
+
 
     public Material collectableMaterial;
     public Material collectedMaterial;
@@ -115,6 +115,7 @@ public class Stickman : MonoBehaviour
 
     public void TweenToDesiredPosition(LeanTweenType type =  LeanTweenType.easeOutBack)
     {
+        
         float yDiff = transform.localPosition.y - (desiredPosition.transform.localPosition + new Vector3(0, desiredPosition.Height, 0)).y;
         float xDiff = transform.localPosition.x - (desiredPosition.transform.localPosition + new Vector3(0, desiredPosition.Height, 0)).x;
         if (Mathf.Abs(yDiff) > Mathf.Abs(xDiff)) {
@@ -137,7 +138,7 @@ public class Stickman : MonoBehaviour
         tweening = true;
         float duration = Random.Range(0.5f, 0.8f);
         LeanTween.moveLocal(gameObject, desiredPosition.transform.localPosition + new Vector3(0, desiredPosition.Height, 0), duration).setEase(type).setOnComplete(TweeningFinished);
-
+        
     }
     public void TweeningFinished()
     {
@@ -207,8 +208,6 @@ public class Stickman : MonoBehaviour
 
     public void SetDesiredPosition(StickmanPosition position)
     {
-        reached = false;
-
         desiredPosition = position;
         desiredPosition.followingStickman = this;
 

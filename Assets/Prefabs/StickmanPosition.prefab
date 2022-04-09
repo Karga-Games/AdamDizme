@@ -88,7 +88,7 @@ MonoBehaviour:
   animClipTo: 1
   _sampleCount: 0
   startSampleIndex: 0
-  multithreaded: 0
+  multithreaded: 1
   buildOnAwake: 0
   buildOnEnable: 0
   _isUpdated: 1
@@ -157,7 +157,9 @@ MonoBehaviour:
   Distance: 0
   Height: 0
   indicator: {fileID: 426238968275736656}
+  followingStickman: {fileID: 0}
   ListCoordinate: {x: 0, y: 0}
+  ParentColumn: []
 --- !u!1 &426238968275736657
 GameObject:
   m_ObjectHideFlags: 0

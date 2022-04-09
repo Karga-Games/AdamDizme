@@ -377,7 +377,9 @@ public class CrowdController : MonoBehaviour
                         StickmanPositions[columnIndex].Add(position);
                         position.ListCoordinate.y += 1;
                         position.Height += VerticalDistanceBetweenStickmans;
+                        position.ParentColumn = StickmanPositions[columnIndex];
                         position.positioner.RebuildImmediate();
+
 
                         newStickman.desiredPosition = position;
                     }
@@ -460,7 +462,7 @@ public class CrowdController : MonoBehaviour
             StickmanPositions[to].Add(position);
 
             position.Position(basePosition.Distance, new Vector2(0,yCoord * VerticalDistanceBetweenStickmans), new Vector2Int(to, yCoord));
-
+            position.ParentColumn = StickmanPositions[to];
             position.positioner.RebuildImmediate();
 
         }
