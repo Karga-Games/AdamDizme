@@ -23,10 +23,11 @@ public class Stickman : MonoBehaviour
     public Collider _deadCollider;
     Rigidbody _rigidbody;
     bool alive = true;
-
+    bool tweening = false;
     public bool changeDeadCollider = false;
 
-    float animationTime;
+    public Gradient colorGradient;
+
     // Start is called before the first frame update
 
     private void Awake()
@@ -56,6 +57,8 @@ public class Stickman : MonoBehaviour
             UpdateRotation();
 
             UpdateAnimation();
+
+            UpdateColor();
         }
 
         if(animator != null)
@@ -78,14 +81,76 @@ public class Stickman : MonoBehaviour
 
     }
 
+    public void UpdateColor()
+    {
+        if (crowd != null && desiredPosition != null)
+        {
+            float xIndex = (desiredPosition.ListCoordinate.x);
+            float yIndex = (desiredPosition.ListCoordinate.y);
+
+            if(xIndex <= 0)
+            {
+                xIndex = 1;
+            }
+            if(yIndex <= 0)
+            {
+                yIndex = 1;
+            }
+
+
+            float p = (float)(xIndex * yIndex) / (float)crowd.StickmanCount();
+
+            if (_srenderer != null)
+            {
+                _renderer.material.color = colorGradient.Evaluate(p);
+            }
+
+            if (_renderer != null)
+            {
+                _renderer.material.color = colorGradient.Evaluate(p);
+            }
+        }
+    }
+
+
+    public void TweenToDesiredPosition(LeanTweenType type =  LeanTweenType.easeOutBack)
+    {
+        float yDiff = transform.localPosition.y - (desiredPosition.transform.localPosition + new Vector3(0, desiredPosition.Height, 0)).y;
+        float xDiff = transform.localPosition.x - (desiredPosition.transform.localPosition + new Vector3(0, desiredPosition.Height, 0)).x;
+        if (Mathf.Abs(yDiff) > Mathf.Abs(xDiff)) {
+
+            if(yDiff > 0)
+            {
+                type = LeanTweenType.easeOutBounce;
+            }
+            else
+            {
+                type = LeanTweenType.easeOutBack;
+            }
+
+        }
+        else
+        {
+            type = LeanTweenType.easeOutBack;
+        }
+
+        tweening = true;
+        float duration = Random.Range(0.5f, 0.8f);
+        LeanTween.moveLocal(gameObject, desiredPosition.transform.localPosition + new Vector3(0, desiredPosition.Height, 0), duration).setEase(type).setOnComplete(TweeningFinished);
+
+    }
+    public void TweeningFinished()
+    {
+        tweening = false;
+    }
+
     public void GoToDesiredPosition()
     {
-        if (desiredPosition != null)
+        if (desiredPosition != null && !tweening)
         {
             transform.localPosition = Vector3.Lerp(transform.localPosition, desiredPosition.transform.localPosition + new Vector3(0, desiredPosition.Height, 0), Time.deltaTime * movementSpeed);
         }
     }
-   
 
     public void UpdateAnimation()
     {
@@ -146,6 +211,7 @@ public class Stickman : MonoBehaviour
 
         desiredPosition = position;
         desiredPosition.followingStickman = this;
+
     }
 
     public void Join(CrowdController crowd)

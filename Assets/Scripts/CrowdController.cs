@@ -31,6 +31,9 @@ public class CrowdController : MonoBehaviour
     bool FixWorking = false;
     float lastFixTime = 0;
     int fixCommand = 0;
+
+    public Vector3 velocity;
+    Vector3 lastPosition;
     // Start is called before the first frame update
     public virtual void Start()
     {
@@ -57,8 +60,14 @@ public class CrowdController : MonoBehaviour
         {
             FixWorking = false;
         }
-    }
 
+        CalculateVelocity();
+    }
+    public void CalculateVelocity()
+    {
+        velocity = transform.position - lastPosition;
+        lastPosition = transform.position;
+    }
     public virtual void Fail()
     {
         gameSceneManager.LevelFailed();
@@ -127,6 +136,7 @@ public class CrowdController : MonoBehaviour
 
                         FixColumns();
                         FixRows();
+                        TweenStickmans();
 
                     }
 
@@ -157,8 +167,10 @@ public class CrowdController : MonoBehaviour
         {
             if(StickmanPositions[columnIndex][i].ListCoordinate.y != i)
             {
+
                 StickmanPositions[columnIndex][i].ListCoordinate.y = i;
                 StickmanPositions[columnIndex][i].Height = i * VerticalDistanceBetweenStickmans;
+
             }
         }
     }
@@ -187,6 +199,7 @@ public class CrowdController : MonoBehaviour
                         position.Distance = mod;
                         position.positioner.SetDistance(mod);
                         position.positioner.RebuildImmediate();
+                        
                     }
                 }
             }
@@ -195,6 +208,14 @@ public class CrowdController : MonoBehaviour
 
     }
 
+
+    public void TweenStickmans()
+    {
+        foreach(Stickman stickman in StickmanList)
+        {
+            stickman.TweenToDesiredPosition();
+        }
+    }
 
     public virtual void RePositionStickmans()
     {
@@ -206,6 +227,7 @@ public class CrowdController : MonoBehaviour
 
         AssignPointsToStickmans();
 
+        TweenStickmans();
     }
 
     public virtual void ClearPositions()
@@ -216,6 +238,13 @@ public class CrowdController : MonoBehaviour
             {
                 Destroy(position.gameObject);
             }
+        }
+
+        foreach(ColumnHeader header in FindObjectsOfType<ColumnHeader>())
+        {
+           
+            Destroy(header.gameObject);
+            
         }
 
         StickmanPositions = new List<List<StickmanPosition>>();
@@ -336,18 +365,23 @@ public class CrowdController : MonoBehaviour
         {
             for (int i = 0; i < Count; i++)
             {
-                Stickman newStickman = Instantiate(stickmanPrefab, StickmansParent.transform);
-                StickmanList.Add(newStickman);
-                newStickman.Join(this);
+                if (StickmanPositions.Count > columnIndex)
+                {
+                    if (StickmanPositions[columnIndex].Count - 1 >= i)
+                    {
+                        Stickman newStickman = Instantiate(stickmanPrefab, StickmansParent.transform);
+                        StickmanList.Add(newStickman);
+                        newStickman.Join(this);
 
-                StickmanPosition position = Instantiate(StickmanPositions[columnIndex][StickmanPositions[columnIndex].Count - 1], PositionsParent.transform);
-                StickmanPositions[columnIndex].Add(position);
-                position.ListCoordinate.y += 1;
-                position.Height += VerticalDistanceBetweenStickmans;
-                position.positioner.RebuildImmediate();
+                        StickmanPosition position = Instantiate(StickmanPositions[columnIndex][StickmanPositions[columnIndex].Count - 1], PositionsParent.transform);
+                        StickmanPositions[columnIndex].Add(position);
+                        position.ListCoordinate.y += 1;
+                        position.Height += VerticalDistanceBetweenStickmans;
+                        position.positioner.RebuildImmediate();
 
-                newStickman.desiredPosition = position;
-
+                        newStickman.desiredPosition = position;
+                    }
+                }
             }
 
         }
@@ -355,9 +389,15 @@ public class CrowdController : MonoBehaviour
         {
             for (int i = 0; i < Mathf.Abs(Count); i++)
             {
-                if (StickmanPositions[columnIndex][StickmanPositions[columnIndex].Count - 1 - i] != null)
+                if(StickmanPositions.Count > columnIndex)
                 {
-                    StickmanPositions[columnIndex][StickmanPositions[columnIndex].Count - 1 - i].followingStickman.Dead();
+                    if (StickmanPositions[columnIndex].Count - 1 >= i)
+                    {
+                        if (StickmanPositions[columnIndex][StickmanPositions[columnIndex].Count - 1 - i] != null)
+                        {
+                            StickmanPositions[columnIndex][StickmanPositions[columnIndex].Count - 1 - i].followingStickman.Dead();
+                        }
+                    }
                 }
 
             }
@@ -369,6 +409,11 @@ public class CrowdController : MonoBehaviour
     public void MultiplyColumn(int columnIndex, float factor)
     {
 
+    }
+
+    public int StickmanCount()
+    {
+        return StickmanList.Count;
     }
 
     public virtual void AssignPointsToStickmans()
@@ -421,7 +466,26 @@ public class CrowdController : MonoBehaviour
         }
 
         StickmanPositions.Remove(StickmanPositions[from]);
+
+        Destroy(FindColumnHeader(from).gameObject);
         
+    }
+
+    public ColumnHeader FindColumnHeader(int index) {
+
+        ColumnHeader header = null;
+
+        foreach(ColumnHeader h in FindObjectsOfType<ColumnHeader>())
+        {
+            if(h.columnIndex == index)
+            {
+                header = h;
+            }
+        }
+
+
+        return header;
+
     }
 
     public SplineComputer GetSpline()

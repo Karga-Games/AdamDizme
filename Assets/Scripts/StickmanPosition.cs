@@ -52,6 +52,7 @@ public class StickmanPosition : MonoBehaviour
 
     }
 
+
     public void RemovePosition()
     {
 
