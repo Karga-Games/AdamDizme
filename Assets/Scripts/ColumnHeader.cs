@@ -10,7 +10,10 @@ public class ColumnHeader : MonoBehaviour
 
     private void OnDestroy()
     {
-        line.autoDraw = false;
-        line.transform.SetParent(null);
+        if(line != null)
+        {
+            line.autoDraw = false;
+            line.transform.SetParent(null);
+        }
     }
 }

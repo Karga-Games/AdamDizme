@@ -25,9 +25,11 @@ public class Stickman : MonoBehaviour
     bool alive = true;
     bool tweening = false;
     public bool changeDeadCollider = false;
-
+    bool free = false;
     public Gradient colorGradient;
-
+    public Vector3 freeVelocity;
+    public float freeY;
+    Vector3 desiredFreePos;
     // Start is called before the first frame update
 
     private void Awake()
@@ -48,17 +50,23 @@ public class Stickman : MonoBehaviour
     // Update is called once per frame
     public void Update()
     {
+
+        CalculateVelocity();
+
         if (alive)
         {
             GoToDesiredPosition();
-
-            CalculateVelocity();
 
             UpdateRotation();
 
             UpdateAnimation();
 
             UpdateColor();
+        }
+
+        if (free)
+        {
+            FreeMove();
         }
 
         if(animator != null)
@@ -138,7 +146,7 @@ public class Stickman : MonoBehaviour
         tweening = true;
         float duration = Random.Range(0.5f, 0.8f);
         LeanTween.moveLocal(gameObject, desiredPosition.transform.localPosition + new Vector3(0, desiredPosition.Height, 0), duration).setEase(type).setOnComplete(TweeningFinished);
-        
+
     }
     public void TweeningFinished()
     {
@@ -193,6 +201,38 @@ public class Stickman : MonoBehaviour
         }
     }
 
+    public void Free()
+    {
+        alive = false;
+        freeVelocity = new Vector3(Random.Range(-2f, 2f), 0, 2f);
+        free = true;
+        freeY = transform.localPosition.y;
+
+        desiredPosition = null;
+
+        desiredFreePos = transform.position;
+    }
+
+    public void FreeMove()
+    {
+        Vector3 cdesiredFreePos = transform.position + freeVelocity;
+        cdesiredFreePos.y = freeY;
+
+        if(freeY > 0)
+        {
+            freeY -= Time.deltaTime*5f;
+            cdesiredFreePos.z += Time.deltaTime*80f;
+        }
+        else
+        {
+            freeY = 0;
+        }
+
+        desiredFreePos = Vector3.Lerp(desiredFreePos, cdesiredFreePos,Time.deltaTime*5f);
+
+        _rigidbody.MovePosition(desiredFreePos);
+    }
+
     public void Stand()
     {
         if (animator != null)
@@ -218,7 +258,6 @@ public class Stickman : MonoBehaviour
         SetCrowd(crowd);
         ChangeMaterial(collectedMaterial);
     }
-
 
     public void Dead()
     {
@@ -261,23 +300,34 @@ public class Stickman : MonoBehaviour
     {
         //base.OnCollisionEnter(collision);
 
-        Stickman stickman = collision.gameObject.GetComponent<Stickman>();
-
-        if(stickman != null)
+        if (free && collision.gameObject.name == "Wall")
         {
-            if (stickman.crowd == null && crowd != null && stickman.alive)
+            Vector3 newvel = Vector3.Reflect(freeVelocity, collision.contacts[0].normal);
+
+            freeVelocity = newvel;
+
+        }
+        else
+        {
+            Stickman stickman = collision.gameObject.GetComponent<Stickman>();
+
+            if (stickman != null)
             {
-                crowd.AddStickman(stickman);
+                if (stickman.crowd == null && crowd != null && stickman.alive)
+                {
+                    crowd.AddStickman(stickman);
+                }
+                return;
             }
-            return;
+
+            Obstacle obstacle = collision.gameObject.GetComponent<Obstacle>();
+            if (obstacle != null && crowd != null)
+            {
+                Dead();
+                return;
+            }
         }
 
-        Obstacle obstacle = collision.gameObject.GetComponent<Obstacle>();
-        if(obstacle != null && crowd != null)
-        {
-            Dead();
-            return;
-        }
 
     }
     

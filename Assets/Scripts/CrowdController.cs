@@ -370,6 +370,18 @@ public class CrowdController : MonoBehaviour
 
     }
 
+    public void Spread()
+    {
+
+        foreach(Stickman stickman in StickmanList)
+        {
+            stickman.Free();
+        }
+
+        playerController.levelend = true;
+
+    }
+
     public void AddToColumn(int columnIndex, int Count)
     {
 

@@ -18,6 +18,7 @@ public class LevelFinisher : MonoBehaviour
     GameObject drawingUI;
 
     CameraController cameraController;
+    CrowdController crowdController;
 
     public bool passed = false;
     /*
@@ -44,24 +45,30 @@ public class LevelFinisher : MonoBehaviour
         drawingUI = GameObject.FindGameObjectWithTag("DrawingArea");
 
         cameraController = FindObjectOfType<CameraController>();
+        crowdController = FindObjectOfType<CrowdController>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        /*
         if (passed)
         {
             cameraController.FollowOffset = Vector3.Lerp(cameraController.FollowOffset,CameraFollow,Time.deltaTime * 2f);
             cameraController.TargetOffset = Vector3.Lerp(cameraController.TargetOffset, CameraTarget, Time.deltaTime * 2f);
         }
+        */
+
     }
 
     public void FinishReached()
     {
+
         splineDrawer.enabled = false;
         drawingUI.SetActive(false);
-        splineGenerator.GenerateSplineFromPointList(posList);
-        
+        //splineGenerator.GenerateSplineFromPointList(posList);
+
+        crowdController.Spread();
 
     }
 

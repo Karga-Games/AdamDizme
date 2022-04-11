@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class RunnerPlayerController : DreamteckRoadPlayerController
 {
+    public bool levelend = false;
     // Start is called before the first frame update
     public override void Start()
     {
@@ -13,7 +14,14 @@ public class RunnerPlayerController : DreamteckRoadPlayerController
     // Update is called once per frame
     public override void Update()
     {
-        base.Update();
+        if (!levelend)
+        {
+            base.Update();
+        }
+        else
+        {
+            transform.position += Vector3.Lerp(transform.position, transform.position + transform.forward, Time.deltaTime * 0.00001f);
+        }
     }
 
     public override void FixedUpdate()

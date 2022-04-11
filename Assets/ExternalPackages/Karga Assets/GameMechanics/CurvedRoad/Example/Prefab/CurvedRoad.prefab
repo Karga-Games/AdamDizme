@@ -59,9 +59,9 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 5c270a73328a99e439fec44a0cf3a17d, type: 2}
-  - {fileID: 2100000, guid: d5b3a558a1e7f4a4182b166bb2f27cf7, type: 2}
-  - {fileID: 2100000, guid: d5b3a558a1e7f4a4182b166bb2f27cf7, type: 2}
+  - {fileID: 2100000, guid: ffd9e6f97bf08c14c9946fc2e34704b2, type: 2}
+  - {fileID: 2100000, guid: ffd9e6f97bf08c14c9946fc2e34704b2, type: 2}
+  - {fileID: 2100000, guid: ffd9e6f97bf08c14c9946fc2e34704b2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -156,7 +156,7 @@ MonoBehaviour:
       - 0
       globalNormalsAngle: 0
       flipNormals: 0
-    vertexPathUpToDate: 1
+    vertexPathUpToDate: 0
     vertexPathMaxAngleError: 0.3
     vertexPathMinVertexSpacing: 0.01
     showTransformTool: 1
@@ -193,6 +193,8 @@ MonoBehaviour:
   autoUpdate: 1
   roadWidth: 6
   thickness: 0.485
+  sideWidth: 0.15
+  sideHeight: 0.15
   flattenSurface: 0
   roadMaterial: {fileID: 2100000, guid: ffd9e6f97bf08c14c9946fc2e34704b2, type: 2}
   undersideMaterial: {fileID: 2100000, guid: ffd9e6f97bf08c14c9946fc2e34704b2, type: 2}
