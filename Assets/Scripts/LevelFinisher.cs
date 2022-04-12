@@ -77,10 +77,11 @@ public class LevelFinisher : MonoBehaviour
         if (!passed)
         {
             passed = true; 
-            ColumnHeader column = other.GetComponent<ColumnHeader>();
-            if (column != null)
+            
+            if (other.gameObject.tag == "Player")
             {
                 FinishReached();
+                other.gameObject.SetActive(false);
             }
         }
         

@@ -321,7 +321,10 @@ public class Stickman : MonoBehaviour
         _rigidbody.AddForce(speed,ForceMode.VelocityChange);
         _rigidbody.angularVelocity = Vector3.zero;
         
-        crowd.StickmanList.Remove(this);
+        if(crowd != null)
+        {
+            crowd.StickmanList.Remove(this);
+        }
 
     }
 
