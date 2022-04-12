@@ -29,6 +29,7 @@ public class Stickman : MonoBehaviour
     public Gradient colorGradient;
     public Vector3 freeVelocity;
     public float freeY;
+    public float freeZ;
     Vector3 desiredFreePos;
     // Start is called before the first frame update
 
@@ -204,33 +205,33 @@ public class Stickman : MonoBehaviour
     public void Free()
     {
         alive = false;
-        freeVelocity = new Vector3(Random.Range(-2f, 2f), 0, 2f);
+        freeVelocity = new Vector3(Random.Range(-2f, 2f), 0, 0);
         free = true;
         freeY = transform.localPosition.y;
+        freeZ = transform.localPosition.y;
+
+        LeanTween.value(gameObject, freeY, 0f, 0.2f * desiredPosition.ListCoordinate.y).setOnUpdate((float val) =>
+        {
+
+            freeY = val;
+
+        }).setEase(LeanTweenType.easeOutBounce);
 
         desiredPosition = null;
 
-        desiredFreePos = transform.position;
+        desiredFreePos = transform.localPosition;
+
+        desiredFreePos.z = freeZ;
+
     }
 
     public void FreeMove()
     {
-        Vector3 cdesiredFreePos = transform.position + freeVelocity;
+        Vector3 cdesiredFreePos = transform.localPosition + freeVelocity * Time.deltaTime * 5f;
         cdesiredFreePos.y = freeY;
+        cdesiredFreePos.z = freeZ;
 
-        if(freeY > 0)
-        {
-            freeY -= Time.deltaTime*5f;
-            cdesiredFreePos.z += Time.deltaTime*80f;
-        }
-        else
-        {
-            freeY = 0;
-        }
-
-        desiredFreePos = Vector3.Lerp(desiredFreePos, cdesiredFreePos,Time.deltaTime*5f);
-
-        _rigidbody.MovePosition(desiredFreePos);
+        transform.localPosition = cdesiredFreePos;
     }
 
     public void Stand()
@@ -295,16 +296,41 @@ public class Stickman : MonoBehaviour
         }
     }
 
-    
+    public void InHole(Vector3 speed)
+    {
+        free = false;
+
+        transform.SetParent(null);
+
+        _rigidbody.useGravity = true;
+        _rigidbody.isKinematic = false;
+        _rigidbody.AddForce(speed,ForceMode.VelocityChange);
+        _rigidbody.angularVelocity = Vector3.zero;
+        
+    }
+
+    private void OnBecameInvisible()
+    {
+        if(!alive)
+        {
+            Destroy(gameObject);
+        }
+    }
+
     public void OnCollisionEnter(Collision collision)
     {
         //base.OnCollisionEnter(collision);
 
-        if (free && collision.gameObject.name == "Wall")
+        if (free)
         {
-            Vector3 newvel = Vector3.Reflect(freeVelocity, collision.contacts[0].normal);
+            if (collision.gameObject.tag == "Wall")
+            {
 
-            freeVelocity = newvel;
+                Vector3 newvel = Vector3.Reflect(freeVelocity, collision.contacts[0].normal);
+
+                freeVelocity = newvel;
+
+            }
 
         }
         else

@@ -8,11 +8,13 @@ TagManager:
   - FxTemporaire
   - MainCanvas
   - DrawingArea
+  - Hole
+  - Wall
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Ball
   - Water
   - UI
   - 

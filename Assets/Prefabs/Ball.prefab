@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 484687986062659789}
   - component: {fileID: 1331001264333666169}
   - component: {fileID: 7775360061052979875}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Ball
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -86,6 +86,8 @@ MonoBehaviour:
     m_NumColorKeys: 3
     m_NumAlphaKeys: 2
   freeVelocity: {x: 0, y: 0, z: 0}
+  freeY: 0
+  freeZ: 0
 --- !u!54 &1331001264333666169
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -126,7 +128,7 @@ GameObject:
   - component: {fileID: 5096313719289227956}
   - component: {fileID: 6865238666605493115}
   - component: {fileID: 2200998699470845768}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}

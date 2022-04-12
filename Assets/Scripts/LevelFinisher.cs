@@ -51,13 +51,13 @@ public class LevelFinisher : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        /*
+        
         if (passed)
         {
             cameraController.FollowOffset = Vector3.Lerp(cameraController.FollowOffset,CameraFollow,Time.deltaTime * 2f);
             cameraController.TargetOffset = Vector3.Lerp(cameraController.TargetOffset, CameraTarget, Time.deltaTime * 2f);
         }
-        */
+        
 
     }
 
