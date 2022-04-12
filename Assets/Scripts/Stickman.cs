@@ -35,6 +35,7 @@ public class Stickman : MonoBehaviour
     float lastReflection;
 
     public GameObject Trail;
+    Color ballColor;
     // Start is called before the first frame update
 
     private void Awake()
@@ -114,14 +115,15 @@ public class Stickman : MonoBehaviour
 
             float p = (float)(xIndex * yIndex) / (float)crowd.StickmanCount();
 
+            ballColor = colorGradient.Evaluate(p);
             if (_srenderer != null)
             {
-                _renderer.material.color = colorGradient.Evaluate(p);
+                _renderer.material.color = ballColor;
             }
 
             if (_renderer != null)
             {
-                _renderer.material.color = colorGradient.Evaluate(p);
+                _renderer.material.color = ballColor;
             }
         }
     }
@@ -215,6 +217,9 @@ public class Stickman : MonoBehaviour
         freeY = transform.localPosition.y;
         freeZ = transform.localPosition.y;
         Trail.SetActive(true);
+        Color trailColor = ballColor;
+        trailColor.a = 0.1f;
+        Trail.GetComponent<TrailRenderer>().material.color = trailColor;
         LeanTween.value(gameObject, freeY, 0f, 0.2f * desiredPosition.ListCoordinate.y).setOnUpdate((float val) =>
         {
 
