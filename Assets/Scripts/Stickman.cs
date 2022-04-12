@@ -91,8 +91,12 @@ public class Stickman : MonoBehaviour
 
     public void UpdateRotation()
     {
+        Vector3 movement = new Vector3(velocity.x, 0, velocity.z);
+        if (movement != Vector3.zero)
+        {
 
-        transform.rotation = Quaternion.LookRotation(new Vector3(velocity.x,0, velocity.z), Vector3.up);
+            transform.rotation = Quaternion.LookRotation(movement, Vector3.up);
+        }
 
     }
 
