@@ -66,6 +66,11 @@ public class LevelFinisher : MonoBehaviour
 
         splineDrawer.enabled = false;
         drawingUI.SetActive(false);
+        foreach(KargaGames.Drawing.Line line in FindObjectsOfType<KargaGames.Drawing.Line>())
+        {
+            Destroy(line.gameObject);
+        }
+        
         //splineGenerator.GenerateSplineFromPointList(posList);
 
         crowdController.Spread();
@@ -74,8 +79,6 @@ public class LevelFinisher : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!passed)
-        {
             passed = true; 
             
             if (other.gameObject.tag == "Player")
@@ -83,7 +86,7 @@ public class LevelFinisher : MonoBehaviour
                 FinishReached();
                 other.gameObject.SetActive(false);
             }
-        }
+        
         
     }
 }

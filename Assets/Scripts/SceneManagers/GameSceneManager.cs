@@ -80,7 +80,7 @@ public class GameSceneManager : MonoBehaviour
 
     public void Reload()
     {
-        SceneManager.LoadScene("GameScene", LoadSceneMode.Single);
+        SceneManager.LoadScene("GameScene_Ball", LoadSceneMode.Single);
     }
 
     public void LevelPassed()
