@@ -12,6 +12,7 @@ public class GameSceneManager : MonoBehaviour
     public static GlobalAudioManager _audioManager;
     public GameObject LevelEndUI;
     public GameObject LevelFailedUI;
+    public GameObject Confetti;
     //public GameObject _playerMesh;
 
     int level;
@@ -102,6 +103,8 @@ public class GameSceneManager : MonoBehaviour
             {
                 LevelEndUI.SetActive(true);
             }
+            Instantiate(Confetti, _camera.transform.position + (_camera.transform.forward * 3.5f) + (_camera.transform.up * 1f),Quaternion.identity);
+
             Debug.Log("Level Ended!");
             Account.Level++;
         }

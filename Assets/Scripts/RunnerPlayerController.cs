@@ -6,7 +6,7 @@ public class RunnerPlayerController : DreamteckRoadPlayerController
 {
     public bool levelend = false;
     CrowdController crowdController;
-
+    GameSceneManager gameSceneManager;
     // Start is called before the first frame update
     public override void Start()
     {
@@ -20,7 +20,7 @@ public class RunnerPlayerController : DreamteckRoadPlayerController
         {
             base.Update();
         }
-        else
+        else if(!GameSceneManager.gameOver)
         {
             transform.position = Vector3.Lerp(transform.position, transform.position + transform.forward, Time.deltaTime*10f);
         }

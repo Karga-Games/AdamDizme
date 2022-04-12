@@ -31,6 +31,10 @@ public class Stickman : MonoBehaviour
     public float freeY;
     public float freeZ;
     Vector3 desiredFreePos;
+
+    float lastReflection;
+
+    public GameObject Trail;
     // Start is called before the first frame update
 
     private void Awake()
@@ -75,6 +79,7 @@ public class Stickman : MonoBehaviour
             animator.SetBool("alive", alive);
         }
 
+        lastReflection += Time.deltaTime;
     }
 
     public void CalculateVelocity()
@@ -209,7 +214,7 @@ public class Stickman : MonoBehaviour
         free = true;
         freeY = transform.localPosition.y;
         freeZ = transform.localPosition.y;
-
+        Trail.SetActive(true);
         LeanTween.value(gameObject, freeY, 0f, 0.2f * desiredPosition.ListCoordinate.y).setOnUpdate((float val) =>
         {
 
@@ -307,12 +312,19 @@ public class Stickman : MonoBehaviour
         _rigidbody.AddForce(speed,ForceMode.VelocityChange);
         _rigidbody.angularVelocity = Vector3.zero;
         
+        crowd.StickmanList.Remove(this);
+
     }
 
     private void OnBecameInvisible()
     {
         if(!alive)
         {
+            if(crowd != null)
+            {
+                crowd.StickmanList.Remove(this);
+            }
+
             Destroy(gameObject);
         }
     }
@@ -323,12 +335,14 @@ public class Stickman : MonoBehaviour
 
         if (free)
         {
-            if (collision.gameObject.tag == "Wall")
+            if (collision.gameObject.tag == "Wall" && lastReflection > 0.1f)
             {
 
                 Vector3 newvel = Vector3.Reflect(freeVelocity, collision.contacts[0].normal);
 
                 freeVelocity = newvel;
+
+                lastReflection = 0;
 
             }
 

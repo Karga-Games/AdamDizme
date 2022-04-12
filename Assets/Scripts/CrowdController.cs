@@ -17,7 +17,7 @@ public class CrowdController : MonoBehaviour
 
     protected SplineComputer _spline;
     protected List<List<StickmanPosition>> StickmanPositions;
-    protected List<Stickman> StickmanList;
+    public List<Stickman> StickmanList;
     protected GameSceneManager gameSceneManager;
     protected SplineByDrawing splineDrawer;
     protected SplineGenerator splineGenerator;
@@ -36,6 +36,8 @@ public class CrowdController : MonoBehaviour
     Vector3 lastPosition;
 
     bool setup = false;
+
+    public int stickmanCount;
     // Start is called before the first frame update
     public virtual void Start()
     {
@@ -56,7 +58,17 @@ public class CrowdController : MonoBehaviour
         {
             if (StickmanList.Count == 0 && !GameSceneManager.gameOver)
             {
-                Fail();
+                if (playerController.levelend)
+                {
+                    playerController.speed = 0;
+                    gameSceneManager.LevelPassed();
+                }
+                else
+                {
+                    Fail();
+
+                }
+
             }
 
             lastFixTime += Time.deltaTime;
@@ -68,6 +80,7 @@ public class CrowdController : MonoBehaviour
 
             CalculateVelocity();
         }
+
     }
     public void CalculateVelocity()
     {
@@ -81,6 +94,7 @@ public class CrowdController : MonoBehaviour
         drawingUI.SetActive(false);
         playerController.speed = 0;
     }
+
 
     public virtual void SetupController()
     {

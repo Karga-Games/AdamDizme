@@ -55,6 +55,29 @@ public class Lance : MonoBehaviour
 
             triggered = false;
             int added = 0;
+
+            int index = 0;
+            while(added < Mathf.Abs(AdditionValue))
+            {
+                int count = 1;
+                if (AdditionValue < 0)
+                {
+                    count = -1;
+                }
+
+                columnsToAdd[index].crowd.AddToColumn(columnsToAdd[index].columnIndex, count);
+
+                added++;
+
+                index++;
+
+                if(index > columnsToAdd.Count - 1)
+                {
+                    index = 0;
+                }
+            }
+
+            /*
             foreach (ColumnHeader column in columnsToAdd)
             {
                 if(added < Mathf.Abs(AdditionValue))
@@ -74,6 +97,7 @@ public class Lance : MonoBehaviour
                     return;
                 }
             }
+            */
 
         }
     }
