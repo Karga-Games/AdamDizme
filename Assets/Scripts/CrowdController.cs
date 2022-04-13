@@ -38,9 +38,11 @@ public class CrowdController : MonoBehaviour
     bool setup = false;
 
     public int stickmanCount;
+
     // Start is called before the first frame update
     public virtual void Start()
     {
+
         gameSceneManager = FindObjectOfType<GameSceneManager>();
         splineDrawer = FindObjectOfType<SplineByDrawing>();
         splineGenerator = FindObjectOfType<SplineGenerator>();
@@ -84,8 +86,10 @@ public class CrowdController : MonoBehaviour
     }
     public void CalculateVelocity()
     {
+
         velocity = transform.position - lastPosition;
         lastPosition = transform.position;
+
     }
     public virtual void Fail()
     {
@@ -94,7 +98,6 @@ public class CrowdController : MonoBehaviour
         drawingUI.SetActive(false);
         playerController.speed = 0;
     }
-
 
     public virtual void SetupController()
     {
@@ -158,17 +161,13 @@ public class CrowdController : MonoBehaviour
                         StickmanPositions.RemoveAll(item => item == null);
                         StickmanPositions.RemoveAll(item => item.Count == 0);
 
-
                         FixColumns();
                         FixRows();
-                        TweenStickmans();
+                        //TweenStickmans();
 
                     }
 
-
                 }
-
-
 
             },repositionDelay));
         }

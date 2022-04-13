@@ -216,6 +216,7 @@ public class Stickman : MonoBehaviour
     public void Free()
     {
         alive = false;
+        gameObject.layer = 3;
         freeVelocity = new Vector3(Random.Range(-2f, 2f), 0, 0);
         free = true;
         freeY = transform.localPosition.y;
@@ -272,10 +273,13 @@ public class Stickman : MonoBehaviour
     {
         SetCrowd(crowd);
         ChangeMaterial(collectedMaterial);
+
+        gameObject.layer = 6;
     }
 
     public void Dead()
     {
+        LeanTween.cancel(gameObject);
         ChangeMaterial(deadMaterial);
         if(crowd != null)
         {
@@ -330,15 +334,21 @@ public class Stickman : MonoBehaviour
 
     private void OnBecameInvisible()
     {
+        
+        
         if(!alive)
         {
+
             if(crowd != null)
             {
                 crowd.StickmanList.Remove(this);
             }
 
             Destroy(gameObject);
+
         }
+        
+        
     }
 
     public void OnCollisionEnter(Collision collision)

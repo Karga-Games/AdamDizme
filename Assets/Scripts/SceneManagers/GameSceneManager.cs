@@ -46,7 +46,7 @@ public class GameSceneManager : MonoBehaviour
 
         _audioManager = FindObjectOfType<GlobalAudioManager>();
 
-        Account.Level = 1;
+        //Account.Level = 1;
 
         level = Account.Level;
 
