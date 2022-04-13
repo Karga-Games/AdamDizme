@@ -36,7 +36,12 @@ public class SplineGenerator : SplineByDrawing
         Vector3[] linePoints = new Vector3[line.GetLineRenderer().positionCount];
         line.GetLineRenderer().GetPositions(linePoints);
 
-        GenerateSplineFromPointList(linePoints);
+        if (linePoints.Length > 2)
+        {
+
+            GenerateSplineFromPointList(linePoints);
+        }
+
 
     }
 
