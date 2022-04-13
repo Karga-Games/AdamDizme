@@ -281,6 +281,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8599003790986943579, guid: f25f96609787dbe45b0e146c06412cf9,
         type: 3}
+      propertyPath: AutoLoadSounds
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8599003790986943579, guid: f25f96609787dbe45b0e146c06412cf9,
+        type: 3}
       propertyPath: Sounds.Array.data[0].pitch
       value: 0.1
       objectReference: {fileID: 0}
