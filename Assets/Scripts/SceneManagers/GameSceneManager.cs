@@ -38,6 +38,8 @@ public class GameSceneManager : MonoBehaviour
     private void Awake()
     {
         Application.targetFrameRate = targetFPS;
+
+        LeanTween.init(4000);
     }
 
     void Start()
