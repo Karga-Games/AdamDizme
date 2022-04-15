@@ -291,6 +291,7 @@ public class Stickman : MonoBehaviour
     {
         LeanTween.cancel(gameObject);
         ChangeMaterial(deadMaterial);
+        gameObject.layer = 8;
         if(crowd != null)
         {
             crowd.RemoveStickman(this, true, 0.2f);

@@ -136,7 +136,7 @@ GameObject:
   - component: {fileID: 166083089}
   - component: {fileID: 166083091}
   - component: {fileID: 166083090}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: PlayerCollider
   m_TagString: Player
   m_Icon: {fileID: 0}
