@@ -2964,7 +2964,7 @@ PrefabInstance:
     - target: {fileID: 5168164808887061420, guid: c5cdd4b71cb0d0246be102ba16c61e7b,
         type: 3}
       propertyPath: tiling.y
-      value: 20
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 7263674314116956074, guid: c5cdd4b71cb0d0246be102ba16c61e7b,
         type: 3}
@@ -4081,6 +4081,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5031454445629627468}
     m_Modifications:
+    - target: {fileID: 1028051571577521170, guid: 6be17bdfa8e67c14c9f6a9ddd195250d,
+        type: 3}
+      propertyPath: m_text
+      value: -20
+      objectReference: {fileID: 0}
     - target: {fileID: 1028051571657428720, guid: 6be17bdfa8e67c14c9f6a9ddd195250d,
         type: 3}
       propertyPath: m_Name
@@ -4161,6 +4166,11 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 02964ad7da6e7d14b9f727ce171e2587, type: 2}
+    - target: {fileID: 6222885242524105693, guid: 6be17bdfa8e67c14c9f6a9ddd195250d,
+        type: 3}
+      propertyPath: m_text
+      value: +30
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6be17bdfa8e67c14c9f6a9ddd195250d, type: 3}
 --- !u!4 &7545917732292210723 stripped

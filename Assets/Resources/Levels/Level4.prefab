@@ -4694,7 +4694,7 @@ PrefabInstance:
     - target: {fileID: 5168164808887061420, guid: c5cdd4b71cb0d0246be102ba16c61e7b,
         type: 3}
       propertyPath: tiling.y
-      value: 20
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 7263674314116956074, guid: c5cdd4b71cb0d0246be102ba16c61e7b,
         type: 3}

@@ -3739,6 +3739,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8741462822409158515}
     m_Modifications:
+    - target: {fileID: 7768811171567571798, guid: 99478e67e9973064cac3c5d1c6d49381,
+        type: 3}
+      propertyPath: m_text
+      value: -20
+      objectReference: {fileID: 0}
     - target: {fileID: 7768811173052766386, guid: 99478e67e9973064cac3c5d1c6d49381,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -3904,6 +3909,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8741462822409158515}
     m_Modifications:
+    - target: {fileID: 1028051571577521170, guid: 6be17bdfa8e67c14c9f6a9ddd195250d,
+        type: 3}
+      propertyPath: m_text
+      value: +30
+      objectReference: {fileID: 0}
     - target: {fileID: 1028051571657428720, guid: 6be17bdfa8e67c14c9f6a9ddd195250d,
         type: 3}
       propertyPath: m_Name
@@ -3977,6 +3987,11 @@ PrefabInstance:
     - target: {fileID: 6222885241141130080, guid: 6be17bdfa8e67c14c9f6a9ddd195250d,
         type: 3}
       propertyPath: AdditionValue
+      value: -30
+      objectReference: {fileID: 0}
+    - target: {fileID: 6222885242524105693, guid: 6be17bdfa8e67c14c9f6a9ddd195250d,
+        type: 3}
+      propertyPath: m_text
       value: -30
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -7659,7 +7674,7 @@ PrefabInstance:
     - target: {fileID: 5168164808887061420, guid: c5cdd4b71cb0d0246be102ba16c61e7b,
         type: 3}
       propertyPath: tiling.y
-      value: 20
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 7263674314116956074, guid: c5cdd4b71cb0d0246be102ba16c61e7b,
         type: 3}
