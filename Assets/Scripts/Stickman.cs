@@ -81,6 +81,12 @@ public class Stickman : MonoBehaviour
         }
 
         lastReflection += Time.deltaTime;
+
+
+        if (!free && !alive && desiredPosition == null)
+        {
+            transform.SetParent(null);
+        }
     }
 
     public void CalculateVelocity()
