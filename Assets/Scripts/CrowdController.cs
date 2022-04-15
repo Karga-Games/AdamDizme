@@ -431,12 +431,9 @@ public class CrowdController : MonoBehaviour
             {
                 if(StickmanPositions.Count > columnIndex)
                 {
-                    if (StickmanPositions[columnIndex].Count - 1 >= i)
+                    if(StickmanPositions[columnIndex].Count > 0)
                     {
-                        if (StickmanPositions[columnIndex][StickmanPositions[columnIndex].Count - 1 - i] != null)
-                        {
-                            StickmanPositions[columnIndex][StickmanPositions[columnIndex].Count - 1 - i].followingStickman.Dead();
-                        }
+                        StickmanPositions[columnIndex][0].followingStickman.Dead();
                     }
                 }
 
@@ -448,9 +445,34 @@ public class CrowdController : MonoBehaviour
 
 
     }
-    public void MultiplyColumn(int columnIndex, float factor)
-    {
 
+
+    public void MultiplyColumn(int columnIndex, float factor, int max = 999)
+    {
+        if(factor > 0)
+        {
+            int stickmanCount = StickmanPositions[columnIndex].Count;
+            if (stickmanCount > max)
+            {
+                stickmanCount = max;
+            }
+
+            if (factor > 1)
+            {
+
+                int count = (int)(stickmanCount * factor) - stickmanCount;
+                AddToColumn(columnIndex, count);
+
+            }
+            else
+            {
+                int count = -1*(int)(stickmanCount * (1-factor));
+                AddToColumn(columnIndex, count);
+
+            }
+        }
+
+        
     }
 
     public int StickmanCount()

@@ -8,6 +8,8 @@ public class Lance : MonoBehaviour
     public int AdditionValue;
     public float MultiplyFactor;
 
+    public int LanceHeightForMultiply;
+
     public TextMeshPro lanceText;
 
     public Material goodMaterial;
@@ -25,27 +27,49 @@ public class Lance : MonoBehaviour
     {
         if (isActiveAndEnabled)
         {
-            string prefix = "";
+            SetupText();
+        }
+    }
 
-            if (AdditionValue > 0)
+    public void SetupText()
+    {
+        string prefix = "";
+
+        if (AdditionValue > 0)
+        {
+            prefix = "+";
+            planeRenderer.material = goodMaterial;
+        }
+        else
+        {
+            planeRenderer.material = badMaterial;
+        }
+        lanceText.text = prefix + AdditionValue.ToString();
+
+        if (MultiplyFactor > 0)
+        {
+            if (MultiplyFactor > 1)
             {
-                prefix = "+";
+                prefix = "x";
                 planeRenderer.material = goodMaterial;
             }
             else
             {
+                prefix = "x";
                 planeRenderer.material = badMaterial;
             }
-
-            lanceText.text = prefix + AdditionValue.ToString();
-
         }
+
+        lanceText.text = prefix + MultiplyFactor.ToString();
+
     }
 
     private void Start()
     {
         columnsToAdd = new List<ColumnHeader>();
         triggered = false;
+
+        SetupText();
     }
 
     private void Update()
@@ -77,27 +101,12 @@ public class Lance : MonoBehaviour
                 }
             }
 
-            /*
-            foreach (ColumnHeader column in columnsToAdd)
+
+            foreach(ColumnHeader column in columnsToAdd)
             {
-                if(added < Mathf.Abs(AdditionValue))
-                {
-                    int count = 1;
-                    if (AdditionValue < 0)
-                    {
-                        count = -1;
-                    }
-
-                    column.crowd.AddToColumn(column.columnIndex,count);
-
-                    added++;
-                }
-                else
-                {
-                    return;
-                }
+                columnsToAdd[index].crowd.MultiplyColumn(column.columnIndex, MultiplyFactor, LanceHeightForMultiply);
             }
-            */
+
 
         }
     }
@@ -109,18 +118,11 @@ public class Lance : MonoBehaviour
         {
             triggered = true;
             triggeringCount++;
-            if (Mathf.Abs(AdditionValue) > 0)
+            if (Mathf.Abs(AdditionValue) > 0 || Mathf.Abs(MultiplyFactor) > 0)
             {
-                //column.crowd.AddToColumn(column.columnIndex, AdditionValue);
                 columnsToAdd.Add(column);
             }
 
-            /*
-            if (MultiplyFactor > 0)
-            {
-                column.crowd.MultiplyColumn(column.columnIndex, MultiplyFactor);
-            }
-            */
 
         }
     }
@@ -131,18 +133,13 @@ public class Lance : MonoBehaviour
         if (column != null)
         {
             triggeringCount--;
-            if (Mathf.Abs(AdditionValue) > 0)
-            {
-                //column.crowd.AddToColumn(column.columnIndex, AdditionValue);
-                columnsToAdd.Add(column);
-            }
-
             /*
-            if (MultiplyFactor > 0)
+            if (Mathf.Abs(AdditionValue) > 0 || Mathf.Abs(MultiplyFactor) > 0)
             {
-                column.crowd.MultiplyColumn(column.columnIndex, MultiplyFactor);
+                //columnsToAdd.Add(column);
             }
             */
+            
 
         }
 

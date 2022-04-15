@@ -383,6 +383,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AdditionValue: 20
   MultiplyFactor: 0
+  LanceHeightForMultiply: 6
   lanceText: {fileID: 7768811171567571798}
   goodMaterial: {fileID: 2100000, guid: 02964ad7da6e7d14b9f727ce171e2587, type: 2}
   badMaterial: {fileID: 2100000, guid: 4a9b7eb8d3e83934bab6420fa7ebfd56, type: 2}
