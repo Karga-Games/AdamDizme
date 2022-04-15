@@ -44,6 +44,7 @@ public class Lance : MonoBehaviour
         {
             planeRenderer.material = badMaterial;
         }
+
         lanceText.text = prefix + AdditionValue.ToString();
 
         if (MultiplyFactor > 0)
@@ -58,9 +59,9 @@ public class Lance : MonoBehaviour
                 prefix = "x";
                 planeRenderer.material = badMaterial;
             }
+            lanceText.text = prefix + MultiplyFactor.ToString();
         }
 
-        lanceText.text = prefix + MultiplyFactor.ToString();
 
     }
 
@@ -123,9 +124,15 @@ public class Lance : MonoBehaviour
                 columnsToAdd.Add(column);
             }
 
+        }
 
+        Stickman stickman = other.GetComponent<Stickman>();
+        if(stickman != null && (AdditionValue > 0 || MultiplyFactor > 1))
+        {
+            stickman.Glow();
         }
     }
+
 
     public void OnTriggerExit(Collider other)
     {

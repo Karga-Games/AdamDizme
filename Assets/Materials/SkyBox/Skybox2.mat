@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: New Material
+  m_Name: Skybox2
   m_Shader: {fileID: 4800000, guid: b9946ecd40cf0fb4caa3c70735da3e87, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
@@ -77,6 +77,6 @@ Material:
     - _BottomColor: {r: 0.3, g: 0.3, b: 1, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _TopColor: {r: 1, g: 0.3, b: 0.3, a: 0}
+    - _TopColor: {r: 1, g: 0.51482475, b: 0.51482475, a: 0}
     - _Up: {r: 0, g: 1, b: 0, a: 0}
   m_BuildTextureStacks: []

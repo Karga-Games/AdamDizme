@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 //using ElephantSDK;
@@ -33,6 +34,10 @@ public class GameSceneManager : MonoBehaviour
     public float LevelFailFollowSpeed;
     public float LevelFailLookSpeed;
 
+
+    public TextMeshProUGUI LevelText;
+    public GameObject HighScore;
+
     // Start is called before the first frame update
 
     private void Awake()
@@ -45,7 +50,7 @@ public class GameSceneManager : MonoBehaviour
     void Start()
     {
         gameOver = false;
-
+        Account.HighScorePassed = false;
         _audioManager = FindObjectOfType<GlobalAudioManager>();
 
         //Account.Level = 1;
@@ -89,6 +94,13 @@ public class GameSceneManager : MonoBehaviour
     {
         if (!gameOver)
         {
+
+            LevelText.text = "Level " + Account.Level;
+
+            if (Account.HighScorePassed)
+            {
+                HighScore.SetActive(true);
+            }
 
             //PlaySound("LevelPass");
             //Elephant.LevelCompleted(Account.Level);

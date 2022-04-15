@@ -27,6 +27,7 @@ public class Stickman : MonoBehaviour
     public bool changeDeadCollider = false;
     bool free = false;
     public Gradient colorGradient;
+    public Gradient glowGradient;
     public Vector3 freeVelocity;
     public float freeY;
     public float freeZ;
@@ -35,7 +36,10 @@ public class Stickman : MonoBehaviour
     float lastReflection;
 
     public GameObject Trail;
+    public GameObject Particle;
     Color ballColor;
+    bool glowing;
+    float glowingtime;
     // Start is called before the first frame update
 
     private void Awake()
@@ -51,6 +55,8 @@ public class Stickman : MonoBehaviour
 
         alive = true;
 
+        transform.localScale = new Vector3(0.7f,0.7f,0.7f);
+        glowing = false;
     }
     
     // Update is called once per frame
@@ -73,6 +79,12 @@ public class Stickman : MonoBehaviour
         if (free)
         {
             FreeMove();
+            lastReflection += Time.deltaTime;
+
+            if( Mathf.Abs(transform.position.x) > 4.2f)
+            {
+                Dead();
+            }
         }
 
         if(animator != null)
@@ -80,7 +92,6 @@ public class Stickman : MonoBehaviour
             animator.SetBool("alive", alive);
         }
 
-        lastReflection += Time.deltaTime;
 
 
         if (!free && !alive && desiredPosition == null)
@@ -112,16 +123,32 @@ public class Stickman : MonoBehaviour
 
     public void UpdateColor()
     {
-        if (crowd != null && desiredPosition != null)
+
+        if (glowing)
+        {
+            Color glowcolor = glowGradient.Evaluate(glowingtime);
+            if (_srenderer != null)
+            {
+                _renderer.material.color = glowcolor;
+            }
+
+            if (_renderer != null)
+            {
+                _renderer.material.color = glowcolor;
+            }
+
+            glowingtime += Time.deltaTime;
+        }
+        else if(crowd != null && desiredPosition != null)
         {
             float xIndex = (desiredPosition.ListCoordinate.x);
             float yIndex = (desiredPosition.ListCoordinate.y);
 
-            if(xIndex <= 0)
+            if (xIndex <= 0)
             {
                 xIndex = 1;
             }
-            if(yIndex <= 0)
+            if (yIndex <= 0)
             {
                 yIndex = 1;
             }
@@ -140,6 +167,7 @@ public class Stickman : MonoBehaviour
                 _renderer.material.color = ballColor;
             }
         }
+        
     }
 
 
@@ -284,6 +312,7 @@ public class Stickman : MonoBehaviour
         SetCrowd(crowd);
         ChangeMaterial(collectedMaterial);
 
+        transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
         gameObject.layer = 6;
     }
 
@@ -314,6 +343,7 @@ public class Stickman : MonoBehaviour
 
     public void ChangeMaterial(Material mat)
     {
+
         if(_srenderer != null)
         {
             _srenderer.material = mat;
@@ -323,12 +353,29 @@ public class Stickman : MonoBehaviour
         {
             _renderer.material = mat;
         }
+
+    }
+
+    public void Glow()
+    {
+
+        glowGradient.colorKeys[2].color = _renderer.material.color;
+        glowGradient.SetKeys(new GradientColorKey[]{ glowGradient.colorKeys[0], glowGradient.colorKeys[1], new GradientColorKey { color = _renderer.material.color , time = glowGradient.colorKeys[2].time } }
+        , glowGradient.alphaKeys);
+        glowing = true;
+        glowingtime = 0;
+        LeanTween.value(0, 1, 0.5f).setOnComplete(() => {
+
+            glowing = false;
+
+        });
+        
     }
 
     public void InHole(Vector3 speed)
     {
         free = false;
-
+        Particle.SetActive(true);
         transform.SetParent(null);
 
         _rigidbody.useGravity = true;

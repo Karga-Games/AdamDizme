@@ -138,39 +138,48 @@ public class CrowdController : MonoBehaviour
     public virtual void RemoveStickman(Stickman stickman, bool reposition = false, float repositionDelay = 0f)
     {
 
-        Vector2Int coord = stickman.desiredPosition.ListCoordinate;
-
-        StickmanList.Remove(stickman);
-
-        if (reposition)
+        if(stickman != null)
         {
-            fixCommand++;
+            if(stickman.desiredPosition!= null)
+            {
+                Vector2Int coord = stickman.desiredPosition.ListCoordinate;
 
-            float commandIndex = fixCommand;
-            StartCoroutine(GeneralFunctions.executeAfterSec(() => {
+                StickmanList.Remove(stickman);
 
-                if(commandIndex == fixCommand)
+                if (reposition)
                 {
-                    //RePositionStickmans();
+                    fixCommand++;
 
-                    if (!FixWorking)
-                    {
-                        FixWorking = true;
-                        lastFixTime = 0;
+                    float commandIndex = fixCommand;
+                    StartCoroutine(GeneralFunctions.executeAfterSec(() => {
 
-                        StickmanPositions.RemoveAll(item => item == null);
-                        StickmanPositions.RemoveAll(item => item.Count == 0);
+                        if (commandIndex == fixCommand)
+                        {
+                            //RePositionStickmans();
 
-                        FixColumns();
-                        FixRows();
-                        //TweenStickmans();
+                            if (!FixWorking)
+                            {
+                                FixWorking = true;
+                                lastFixTime = 0;
 
-                    }
+                                StickmanPositions.RemoveAll(item => item == null);
+                                StickmanPositions.RemoveAll(item => item.Count == 0);
 
+                                FixColumns();
+                                FixRows();
+                                //TweenStickmans();
+
+                            }
+
+                        }
+
+                    }, repositionDelay));
                 }
-
-            },repositionDelay));
+            }
+            
         }
+
+        
     }
 
 
