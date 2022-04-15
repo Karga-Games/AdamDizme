@@ -86,6 +86,10 @@ public class Stickman : MonoBehaviour
         if (!free && !alive && desiredPosition == null)
         {
             transform.SetParent(null);
+            if (LeanTween.isTweening(gameObject))
+            {
+                LeanTween.cancel(gameObject);
+            }
         }
     }
 
