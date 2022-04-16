@@ -1,9 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using TMPro;
 public class HighScore : MonoBehaviour
 {
+    public TextMeshProUGUI rankText;
 
     // Start is called before the first frame update
     void Start()
@@ -15,5 +16,10 @@ public class HighScore : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void SetupRank(int rank)
+    {
+        rankText.text = rank.ToString();
     }
 }

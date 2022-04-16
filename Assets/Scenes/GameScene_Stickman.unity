@@ -1277,13 +1277,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 733954cf963c3ce4881adfe64591c9b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  positionPrefab: {fileID: 0}
-  HorizontalDistanceBetweenStickmans: 0.5
-  VerticalDistanceBetweenStickmans: 0.9
-  PositionsParent: {fileID: 0}
-  StickmansParent: {fileID: 0}
-  ColumnPrefab: {fileID: 6144174807227429085, guid: f8677a974794e3b449eed83076d18ca4,
-    type: 3}
 --- !u!114 &851711264
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2422,6 +2415,7 @@ MonoBehaviour:
   _player: {fileID: 0}
   LevelEndUI: {fileID: 1367757080}
   LevelFailedUI: {fileID: 1959644874}
+  Confetti: {fileID: 0}
   spawnLevel: 0
   LevelEndCameraFollow: {x: 0, y: 10.77, z: -9.88}
   LevelEndCameraLook: {x: 0, y: 5.27, z: 0}
@@ -2431,6 +2425,8 @@ MonoBehaviour:
   LevelFailCameraLook: {x: 0, y: 5.27, z: 0}
   LevelFailFollowSpeed: 0.3
   LevelFailLookSpeed: 0.1
+  LevelText: {fileID: 0}
+  HighScore: {fileID: 0}
 --- !u!4 &1083739658
 Transform:
   m_ObjectHideFlags: 0
@@ -2908,12 +2904,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f9167b7a9518ca408ff80a60d392109, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stickmanPrefab: {fileID: 0}
   positionPrefab: {fileID: 426238966916378804, guid: 3cfcf2c1be1b7c84989a07a29e75fb25,
     type: 3}
+  ColumnPrefab: {fileID: 0}
   HorizontalDistanceBetweenStickmans: 0.5
   VerticalDistanceBetweenStickmans: 0.9
   PositionsParent: {fileID: 936272528}
   StickmansParent: {fileID: 1344649250}
+  StickmanList: []
+  velocity: {x: 0, y: 0, z: 0}
+  stickmanCount: 0
 --- !u!4 &1254144992 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 484687986062659788, guid: 611fbebf4c91a144aa75d19fd5217dad,
@@ -4452,6 +4453,7 @@ MonoBehaviour:
   MoveAsChild: {fileID: 0}
   MovementOffset: {x: 0, y: 0, z: 0}
   active: 1
+  levelend: 0
 --- !u!4 &1999225350
 Transform:
   m_ObjectHideFlags: 0

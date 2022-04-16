@@ -36,7 +36,9 @@ public class GameSceneManager : MonoBehaviour
 
 
     public TextMeshProUGUI LevelText;
-    public GameObject HighScore;
+    public HighScore _HighScore;
+
+
 
     // Start is called before the first frame update
 
@@ -99,8 +101,9 @@ public class GameSceneManager : MonoBehaviour
 
             if (Account.HighScorePassed)
             {
-                HighScore.SetActive(true);
+                //HighScore.SetActive(true);
             }
+
 
             //PlaySound("LevelPass");
             //Elephant.LevelCompleted(Account.Level);
@@ -115,7 +118,15 @@ public class GameSceneManager : MonoBehaviour
 
             if (LevelEndUI != null)
             {
-                LevelEndUI.SetActive(true);
+                StartCoroutine(GeneralFunctions.executeAfterSec(() => {
+
+
+                    _HighScore.SetupRank(5);
+                    _HighScore.gameObject.SetActive(true);
+
+                    LevelEndUI.SetActive(true);
+
+                },1f));
             }
             Instantiate(Confetti, _camera.transform.position + (_camera.transform.forward * 3.5f) + (_camera.transform.up * 1f),Quaternion.identity);
 
