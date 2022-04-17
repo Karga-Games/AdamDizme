@@ -7,7 +7,7 @@ public class Move : MonoBehaviour
     public float movementSpeed;
     public float minX;
     public float maxX;
-    protected float currentX;
+    public float currentX;
     protected bool direction;
     // Start is called before the first frame update
     void Start()
