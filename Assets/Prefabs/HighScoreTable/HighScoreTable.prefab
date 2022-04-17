@@ -835,6 +835,11 @@ PrefabInstance:
       propertyPath: m_text
       value: Berefsi
       objectReference: {fileID: 0}
+    - target: {fileID: 8486806645809042310, guid: 91195679a7cc96e42ac988507bb11482,
+        type: 3}
+      propertyPath: m_text
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 8486806646020435955, guid: 91195679a7cc96e42ac988507bb11482,
         type: 3}
       propertyPath: m_Name
@@ -964,6 +969,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_text
       value: Stowir
+      objectReference: {fileID: 0}
+    - target: {fileID: 8486806645809042310, guid: 91195679a7cc96e42ac988507bb11482,
+        type: 3}
+      propertyPath: m_text
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 8486806646020435955, guid: 91195679a7cc96e42ac988507bb11482,
         type: 3}
@@ -1417,6 +1427,11 @@ PrefabInstance:
       propertyPath: m_text
       value: Dirch
       objectReference: {fileID: 0}
+    - target: {fileID: 8486806645809042310, guid: 91195679a7cc96e42ac988507bb11482,
+        type: 3}
+      propertyPath: m_text
+      value: 24
+      objectReference: {fileID: 0}
     - target: {fileID: 8486806646020435955, guid: 91195679a7cc96e42ac988507bb11482,
         type: 3}
       propertyPath: m_Name
@@ -1547,6 +1562,11 @@ PrefabInstance:
       propertyPath: m_text
       value: Thea
       objectReference: {fileID: 0}
+    - target: {fileID: 8486806645809042310, guid: 91195679a7cc96e42ac988507bb11482,
+        type: 3}
+      propertyPath: m_text
+      value: 18
+      objectReference: {fileID: 0}
     - target: {fileID: 8486806646020435955, guid: 91195679a7cc96e42ac988507bb11482,
         type: 3}
       propertyPath: m_Name
@@ -1676,6 +1696,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_text
       value: Cko
+      objectReference: {fileID: 0}
+    - target: {fileID: 8486806645809042310, guid: 91195679a7cc96e42ac988507bb11482,
+        type: 3}
+      propertyPath: m_text
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 8486806646020435955, guid: 91195679a7cc96e42ac988507bb11482,
         type: 3}
@@ -1812,6 +1837,11 @@ PrefabInstance:
       propertyPath: m_fontSize
       value: 41.85
       objectReference: {fileID: 0}
+    - target: {fileID: 8486806645809042310, guid: 91195679a7cc96e42ac988507bb11482,
+        type: 3}
+      propertyPath: m_text
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 8486806646020435955, guid: 91195679a7cc96e42ac988507bb11482,
         type: 3}
       propertyPath: m_Name
@@ -1941,6 +1971,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_text
       value: UIU
+      objectReference: {fileID: 0}
+    - target: {fileID: 8486806645809042310, guid: 91195679a7cc96e42ac988507bb11482,
+        type: 3}
+      propertyPath: m_text
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 8486806646020435955, guid: 91195679a7cc96e42ac988507bb11482,
         type: 3}
@@ -2072,6 +2107,11 @@ PrefabInstance:
       propertyPath: m_text
       value: Liii
       objectReference: {fileID: 0}
+    - target: {fileID: 8486806645809042310, guid: 91195679a7cc96e42ac988507bb11482,
+        type: 3}
+      propertyPath: m_text
+      value: 22
+      objectReference: {fileID: 0}
     - target: {fileID: 8486806646020435955, guid: 91195679a7cc96e42ac988507bb11482,
         type: 3}
       propertyPath: m_Name
@@ -2201,6 +2241,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_text
       value: Winnet
+      objectReference: {fileID: 0}
+    - target: {fileID: 8486806645809042310, guid: 91195679a7cc96e42ac988507bb11482,
+        type: 3}
+      propertyPath: m_text
+      value: 19
       objectReference: {fileID: 0}
     - target: {fileID: 8486806646020435955, guid: 91195679a7cc96e42ac988507bb11482,
         type: 3}
@@ -2332,6 +2377,11 @@ PrefabInstance:
       propertyPath: m_text
       value: Capzyel
       objectReference: {fileID: 0}
+    - target: {fileID: 8486806645809042310, guid: 91195679a7cc96e42ac988507bb11482,
+        type: 3}
+      propertyPath: m_text
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 8486806646020435955, guid: 91195679a7cc96e42ac988507bb11482,
         type: 3}
       propertyPath: m_Name
@@ -2461,6 +2511,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_text
       value: Dyer
+      objectReference: {fileID: 0}
+    - target: {fileID: 8486806645809042310, guid: 91195679a7cc96e42ac988507bb11482,
+        type: 3}
+      propertyPath: m_text
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 8486806646020435955, guid: 91195679a7cc96e42ac988507bb11482,
         type: 3}
@@ -2592,6 +2647,11 @@ PrefabInstance:
       propertyPath: m_text
       value: bab
       objectReference: {fileID: 0}
+    - target: {fileID: 8486806645809042310, guid: 91195679a7cc96e42ac988507bb11482,
+        type: 3}
+      propertyPath: m_text
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 8486806646020435955, guid: 91195679a7cc96e42ac988507bb11482,
         type: 3}
       propertyPath: m_Name
@@ -2721,6 +2781,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_text
       value: Cibili
+      objectReference: {fileID: 0}
+    - target: {fileID: 8486806645809042310, guid: 91195679a7cc96e42ac988507bb11482,
+        type: 3}
+      propertyPath: m_text
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 8486806646020435955, guid: 91195679a7cc96e42ac988507bb11482,
         type: 3}
@@ -2852,6 +2917,11 @@ PrefabInstance:
       propertyPath: m_text
       value: Con
       objectReference: {fileID: 0}
+    - target: {fileID: 8486806645809042310, guid: 91195679a7cc96e42ac988507bb11482,
+        type: 3}
+      propertyPath: m_text
+      value: 23
+      objectReference: {fileID: 0}
     - target: {fileID: 8486806646020435955, guid: 91195679a7cc96e42ac988507bb11482,
         type: 3}
       propertyPath: m_Name
@@ -2981,6 +3051,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_text
       value: Biah
+      objectReference: {fileID: 0}
+    - target: {fileID: 8486806645809042310, guid: 91195679a7cc96e42ac988507bb11482,
+        type: 3}
+      propertyPath: m_text
+      value: 17
       objectReference: {fileID: 0}
     - target: {fileID: 8486806646020435955, guid: 91195679a7cc96e42ac988507bb11482,
         type: 3}
@@ -3117,6 +3192,11 @@ PrefabInstance:
       propertyPath: m_fontSize
       value: 37.2
       objectReference: {fileID: 0}
+    - target: {fileID: 8486806645809042310, guid: 91195679a7cc96e42ac988507bb11482,
+        type: 3}
+      propertyPath: m_text
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 8486806646020435955, guid: 91195679a7cc96e42ac988507bb11482,
         type: 3}
       propertyPath: m_Name
@@ -3247,6 +3327,11 @@ PrefabInstance:
       propertyPath: m_text
       value: Saksak
       objectReference: {fileID: 0}
+    - target: {fileID: 8486806645809042310, guid: 91195679a7cc96e42ac988507bb11482,
+        type: 3}
+      propertyPath: m_text
+      value: 21
+      objectReference: {fileID: 0}
     - target: {fileID: 8486806646020435955, guid: 91195679a7cc96e42ac988507bb11482,
         type: 3}
       propertyPath: m_Name
@@ -3376,6 +3461,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_text
       value: Augie
+      objectReference: {fileID: 0}
+    - target: {fileID: 8486806645809042310, guid: 91195679a7cc96e42ac988507bb11482,
+        type: 3}
+      propertyPath: m_text
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 8486806646020435955, guid: 91195679a7cc96e42ac988507bb11482,
         type: 3}
@@ -3632,6 +3722,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5739173281725937077}
     m_Modifications:
+    - target: {fileID: 8486806645809042310, guid: 91195679a7cc96e42ac988507bb11482,
+        type: 3}
+      propertyPath: m_text
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 8486806646020435955, guid: 91195679a7cc96e42ac988507bb11482,
         type: 3}
       propertyPath: m_Name
@@ -3762,6 +3857,11 @@ PrefabInstance:
       propertyPath: m_text
       value: Ayca22
       objectReference: {fileID: 0}
+    - target: {fileID: 8486806645809042310, guid: 91195679a7cc96e42ac988507bb11482,
+        type: 3}
+      propertyPath: m_text
+      value: 13
+      objectReference: {fileID: 0}
     - target: {fileID: 8486806646020435955, guid: 91195679a7cc96e42ac988507bb11482,
         type: 3}
       propertyPath: m_Name
@@ -3891,6 +3991,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_text
       value: Cy
+      objectReference: {fileID: 0}
+    - target: {fileID: 8486806645809042310, guid: 91195679a7cc96e42ac988507bb11482,
+        type: 3}
+      propertyPath: m_text
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 8486806646020435955, guid: 91195679a7cc96e42ac988507bb11482,
         type: 3}

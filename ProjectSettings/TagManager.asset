@@ -11,6 +11,7 @@ TagManager:
   - Hole
   - Wall
   - HighScore_Nickname
+  - HighScore_Rank
   layers:
   - Default
   - TransparentFX

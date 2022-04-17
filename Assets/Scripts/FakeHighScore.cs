@@ -45,7 +45,7 @@ public class FakeHighScore : MonoBehaviour
         int i = 0;
         foreach(GameObject nickName in nickNameList)
         {
-
+            
             if(i>= fakeNames.Count)
             {
                 i = 0;
