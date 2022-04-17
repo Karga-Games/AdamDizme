@@ -104,7 +104,6 @@ public class GameSceneManager : MonoBehaviour
                 //HighScore.SetActive(true);
             }
 
-
             //PlaySound("LevelPass");
             //Elephant.LevelCompleted(Account.Level);
             gameOver = true;
@@ -168,15 +167,15 @@ public class GameSceneManager : MonoBehaviour
     {
         //Elephant.LevelStarted(Account.Level);
 
-        if (level > 5)
+        if (level > 6)
         {
-            level = level % 5 + 1;
+            level = level % 6 + 1;
         }
 
         GameObject levelPrefab = Resources.Load<GameObject>("Levels/Level" + level.ToString());
         if (levelPrefab == null)
         {
-            levelPrefab = Resources.Load<GameObject>("Prefabs/Levels/Level5");
+            levelPrefab = Resources.Load<GameObject>("Prefabs/Levels/Level6");
         }
 
         Instantiate(levelPrefab, Vector3.zero, Quaternion.identity);
