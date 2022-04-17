@@ -327,7 +327,10 @@ public class Stickman : MonoBehaviour
         }
         crowd = null;
         transform.SetParent(null);
-        desiredPosition.RemovePosition();
+        if(desiredPosition != null)
+        {
+            desiredPosition.RemovePosition();
+        }
         _rigidbody.useGravity = true;
         _rigidbody.isKinematic = false;
         

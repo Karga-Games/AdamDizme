@@ -46,6 +46,13 @@ public class UIAnimationImage : UIAnimationObject
             }
 
             animationDuration += movementCommand.movementDuration + movementCommand.waitAfterComplete;
+
+            StartCoroutine(GeneralFunctions.executeAfterSec(() => {
+
+                movementCommand.OnComplete.Invoke();
+
+            },animationDuration)); ;
+
         }
         return animationDuration;
     }

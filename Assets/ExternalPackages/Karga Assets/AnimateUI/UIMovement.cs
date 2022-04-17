@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.Events;
 
 [System.Serializable]
 public enum UIMovementGroup
@@ -41,10 +41,12 @@ public class UIMovement
     public Vector3 targetScale;
     public bool scaleChangeEnabled;
 
-    [Header("Movement Timing")]
+    [Header("Timing")]
     public float movementDuration;
     public float waitAfterComplete;
 
+
+    public UnityEvent OnComplete;
 
 }
 

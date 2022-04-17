@@ -36,7 +36,7 @@ public class GameSceneManager : MonoBehaviour
 
 
     public TextMeshProUGUI LevelText;
-    public HighScore _HighScore;
+    public FakeHighScore _HighScore;
 
 
 
@@ -120,8 +120,7 @@ public class GameSceneManager : MonoBehaviour
             {
                 StartCoroutine(GeneralFunctions.executeAfterSec(() => {
 
-
-                    _HighScore.SetupRank(5);
+                    _HighScore.SetupRank(Random.Range(26, 1000));
                     _HighScore.gameObject.SetActive(true);
 
                     LevelEndUI.SetActive(true);
