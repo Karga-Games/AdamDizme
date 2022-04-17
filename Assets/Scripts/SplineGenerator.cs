@@ -11,7 +11,13 @@ public class SplineGenerator : SplineByDrawing
     public float RoadWidth;
     public float YZFactor;
 
+    public bool RepositionToMiddle;
+    public bool RepositionToBottom;
+
     PlayerController playerController;
+
+    public bool inverseX;
+    public bool inverseY;
 
     // Start is called before the first frame update
     public override void Start()
@@ -49,7 +55,9 @@ public class SplineGenerator : SplineByDrawing
     {
         Vector3[] linePoints = pointList;
 
+        
         linePoints = RePositionSplinePoints(linePoints, DrawingArea, CrowdSpline.GetSpline());
+        
 
         SplinePoint[] splinePoints = new SplinePoint[linePoints.Length];
 
@@ -97,25 +105,58 @@ public class SplineGenerator : SplineByDrawing
 
         float pointCount = 0;
 
-        
-        foreach(Vector3 point in points)
+        float offsetY = 0;
+
+        if (RepositionToMiddle)
         {
-            Vector3 screenPointCoord = Camera.main.WorldToScreenPoint(transform.TransformPoint(point));
+            foreach (Vector3 point in points)
+            {
+                Vector3 screenPointCoord = Camera.main.WorldToScreenPoint(transform.TransformPoint(point));
 
-            totalYCoord += screenPointCoord.y;
-            pointCount++;
+                totalYCoord += screenPointCoord.y;
+                pointCount++;
 
+            }
+
+            float avarageYCoord = totalYCoord / pointCount;
+
+            offsetY = DrawingAreaMidY - avarageYCoord;
         }
 
-        float avarageYCoord = totalYCoord / pointCount;
 
-        float offsetY = DrawingAreaMidY - avarageYCoord;
 
+
+        if (RepositionToBottom)
+        {
+            float minY = 9999f;
+            foreach (Vector3 point in points)
+            {
+                Vector3 screenPointCoord = Camera.main.WorldToScreenPoint(transform.TransformPoint(point));
+
+                if(screenPointCoord.y < minY)
+                {
+                    minY = screenPointCoord.y;
+                }
+                
+
+            }
+
+            offsetY = minY - minAreaY;
+        }
+        
         foreach (Vector3 point in points)
         {
 
             Vector3 screenPointCoord = Camera.main.WorldToScreenPoint(transform.TransformPoint(point));
-            
+
+            if (inverseX)
+            {
+                screenPointCoord.x *= -1;
+            }
+            if (inverseY)
+            {
+                screenPointCoord.y *= -1;
+            }
             float PositionOnRange = screenPointCoord.x - minAreaX;
 
             float PercentageOnRange = PositionOnRange / DrawingAreaRange;

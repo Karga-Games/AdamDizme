@@ -8,6 +8,7 @@ using UnityEngine.SceneManagement;
 public class GameSceneManager : MonoBehaviour
 {
     public int targetFPS;
+    public string sceneName;
     public CameraController _camera;
     public PlayerController _player;
     public static GlobalAudioManager _audioManager;
@@ -19,6 +20,7 @@ public class GameSceneManager : MonoBehaviour
     int level;
     [Header("Level Settings")]
     public bool spawnLevel;
+    public string LevelType;
     public static bool gameOver = false;
 
 
@@ -89,7 +91,7 @@ public class GameSceneManager : MonoBehaviour
 
     public void Reload()
     {
-        SceneManager.LoadScene("GameScene_Ball", LoadSceneMode.Single);
+        SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
     }
 
     public void LevelPassed()
@@ -172,10 +174,10 @@ public class GameSceneManager : MonoBehaviour
             level = level % 6 + 1;
         }
 
-        GameObject levelPrefab = Resources.Load<GameObject>("Levels/Level" + level.ToString());
+        GameObject levelPrefab = Resources.Load<GameObject>("Levels"+ LevelType + "/Level" + level.ToString());
         if (levelPrefab == null)
         {
-            levelPrefab = Resources.Load<GameObject>("Prefabs/Levels/Level6");
+            levelPrefab = Resources.Load<GameObject>("Prefabs/Levels" + LevelType + "/Level6");
         }
 
         Instantiate(levelPrefab, Vector3.zero, Quaternion.identity);

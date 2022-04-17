@@ -122,6 +122,8 @@ MonoBehaviour:
   freeZ: 0
   Trail: {fileID: 3827917693055390409}
   Particle: {fileID: 2339348601417663204}
+  FreeScale: {x: 0.7, y: 0.7, z: 0.7}
+  CollectedScale: {x: 0.5, y: 0.5, z: 0.5}
 --- !u!54 &1331001264333666169
 Rigidbody:
   m_ObjectHideFlags: 0

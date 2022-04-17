@@ -197,7 +197,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetFPS: 60
-  targetScene: GameScene_Ball
+  targetScene: GameScene_Ball_SecondMec
 --- !u!4 &906353446
 Transform:
   m_ObjectHideFlags: 0

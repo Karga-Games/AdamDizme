@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using KargaGames.Drawing;
 
+
 public class CrowdController : MonoBehaviour
 {
     public Stickman stickmanPrefab;
@@ -58,20 +59,33 @@ public class CrowdController : MonoBehaviour
     {
         if (setup)
         {
-            if (StickmanList.Count == 0 && !GameSceneManager.gameOver)
+            if (StickmanList.Count == 0 )
             {
-                if (playerController.levelend)
+                
+                if (!GameSceneManager.gameOver)
                 {
-                    playerController.speed = 0;
-                    gameSceneManager.LevelPassed();
-                }
-                else
-                {
-                    Fail();
+                    if (playerController.levelend)
+                    {
+                        playerController.speed = 0;
+                        gameSceneManager.LevelPassed();
+                    }
+                    else
+                    {
+                        Fail();
 
+                    }
                 }
+                
 
             }
+            else
+            {
+                if (StickmanList[0] == null)
+                {
+                    StickmanList.RemoveAt(0);
+                }
+            }
+
 
             lastFixTime += Time.deltaTime;
 
@@ -401,6 +415,17 @@ public class CrowdController : MonoBehaviour
         }
 
         playerController.levelend = true;
+
+        transform.SetParent(playerController.transform);
+        transform.localPosition = Vector3.zero;
+        transform.localRotation = Quaternion.identity;
+
+        /*
+        LeanTween.moveLocal(gameObject, Vector3.zero,0.5f);
+        LeanTween.rotateLocal(gameObject, Vector3.zero, 0.5f);
+        */
+
+
 
     }
 

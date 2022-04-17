@@ -155,7 +155,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1999225350}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &166083090
 BoxCollider:
@@ -638,6 +638,10 @@ MonoBehaviour:
   CrowdSpline: {fileID: 1248329401}
   RoadWidth: 7
   YZFactor: 0.01
+  RepositionToMiddle: 0
+  RepositionToBottom: 0
+  inverseX: 0
+  inverseY: 0
 --- !u!4 &629926656
 Transform:
   m_ObjectHideFlags: 0
@@ -1381,12 +1385,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetFPS: 60
+  sceneName: GameScene_Ball
   _camera: {fileID: 0}
   _player: {fileID: 0}
   LevelEndUI: {fileID: 1367757080}
   LevelFailedUI: {fileID: 1959644874}
   Confetti: {fileID: 1620116211597326, guid: 1805b6a59d8bf1e4fabb266117b0e2cb, type: 3}
   spawnLevel: 1
+  LevelType: 
   LevelEndCameraFollow: {x: 0, y: 10.77, z: -9.88}
   LevelEndCameraLook: {x: 0, y: 5.27, z: 0}
   LevelEndFollowSpeed: 0.3
@@ -1701,14 +1707,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1248329398}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 936272529}
   - {fileID: 1344649251}
   m_Father: {fileID: 1999225350}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1248329400
 MonoBehaviour:
@@ -2617,8 +2623,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1248329399}
   - {fileID: 166083089}
+  - {fileID: 1248329399}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

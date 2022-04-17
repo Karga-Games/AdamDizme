@@ -40,6 +40,9 @@ public class Stickman : MonoBehaviour
     Color ballColor;
     bool glowing;
     float glowingtime;
+
+    public Vector3 FreeScale;
+    public Vector3 CollectedScale;
     // Start is called before the first frame update
 
     private void Awake()
@@ -55,7 +58,7 @@ public class Stickman : MonoBehaviour
 
         alive = true;
 
-        transform.localScale = new Vector3(0.7f,0.7f,0.7f);
+        transform.localScale = FreeScale;
         glowing = false;
     }
     
@@ -253,6 +256,7 @@ public class Stickman : MonoBehaviour
 
     public void Free()
     {
+
         alive = false;
         gameObject.layer = 3;
         freeVelocity = new Vector3(Random.Range(-2f, 2f), 0, 0);
@@ -310,14 +314,16 @@ public class Stickman : MonoBehaviour
     public void Join(CrowdController crowd)
     {
         SetCrowd(crowd);
+
         ChangeMaterial(collectedMaterial);
 
-        transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+        transform.localScale = CollectedScale;
         gameObject.layer = 6;
     }
 
     public void Dead()
     {
+
         LeanTween.cancel(gameObject);
         ChangeMaterial(deadMaterial);
         gameObject.layer = 8;

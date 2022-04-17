@@ -21,6 +21,8 @@ public class LevelFinisher : MonoBehaviour
     CrowdController crowdController;
 
     public bool passed = false;
+
+
     /*
     private void OnValidate()
     {
