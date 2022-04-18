@@ -16,4 +16,23 @@ public class ColumnHeader : MonoBehaviour
             line.transform.SetParent(null);
         }
     }
+
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        Lance lance = collision.gameObject.GetComponent<Lance>();
+        if (lance != null)
+        {
+            lance.ColumnEntered(this);
+        }
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        Lance lance = collision.gameObject.GetComponent<Lance>();
+        if (lance != null)
+        {
+            lance.ColumnExited(this);
+        }
+    }
 }

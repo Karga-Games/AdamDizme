@@ -272,6 +272,8 @@ public class CrowdController : MonoBehaviour
 
         RePositionClosePoints();
 
+        FixListIndexes();
+
         AssignPointsToStickmans();
 
         TweenStickmans();
@@ -441,6 +443,7 @@ public class CrowdController : MonoBehaviour
                     if (StickmanPositions[columnIndex].Count - 1 >= i)
                     {
                         Stickman newStickman = Instantiate(stickmanPrefab, StickmansParent.transform);
+                        newStickman.transform.localPosition = new Vector3(0,0,-5);
                         StickmanList.Add(newStickman);
                         newStickman.Join(this);
 
@@ -568,6 +571,41 @@ public class CrowdController : MonoBehaviour
         Destroy(FindColumnHeader(from).gameObject);
         
     }
+
+
+    public virtual void FixListIndexes()
+    {
+        ColumnHeader[] headers = FindObjectsOfType<ColumnHeader>();
+
+
+        int i = 0;
+        foreach(List<StickmanPosition> positionList in StickmanPositions)
+        {
+
+            foreach (ColumnHeader h in headers)
+            {
+                if (h.columnIndex == positionList[0].ListCoordinate.x)
+                {
+                    h.columnIndex = i;
+                }
+            }
+
+
+            foreach (StickmanPosition position in positionList)
+            {
+
+
+                position.ListCoordinate.x = i;
+            }
+            i++;
+        }
+
+        i = 0;
+
+        
+
+    }
+
 
     public ColumnHeader FindColumnHeader(int index) {
 

@@ -20,8 +20,8 @@ public class Lance : MonoBehaviour
 
     public List<ColumnHeader> columnsToAdd;
 
-    int triggeringCount;
-    bool triggered = false;
+    public int triggeringCount;
+    public bool triggered = false;
 
     private void OnValidate()
     {
@@ -112,24 +112,41 @@ public class Lance : MonoBehaviour
         }
     }
 
+
+
+
+    public void ColumnEntered(ColumnHeader column)
+    {
+        triggered = true;
+        triggeringCount++;
+        if (Mathf.Abs(AdditionValue) > 0 || Mathf.Abs(MultiplyFactor) > 0)
+        {
+            columnsToAdd.Add(column);
+        }
+    }
+    public void ColumnExited(ColumnHeader column)
+    {
+        triggeringCount--;
+    }
+
+    public void StickmanEntered(Stickman stickman)
+    {
+        stickman.Glow();
+    }
+
     public void OnTriggerEnter(Collider other)
     {
         ColumnHeader column = other.GetComponent<ColumnHeader>();
         if(column != null)
         {
-            triggered = true;
-            triggeringCount++;
-            if (Mathf.Abs(AdditionValue) > 0 || Mathf.Abs(MultiplyFactor) > 0)
-            {
-                columnsToAdd.Add(column);
-            }
+            ColumnEntered(column);
 
         }
 
         Stickman stickman = other.GetComponent<Stickman>();
         if(stickman != null && (AdditionValue > 0 || MultiplyFactor > 1))
         {
-            stickman.Glow();
+            StickmanEntered(stickman);
         }
     }
 
@@ -139,7 +156,7 @@ public class Lance : MonoBehaviour
         ColumnHeader column = other.GetComponent<ColumnHeader>();
         if (column != null)
         {
-            triggeringCount--;
+            ColumnExited(column);
             /*
             if (Mathf.Abs(AdditionValue) > 0 || Mathf.Abs(MultiplyFactor) > 0)
             {
@@ -151,4 +168,7 @@ public class Lance : MonoBehaviour
         }
 
     }
+
+
+
 }
