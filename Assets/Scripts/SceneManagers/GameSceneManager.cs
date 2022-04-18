@@ -169,15 +169,15 @@ public class GameSceneManager : MonoBehaviour
     {
         //Elephant.LevelStarted(Account.Level);
 
-        if (level > 6)
+        if (level > 5)
         {
-            level = level % 6 + 1;
+            level = level % 5 + 1;
         }
 
         GameObject levelPrefab = Resources.Load<GameObject>("Levels"+ LevelType + "/Level" + level.ToString());
         if (levelPrefab == null)
         {
-            levelPrefab = Resources.Load<GameObject>("Prefabs/Levels" + LevelType + "/Level6");
+            levelPrefab = Resources.Load<GameObject>("Prefabs/Levels" + LevelType + "/Level5");
         }
 
         Instantiate(levelPrefab, Vector3.zero, Quaternion.identity);
