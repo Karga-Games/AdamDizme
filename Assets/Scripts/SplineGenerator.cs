@@ -9,7 +9,9 @@ public class SplineGenerator : SplineByDrawing
 
     public CrowdController CrowdSpline;
     public float RoadWidth;
-    public float YZFactor;
+    public float RoadHeight;
+
+    public float bugOffset;
 
     public bool RepositionToMiddle;
     public bool RepositionToBottom;
@@ -45,18 +47,18 @@ public class SplineGenerator : SplineByDrawing
         if (linePoints.Length > 2)
         {
 
-            GenerateSplineFromPointList(linePoints);
+            GenerateSplineFromPointList(linePoints, line);
         }
 
 
     }
 
-    public void GenerateSplineFromPointList(Vector3[] pointList)
+    public void GenerateSplineFromPointList(Vector3[] pointList, KargaGames.Drawing.Line line)
     {
         Vector3[] linePoints = pointList;
 
         
-        linePoints = RePositionSplinePoints(linePoints, DrawingArea, CrowdSpline.GetSpline());
+        linePoints = RePositionSplinePoints(linePoints, DrawingArea, CrowdSpline.GetSpline(), line);
         
 
         SplinePoint[] splinePoints = new SplinePoint[linePoints.Length];
@@ -78,7 +80,7 @@ public class SplineGenerator : SplineByDrawing
         }
     }
 
-    public Vector3[] RePositionSplinePoints(Vector3[] points, RectTransform DrawingArea, SplineComputer Road)
+    public Vector3[] RePositionSplinePoints(Vector3[] points, RectTransform DrawingArea, SplineComputer Road, KargaGames.Drawing.Line line)
     {
         Vector3[] corners = new Vector3[4];
 
@@ -95,7 +97,6 @@ public class SplineGenerator : SplineByDrawing
 
         float DrawingAreaRange = maxAreaX - minAreaX;
 
-
         float DrawingAreaYRange = (maxAreaY - minAreaY);
         float DrawingAreaMidY = minAreaY + (DrawingAreaYRange / 2);
 
@@ -107,11 +108,12 @@ public class SplineGenerator : SplineByDrawing
 
         float offsetY = 0;
 
+
         if (RepositionToMiddle)
         {
             foreach (Vector3 point in points)
             {
-                Vector3 screenPointCoord = Camera.main.WorldToScreenPoint(transform.TransformPoint(point));
+                Vector3 screenPointCoord = Camera.main.WorldToScreenPoint(line.transform.TransformPoint(point));
 
                 totalYCoord += screenPointCoord.y;
                 pointCount++;
@@ -131,23 +133,23 @@ public class SplineGenerator : SplineByDrawing
             float minY = 9999f;
             foreach (Vector3 point in points)
             {
-                Vector3 screenPointCoord = Camera.main.WorldToScreenPoint(transform.TransformPoint(point));
+                Vector3 screenPointCoord = Camera.main.WorldToScreenPoint(line.transform.TransformPoint(point));
 
                 if(screenPointCoord.y < minY)
                 {
                     minY = screenPointCoord.y;
                 }
                 
-
             }
 
-            offsetY = minY - minAreaY;
+            offsetY = minAreaY - minY;
         }
+
         
         foreach (Vector3 point in points)
         {
 
-            Vector3 screenPointCoord = Camera.main.WorldToScreenPoint(transform.TransformPoint(point));
+            Vector3 screenPointCoord = Camera.main.WorldToScreenPoint(line.transform.TransformPoint(point));
 
             if (inverseX)
             {
@@ -158,13 +160,16 @@ public class SplineGenerator : SplineByDrawing
                 screenPointCoord.y *= -1;
             }
             float PositionOnRange = screenPointCoord.x - minAreaX;
+            float HeightOnRange = screenPointCoord.y - offsetY - minAreaY;
 
             float PercentageOnRange = PositionOnRange / DrawingAreaRange;
+            float PercentageOnHeight = HeightOnRange / DrawingAreaYRange;
 
             float DesiredPositionOnRoad = (RoadWidth * PercentageOnRange)-(RoadWidth/2f);
+            float DesiredHeightOnRoad = (RoadHeight * PercentageOnHeight) - (RoadHeight / 2f);
 
-            generatedPoints.Add(new Vector3(DesiredPositionOnRoad,0,(screenPointCoord.y + offsetY - DrawingAreaMidY) * YZFactor));
-
+            generatedPoints.Add(new Vector3(DesiredPositionOnRoad,0,(DesiredHeightOnRoad + bugOffset)));
+           
         }
 
 
