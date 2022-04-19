@@ -6,15 +6,18 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Elephant/elephant_scene.unity
+    guid: 47a686e3b898646ae802a7832a649176
+  - enabled: 1
     path: Assets/Scenes/StartScene.unity
     guid: 830771dc8c786a14da431db23cb288df
   - enabled: 1
-    path: Assets/Scenes/GameScene_Stickman.unity
-    guid: e16daa61c3ef7664fafe965be314aa52
-  - enabled: 1
-    path: Assets/Scenes/GameScene_Ball.unity
-    guid: c6b75b24b067d1841804e12397eb622b
-  - enabled: 1
     path: Assets/Scenes/GameScene_Ball_SecondMec.unity
     guid: 0d65d450cca84a64c8b44b0e6c39d393
+  - enabled: 0
+    path: Assets/Scenes/GameScene_Stickman.unity
+    guid: e16daa61c3ef7664fafe965be314aa52
+  - enabled: 0
+    path: Assets/Scenes/GameScene_Ball.unity
+    guid: c6b75b24b067d1841804e12397eb622b
   m_configObjects: {}

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-//using ElephantSDK;
+using ElephantSDK;
 
 public class GameSceneManager : MonoBehaviour
 {
@@ -107,7 +107,7 @@ public class GameSceneManager : MonoBehaviour
             }
 
             //PlaySound("LevelPass");
-            //Elephant.LevelCompleted(Account.Level);
+            Elephant.LevelCompleted(Account.Level);
             gameOver = true;
 
             /*
@@ -140,7 +140,7 @@ public class GameSceneManager : MonoBehaviour
         if (!gameOver)
         {
             //PlaySound("LevelFail");
-            //Elephant.LevelFailed(Account.Level);
+            Elephant.LevelFailed(Account.Level);
             gameOver = true;
 
             /*
@@ -167,7 +167,7 @@ public class GameSceneManager : MonoBehaviour
 
     public void SpawnLevel()
     {
-        //Elephant.LevelStarted(Account.Level);
+        Elephant.LevelStarted(Account.Level);
 
         if (level > 5)
         {
