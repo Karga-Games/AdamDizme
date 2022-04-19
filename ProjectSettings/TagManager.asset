@@ -12,6 +12,10 @@ TagManager:
   - Wall
   - HighScore_Nickname
   - HighScore_Rank
+  - SecondCam
+  - ThirdCam
+  - FourthCam
+  - FifthCam
   layers:
   - Default
   - TransparentFX

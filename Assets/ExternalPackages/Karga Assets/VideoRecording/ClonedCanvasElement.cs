@@ -17,6 +17,7 @@ public class ClonedCanvasElement : MonoBehaviour
     protected TextMeshProUGUI OriginalTMProText;
     protected Slider OriginalSlider;
     protected Mask OriginalMask;
+    protected RectMask2D OriginalRectMask2D;
 
     protected RectTransform CloneRTransform;
     protected Image CloneImage;
@@ -25,6 +26,7 @@ public class ClonedCanvasElement : MonoBehaviour
     protected TextMeshProUGUI CloneTMProText;
     protected Slider CloneSlider;
     protected Mask CloneMask;
+    protected RectMask2D CloneRectMask2D;
     private void Awake()
     {
 
@@ -39,6 +41,7 @@ public class ClonedCanvasElement : MonoBehaviour
         OriginalTMProText = OriginalElement.GetComponent<TextMeshProUGUI>();
         OriginalSlider = OriginalElement.GetComponent<Slider>();
         OriginalMask = OriginalElement.GetComponent<Mask>();
+        OriginalRectMask2D = OriginalElement.GetComponent<RectMask2D>();
     }
 
     public void CopyComponents()
@@ -50,6 +53,7 @@ public class ClonedCanvasElement : MonoBehaviour
 
         CopyRectTransform();
         CopyMask();
+        CopyRectMask();
         CopyImage();
         CopyRawImage();
         CopyText();
@@ -100,6 +104,28 @@ public class ClonedCanvasElement : MonoBehaviour
 
         }
     }
+
+    public void CopyRectMask()
+    {
+        if (OriginalRectMask2D != null)
+        {
+            if (CloneRectMask2D == null)
+            {
+                CloneRectMask2D = GetComponent<RectMask2D>();
+                if (CloneRectMask2D == null)
+                {
+                    CloneRectMask2D = gameObject.AddComponent<RectMask2D>();
+                }
+            }
+
+            CloneRectMask2D.padding = OriginalRectMask2D.padding;
+            CloneRectMask2D.softness = OriginalRectMask2D.softness;
+
+
+
+        }
+    }
+
     public void CopyImage()
     {
         if (OriginalImage != null)

@@ -637,6 +637,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 593066331923553501}
     m_Modifications:
+    - target: {fileID: 656668007988074454, guid: 30931492d049e8946b9945eee53f22f5,
+        type: 3}
+      propertyPath: m_text
+      value: x2
+      objectReference: {fileID: 0}
     - target: {fileID: 2572431814595120603, guid: 30931492d049e8946b9945eee53f22f5,
         type: 3}
       propertyPath: m_Name
@@ -1361,6 +1366,11 @@ PrefabInstance:
         type: 3}
       propertyPath: MultiplyFactor
       value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2157901325800785177, guid: e111893f1032222448481470b6701188,
+        type: 3}
+      propertyPath: LanceHeightForMultiply
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 3208850908911497897, guid: e111893f1032222448481470b6701188,
         type: 3}
