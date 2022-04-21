@@ -348,6 +348,8 @@ public class Stickman : MonoBehaviour
             _deadCollider.enabled = true;
         }
 
+
+
     }
 
     public void ChangeMaterial(Material mat)
@@ -444,22 +446,32 @@ public class Stickman : MonoBehaviour
             {
                 if (stickman.crowd == null && crowd != null && stickman.alive)
                 {
+                    GameSceneManager.PlaySound("ballCollect", true);
                     crowd.AddStickman(stickman);
                 }
+                return;
+            }
+
+            
+
+            Lance lance = collision.gameObject.GetComponent<Lance>();
+            if(lance != null)
+            {
+                lance.StickmanEntered(this);
                 return;
             }
 
             Obstacle obstacle = collision.gameObject.GetComponent<Obstacle>();
             if (obstacle != null && crowd != null)
             {
+                GameSceneManager.PlaySound("tap", true);
                 Dead();
                 return;
             }
 
-            Lance lance = collision.gameObject.GetComponent<Lance>();
-            if(lance != null)
+            if(collision.gameObject.name == "CurvedRoad")
             {
-                lance.StickmanEntered(this);
+                GameSceneManager.PlaySound("tap", true);
             }
         }
 

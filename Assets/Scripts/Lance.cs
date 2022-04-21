@@ -77,6 +77,7 @@ public class Lance : MonoBehaviour
     {
         if(triggered && triggeringCount == 0)
         {
+            GameSceneManager.PlaySound("lanceSound");
 
             triggered = false;
             int added = 0;
