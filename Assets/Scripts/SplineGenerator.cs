@@ -59,10 +59,8 @@ public class SplineGenerator : SplineByDrawing
     {
         Vector3[] linePoints = pointList;
 
-        
         linePoints = RePositionSplinePoints(linePoints, DrawingArea, CrowdSpline.GetSpline(), line);
         
-
         SplinePoint[] splinePoints = new SplinePoint[linePoints.Length];
 
         int i = 0;
@@ -72,7 +70,6 @@ public class SplineGenerator : SplineByDrawing
             splinePoints[i].size = 1f;
             i++;
         }
-
 
         CrowdSpline.UpdateSpline(splinePoints, drawingFinished);
 

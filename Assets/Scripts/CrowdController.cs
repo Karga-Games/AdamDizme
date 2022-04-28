@@ -7,9 +7,11 @@ using KargaGames.Drawing;
 
 public class CrowdController : MonoBehaviour
 {
+    public SplineComputer _indicatorSpline;
     public Stickman stickmanPrefab;
     public StickmanPosition positionPrefab;
     public ColumnHeader ColumnPrefab;
+    public GameObject IndicatorPrefab;
     public float HorizontalDistanceBetweenStickmans;
     public float VerticalDistanceBetweenStickmans;
 
@@ -18,6 +20,7 @@ public class CrowdController : MonoBehaviour
 
     protected SplineComputer _spline;
     protected List<List<StickmanPosition>> StickmanPositions;
+    protected List<List<StickmanPosition>> IndicatorPositions;
     public List<Stickman> StickmanList;
     protected GameSceneManager gameSceneManager;
     protected SplineByDrawing splineDrawer;
@@ -76,7 +79,6 @@ public class CrowdController : MonoBehaviour
                     }
                 }
                 
-
             }
             else
             {
@@ -124,6 +126,7 @@ public class CrowdController : MonoBehaviour
         }
 
         StickmanPositions = new List<List<StickmanPosition>>();
+        IndicatorPositions = new List<List<StickmanPosition>>();
         if(StickmanList == null)
         {
             StickmanList = new List<Stickman>();
@@ -262,7 +265,6 @@ public class CrowdController : MonoBehaviour
         {
             if(stickman != null)
             {
-
                 stickman.TweenToDesiredPosition();
             }
         }
@@ -270,20 +272,18 @@ public class CrowdController : MonoBehaviour
 
     public virtual void RePositionStickmans(bool refreshStickmans = false)
     {
+
         ClearPositions();
 
-        GeneratePositions(refreshStickmans);
+        GeneratePositions();
 
         RePositionClosePoints();
 
         FixListIndexes();
 
-        if (refreshStickmans)
-        {
-            AssignPointsToStickmans();
+        AssignPointsToStickmans();
 
-            TweenStickmans();
-        }
+        TweenStickmans();
 
     }
 
@@ -309,6 +309,135 @@ public class CrowdController : MonoBehaviour
 
         StickmanPositions = new List<List<StickmanPosition>>();
     }
+
+
+    public void ClearIndicator()
+    {
+        foreach (List<StickmanPosition> positionList in IndicatorPositions)
+        {
+            foreach (StickmanPosition position in positionList)
+            {
+                Destroy(position.gameObject);
+            }
+        }
+
+        foreach (ColumnHeader header in FindObjectsOfType<ColumnHeader>())
+        {
+
+            Destroy(header.gameObject);
+
+        }
+
+        StickmanList.RemoveAll(item => item == null);
+
+
+        IndicatorPositions = new List<List<StickmanPosition>>();
+
+    }
+
+    public void GenerateIndicators()
+    {
+        ClearIndicator();
+
+        totalDistance = _indicatorSpline.CalculateLength();
+
+        totalDistance = Mathf.FloorToInt(totalDistance / HorizontalDistanceBetweenStickmans) * HorizontalDistanceBetweenStickmans;
+
+        float currentDistance = 0;
+
+        int range = (int)(totalDistance / HorizontalDistanceBetweenStickmans);
+
+        if (totalDistance >= HorizontalDistanceBetweenStickmans)
+        {
+            for (int i = 0; i < range; i++)
+            {
+
+                StickmanPosition position = Instantiate(positionPrefab, PositionsParent.transform);
+
+
+                float mod = currentDistance % totalDistance;
+
+                if (Mathf.Abs(mod - totalDistance) < 0.01)
+                {
+                    mod = 0;
+                }
+
+                float div = (currentDistance / totalDistance);
+
+                if (Mathf.Abs(Mathf.Round(div) - div) < 0.01)
+                {
+                    div = Mathf.Round(div);
+                }
+
+                float xIndexHolder = (mod / HorizontalDistanceBetweenStickmans);
+
+                int xIndex = 0;
+
+                if (Mathf.Abs(Mathf.Round(xIndexHolder) - xIndexHolder) < 0.01)
+                {
+                    xIndex = Mathf.RoundToInt(xIndexHolder);
+                }
+                else
+                {
+                    xIndex = (int)xIndexHolder;
+                }
+
+                if (IndicatorPositions.Count <= xIndex)
+                {
+                    IndicatorPositions.Add(new List<StickmanPosition>());
+                }
+
+                IndicatorPositions[xIndex].Add(position);
+
+                position.ParentColumn = IndicatorPositions[xIndex];
+
+                int yIndex = (int)div;
+
+                position.Position(mod, new Vector2(0, (yIndex * VerticalDistanceBetweenStickmans)), new Vector2Int(xIndex, yIndex), _indicatorSpline);
+                position.positioner.RebuildImmediate();
+                currentDistance += HorizontalDistanceBetweenStickmans;
+
+            }
+        }
+        else
+        {
+
+            for (int i = 0; i < range; i++)
+            {
+
+                StickmanPosition position = Instantiate(positionPrefab, PositionsParent.transform);
+
+                int xIndex = 0;
+
+                if (IndicatorPositions.Count <= xIndex)
+                {
+                    IndicatorPositions.Add(new List<StickmanPosition>());
+                }
+
+                IndicatorPositions[xIndex].Add(position);
+
+                position.ParentColumn = IndicatorPositions[xIndex];
+
+                position.Position(currentDistance % totalDistance, new Vector2(0, (i * VerticalDistanceBetweenStickmans)), new Vector2Int(0, i), _indicatorSpline);
+                position.positioner.RebuildImmediate();
+            }
+
+        }
+
+
+        foreach (List<StickmanPosition> positionColumn in IndicatorPositions)
+        {
+
+            ColumnHeader column = Instantiate(ColumnPrefab, PositionsParent.transform);
+
+            column.crowd = this;
+            column.columnIndex = positionColumn[0].ListCoordinate.x;
+            column.transform.position = positionColumn[0].transform.position;
+
+        }
+
+    }
+
 
     public virtual void GeneratePositions(bool full = true)
     {
@@ -647,16 +776,40 @@ public class CrowdController : MonoBehaviour
         return _spline;
     }
 
-    public virtual void UpdateSpline(SplinePoint[] points, bool drawingFinished = false)
-    {
-        if (_spline != null)
-        {
-            _spline.SetPoints(points, SplineComputer.Space.Local);
 
-            _spline.RebuildImmediate();
+    public void UpdateIndicator(SplinePoint[] points)
+    {
+        if(_indicatorSpline != null)
+        {
+            _indicatorSpline.SetPoints(points, SplineComputer.Space.Local);
+
+            _indicatorSpline.RebuildImmediate();
         }
 
-        RePositionStickmans(drawingFinished);
+        GenerateIndicators();
+    }
+
+
+    public virtual void UpdateSpline(SplinePoint[] points, bool drawingFinished = false)
+    {
+
+        if (drawingFinished)
+        {
+            if (_spline != null)
+            {
+                _spline.SetPoints(points, SplineComputer.Space.Local);
+
+                _spline.RebuildImmediate();
+            }
+
+            RePositionStickmans(drawingFinished);
+
+        }
+        else
+        {
+            UpdateIndicator(points);
+        }
+
 
     }
 }
