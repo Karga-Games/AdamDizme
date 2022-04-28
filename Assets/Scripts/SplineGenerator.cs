@@ -39,7 +39,7 @@ public class SplineGenerator : SplineByDrawing
         CrowdSpline = controller;
     }
 
-    public override void GenerateSplineFromLine(KargaGames.Drawing.Line line)
+    public override void GenerateSplineFromLine(KargaGames.Drawing.Line line, bool drawingFinished = false)
     {
         Vector3[] linePoints = new Vector3[line.GetLineRenderer().positionCount];
         line.GetLineRenderer().GetPositions(linePoints);
@@ -47,7 +47,7 @@ public class SplineGenerator : SplineByDrawing
         if (linePoints.Length > 2)
         {
 
-            GenerateSplineFromPointList(linePoints, line);
+            GenerateSplineFromPointList(linePoints, line, drawingFinished);
 
 
         }
@@ -55,7 +55,7 @@ public class SplineGenerator : SplineByDrawing
 
     }
 
-    public void GenerateSplineFromPointList(Vector3[] pointList, KargaGames.Drawing.Line line)
+    public void GenerateSplineFromPointList(Vector3[] pointList, KargaGames.Drawing.Line line, bool drawingFinished = false)
     {
         Vector3[] linePoints = pointList;
 
@@ -74,9 +74,9 @@ public class SplineGenerator : SplineByDrawing
         }
 
 
-        CrowdSpline.UpdateSpline(splinePoints);
+        CrowdSpline.UpdateSpline(splinePoints, drawingFinished);
 
-        if (!GameSceneManager.gameOver)
+        if (!GameSceneManager.gameOver && drawingFinished)
         {
             playerController.autoMove = true;
         }

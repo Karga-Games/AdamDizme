@@ -23,19 +23,29 @@ namespace KargaGames.Drawing
             base.Update();
         }
 
+        public override void Draw()
+        {
+            base.Draw();
+            if (currentLine != null)
+            {
+                GenerateSplineFromLine(currentLine, false);
+            }
+
+        }
+
         public override void DrawingFinished()
         {
 
             if(currentLine != null)
             {
-                GenerateSplineFromLine(currentLine);
+                GenerateSplineFromLine(currentLine,true);
             }
 
             DestroyLine();
 
         }
 
-        public virtual void GenerateSplineFromLine(Line line)
+        public virtual void GenerateSplineFromLine(Line line, bool drawingFinished = false)
         {
             Vector3[] linePoints = new Vector3[line.GetLineRenderer().positionCount];
             line.GetLineRenderer().GetPositions(linePoints);

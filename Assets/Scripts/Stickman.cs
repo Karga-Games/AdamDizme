@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using PaintIn3D;
 public class Stickman : MonoBehaviour
 {
     public CrowdController crowd;
@@ -17,6 +17,7 @@ public class Stickman : MonoBehaviour
     SkinnedMeshRenderer _srenderer;
     MeshRenderer _renderer;
     Animator animator;
+    P3dPaintDecal decalComp;
     Vector3 velocity;
     Vector3 lastPosition;
     public BoxCollider _Bcollider;
@@ -55,6 +56,8 @@ public class Stickman : MonoBehaviour
         _renderer = GetComponentInChildren<MeshRenderer>();
 
         _rigidbody = GetComponent<Rigidbody>();
+
+        decalComp = GetComponent<P3dPaintDecal>();
 
         alive = true;
 
@@ -169,6 +172,7 @@ public class Stickman : MonoBehaviour
             {
                 _renderer.material.color = ballColor;
             }
+
         }
         
     }
