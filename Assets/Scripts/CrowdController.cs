@@ -43,10 +43,12 @@ public class CrowdController : MonoBehaviour
 
     public int stickmanCount;
 
+    public CoroutineQueue ActionQueue;
+
     // Start is called before the first frame update
     public virtual void Start()
     {
-
+        ActionQueue = new CoroutineQueue(this);
         gameSceneManager = FindObjectOfType<GameSceneManager>();
         splineDrawer = FindObjectOfType<SplineByDrawing>();
         splineGenerator = FindObjectOfType<SplineGenerator>();
@@ -122,7 +124,7 @@ public class CrowdController : MonoBehaviour
         SplineGenerator _splineGenerator = FindObjectOfType<SplineGenerator>();
         if (_splineGenerator != null)
         {
-            _splineGenerator.SetCrowdController(this);
+            //_splineGenerator.SetCrowd(this);
         }
 
         StickmanPositions = new List<List<StickmanPosition>>();
@@ -148,7 +150,7 @@ public class CrowdController : MonoBehaviour
 
         if (reposition)
         {
-            RePositionStickmans(true);
+            RePositionStickmans();
         }
     }
 
@@ -270,7 +272,7 @@ public class CrowdController : MonoBehaviour
         }
     }
 
-    public virtual void RePositionStickmans(bool refreshStickmans = false)
+    public virtual void RePositionStickmans()
     {
 
         ClearPositions();
@@ -802,7 +804,7 @@ public class CrowdController : MonoBehaviour
                 _spline.RebuildImmediate();
             }
 
-            RePositionStickmans(drawingFinished);
+            RePositionStickmans();
 
         }
         else

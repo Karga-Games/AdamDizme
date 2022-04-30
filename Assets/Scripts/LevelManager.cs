@@ -4,21 +4,22 @@ using UnityEngine;
 
 public class LevelManager : MonoBehaviour
 {
-    public GameObject StickmansToStart;
+    public GameObject BallsToStart;
     // Start is called before the first frame update
     void Start()
     {
-        CrowdController crowdController = FindObjectOfType<CrowdController>();
+        
+        BallCrowd crowd = FindObjectOfType<BallCrowd>();
 
-        crowdController.SetupController();
+        crowd.SetupCrowd();
 
-        foreach(Stickman t in StickmansToStart.GetComponentsInChildren<Stickman>())
+        foreach(Ball t in BallsToStart.GetComponentsInChildren<Ball>())
         {
-            crowdController.AddStickman(t,false);
+            crowd.AddBall(t);
         }
 
-        Destroy(StickmansToStart);
-
+        Destroy(BallsToStart);
+        
     }
 
     // Update is called once per frame
