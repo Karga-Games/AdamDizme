@@ -6,6 +6,7 @@ public class Ball : MonoBehaviour
 {
     public float movementSpeed;
     public Vector3 desiredPosition;
+    public GameObject MeshHolder;
 
     [Header("Collectable Settings")]
     public Vector3 CollectableSize;
@@ -21,6 +22,7 @@ public class Ball : MonoBehaviour
     public Vector3 DeadSize;
     public Material DeadMaterial;
     public int DeadBallLayerIndex;
+    public bool dead;
 
     [Header("Column Data")]
     public CrowdColumn column;
@@ -50,8 +52,12 @@ public class Ball : MonoBehaviour
 
     public void FindRenderer()
     {
-        _srenderer = GetComponentInChildren<SkinnedMeshRenderer>();
-        _renderer = GetComponentInChildren<MeshRenderer>();
+        if (MeshHolder != null)
+        {
+
+        }
+        _srenderer = MeshHolder.GetComponent<SkinnedMeshRenderer>();
+        _renderer = MeshHolder.GetComponent<MeshRenderer>();
     }
 
     public void JoinToCrowd(BallCrowd crowd)
@@ -82,6 +88,8 @@ public class Ball : MonoBehaviour
         ChangeSize(DeadSize);
         ChangeMaterial(DeadMaterial);
         ChangeLayer(DeadBallLayerIndex);
+
+        dead = true;
     }
 
     public void SetColumn(CrowdColumn column, int coordinate)
@@ -228,6 +236,14 @@ public class Ball : MonoBehaviour
 
 
                 break;
+        }
+    }
+
+    private void OnBecameInvisible()
+    {
+        if(dead)
+        {
+            Destroy(gameObject);
         }
     }
 }
