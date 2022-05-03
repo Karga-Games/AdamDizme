@@ -23,6 +23,11 @@ public class CrowdColumn : MonoBehaviour
     }
     
 
+    public void ResetColumn()
+    {
+        balls = new List<Ball>();
+    }
+
     public void SetDistance(float dist)
     {
         if(positioner != null)
@@ -67,5 +72,18 @@ public class CrowdColumn : MonoBehaviour
     public void RemoveBall(Ball ball)
     {
         balls.Remove(ball);
+        crowd.RemoveBall(ball);
+    }
+
+    public void KillLast()
+    {
+        Ball lastBall = balls[balls.Count - 1];
+        lastBall.Dead();
+    }
+
+    public void RemoveLast()
+    {
+        Ball lastBall = balls[balls.Count - 1];
+        RemoveBall(lastBall);
     }
 }

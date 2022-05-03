@@ -20,14 +20,14 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Ball
+  - CollectableBall
   - Water
   - UI
   - CrowdBall
   - Player
   - DeadBall
-  - 
-  - 
+  - Obstacle
+  - Lance
   - 
   - 
   - 

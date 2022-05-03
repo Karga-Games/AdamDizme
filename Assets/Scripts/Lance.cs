@@ -17,11 +17,7 @@ public class Lance : MonoBehaviour
 
     public MeshRenderer planeRenderer;
 
-
-    public List<ColumnHeader> columnsToAdd;
-
-    public int triggeringCount;
-    public bool triggered = false;
+    public List<Ball> InteractedBalls;
 
     private void OnValidate()
     {
@@ -67,109 +63,124 @@ public class Lance : MonoBehaviour
 
     private void Start()
     {
-        columnsToAdd = new List<ColumnHeader>();
-        triggered = false;
-
         SetupText();
+        InteractedBalls = new List<Ball>();
     }
 
     private void Update()
     {
-        if(triggered && triggeringCount == 0)
+
+    }
+
+    public Dictionary<CrowdColumn,int> CalculateInteractions()
+    {
+
+        Dictionary<CrowdColumn, int> interactions = new Dictionary<CrowdColumn, int>();
+
+        foreach (Ball ball in InteractedBalls)
         {
-            GameSceneManager.PlaySound("lanceSound");
-
-            triggered = false;
-            int added = 0;
-
-            int index = 0;
-            while(added < Mathf.Abs(AdditionValue))
+            if (ball.column != null)
             {
-                int count = 1;
-                if (AdditionValue < 0)
+
+                if (!interactions.ContainsKey(ball.column))
                 {
-                    count = -1;
+                    interactions.Add(ball.column, 0);
                 }
 
-                columnsToAdd[index].crowd.AddToColumn(columnsToAdd[index].columnIndex, count);
+                interactions[ball.column]++;
 
-                added++;
+            }
+        }
 
-                index++;
+        return interactions;
 
-                if(index > columnsToAdd.Count - 1)
+    }
+
+    public void AddBalls(BallCrowd crowd)
+    {
+        Dictionary<CrowdColumn, int> interactions = CalculateInteractions();
+
+        List<CrowdColumn> columnList = new List<CrowdColumn>();
+
+        foreach (KeyValuePair<CrowdColumn, int> interaction in interactions)
+        {
+            columnList.Add(interaction.Key);
+        }
+
+        if (AdditionValue > 0)
+        {
+            crowd.AddBallsToColumn(columnList, AdditionValue);
+        }
+        else
+        {
+            crowd.KillBallsFromColumn(columnList, AdditionValue);
+        }
+
+    }
+
+    public void MultiplyBalls(BallCrowd crowd)
+    {
+        Dictionary<CrowdColumn, int> interactions = CalculateInteractions();
+
+        foreach (KeyValuePair<CrowdColumn, int> interaction in interactions)
+        {
+            if(MultiplyFactor > 1)
+            {
+                crowd.AddBallsToColumn(interaction.Key, (int)(interaction.Value * MultiplyFactor),false);
+            }
+            else
+            {
+                crowd.KillBallsFromColumn(interaction.Key, (int)(interaction.Value * MultiplyFactor),false);
+            }
+        }
+
+    }
+
+    public void OnCollisionEnter(Collision other)
+    {
+        switch (other.gameObject.layer)
+        {
+            case 6:
+                //Ball Collider Entered
+
+                Ball ball = other.gameObject.GetComponent<Ball>();
+
+                if (ball != null)
                 {
-                    index = 0;
+                    InteractedBalls.Add(ball);
                 }
-            }
 
-
-            foreach(ColumnHeader column in columnsToAdd)
-            {
-                columnsToAdd[index].crowd.MultiplyColumn(column.columnIndex, MultiplyFactor, LanceHeightForMultiply);
-            }
-
-
+                break;
         }
     }
 
 
-
-
-    public void ColumnEntered(ColumnHeader column)
+    public void OnCollisionExit(Collision other)
     {
-        triggered = true;
-        triggeringCount++;
-        if (Mathf.Abs(AdditionValue) > 0 || Mathf.Abs(MultiplyFactor) > 0)
+
+        switch (other.gameObject.layer)
         {
-            columnsToAdd.Add(column);
+            case 7:
+                //Player Collider Exit
+                Player player = other.gameObject.GetComponent<Player>();
+
+                if(player != null)
+                {
+                    if (MultiplyFactor > 0)
+                    {
+                        MultiplyBalls(player.crowd);
+                    }
+                    else
+                    {
+                        AddBalls(player.crowd);
+                    }
+                }
+
+                break;
         }
+        
     }
-    public void ColumnExited(ColumnHeader column)
-    {
-        triggeringCount--;
-    }
-
-    public void StickmanEntered(Stickman stickman)
-    {
-        stickman.Glow();
-    }
-
-    public void OnTriggerEnter(Collider other)
-    {
-        ColumnHeader column = other.GetComponent<ColumnHeader>();
-        if(column != null)
-        {
-            ColumnEntered(column);
-
-        }
-
-        Stickman stickman = other.GetComponent<Stickman>();
-        if(stickman != null && (AdditionValue > 0 || MultiplyFactor > 1))
-        {
-            StickmanEntered(stickman);
-        }
-    }
-
-
-    public void OnTriggerExit(Collider other)
-    {
-        ColumnHeader column = other.GetComponent<ColumnHeader>();
-        if (column != null)
-        {
-            ColumnExited(column);
-            /*
-            if (Mathf.Abs(AdditionValue) > 0 || Mathf.Abs(MultiplyFactor) > 0)
-            {
-                //columnsToAdd.Add(column);
-            }
-            */
-            
-
-        }
-
-    }
-
-
 
 }
+
+

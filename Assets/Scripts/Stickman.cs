@@ -461,7 +461,7 @@ public class Stickman : MonoBehaviour
             Lance lance = collision.gameObject.GetComponent<Lance>();
             if(lance != null)
             {
-                lance.StickmanEntered(this);
+                //lance.StickmanEntered(this);
                 return;
             }
 

@@ -9,13 +9,15 @@ public class BallCrowd : MonoBehaviour
     public float HorizontalDistanceBetweenBalls;
     public float VerticalDistanceBetweenBalls;
 
+    public Gradient CrowdColorGradient;
+
     public GameObject Columns;
     public CrowdColumn ColumnPrefab;
     protected List<CrowdColumn> ColumnList;
 
     public GameObject Balls;
     public Ball BallPrefab;
-    protected List<Ball> BallList;
+    public List<Ball> BallList;
 
     protected CoroutineQueue ActionQueue;
 
@@ -25,7 +27,9 @@ public class BallCrowd : MonoBehaviour
     void Start()
     {
         SetupCrowd();
+        ActionQueue.StartLoop();
     }
+
 
     public void SetupCrowd()
     {
@@ -49,10 +53,107 @@ public class BallCrowd : MonoBehaviour
         
     }
 
-    public void AddBall(Ball ball)
+    public void AddBallsToColumn(List<CrowdColumn> columns, int ballCount)
+    {
+        int added = 0;
+        for(int i=0; i<columns.Count;)
+        {
+            Ball ball = Instantiate(BallPrefab, transform.position + new Vector3(0, 10f, 0), Quaternion.identity);
+            ball.FindRenderer();
+            AddBall(ball);
+            columns[i].AddBall(ball);
+            added++;
+            i++;
+            if (i >= columns.Count && added < ballCount)
+            {
+                i = 0;
+            }
+        }
+
+    }
+
+    public void AddBallsToColumn(CrowdColumn column, int ballCount, bool coroutine = true)
+    {
+        if (coroutine)
+        {
+            ActionQueue.EnqueueAction(AddBallsToColumnIEnumerator(column,ballCount));
+        }
+        else
+        {
+            for (int i = 0; i < ballCount; i++)
+            {
+                Ball ball = Instantiate(BallPrefab, transform.position + new Vector3(0, 10f, 0), Quaternion.identity);
+                ball.FindRenderer();
+                AddBall(ball);
+                column.AddBall(ball);
+            }
+
+        }
+
+    }
+
+    public void KillBallsFromColumn(List<CrowdColumn> columns, int ballCount)
+    {
+        int killed = 0;
+        for (int i = 0; i < columns.Count;)
+        {
+            columns[i].KillLast();
+            killed++;
+            i++;
+            if (i >= columns.Count && killed < ballCount)
+            {
+                i = 0;
+            }
+        }
+    }
+
+    public void KillBallsFromColumn(CrowdColumn column, int ballCount, bool coroutine = true)
+    {
+        if (coroutine)
+        {
+            ActionQueue.EnqueueAction(KillBallsFromColumnIEnumerator(column,ballCount));
+        }
+        else
+        {
+            if (column.balls.Count >= ballCount)
+            {
+                for (int i = 0; i < ballCount; i++)
+                {
+                    column.KillLast();
+                }
+            }
+        }
+
+        
+    }
+
+    public IEnumerator KillBallsFromColumnIEnumerator(CrowdColumn column, int ballCount)
+    {
+        KillBallsFromColumn(column,ballCount,false);
+        yield return null;
+    }
+    public IEnumerator AddBallsToColumnIEnumerator(CrowdColumn column, int ballCount)
+    {
+
+        AddBallsToColumn(column,ballCount,false);
+        yield return null;
+    }
+
+    public void AddBall(Ball ball, bool realign = false)
     {
         BallList.Add(ball);
-        ball.transform.SetParent(Balls.transform);
+        ball.JoinToCrowd(this);
+        
+        if (realign)
+        {
+            AlignBallsOnColumns();
+        }
+        
+    }
+
+    public void RemoveBall(Ball ball)
+    {
+        BallList.Remove(ball);
     }
 
     public void AttachToSplineGenerator()
@@ -77,8 +178,20 @@ public class BallCrowd : MonoBehaviour
 
     }
 
-    public void AlignBallsOnColumns(List<CrowdColumn> columns)
+    public void AlignBallsOnColumns(List<CrowdColumn> columns=null)
     {
+        bool reAlign = false;
+        if(columns == null)
+        {
+            columns = ColumnList;
+            foreach (CrowdColumn column in columns)
+            {
+                column.ResetColumn();
+            }
+
+            reAlign = true;
+        }
+
         int i = 0;
 
         foreach(Ball ball in BallList)
@@ -93,17 +206,22 @@ public class BallCrowd : MonoBehaviour
             i++;
         }
 
-        if(ColumnList != null)
+        if (!reAlign)
         {
-            foreach (CrowdColumn column in ColumnList)
+            if (ColumnList != null)
             {
-                Destroy(column.gameObject);
+                foreach (CrowdColumn column in ColumnList)
+                {
+                    Destroy(column.gameObject);
+                }
             }
+
+            ColumnList = columns;
         }
 
-        ColumnList = columns;
 
     }
+
 
 
     public List<CrowdColumn> GenerateColumnsOnSpline(SplineComputer _spline)

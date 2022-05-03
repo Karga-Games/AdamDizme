@@ -15,6 +15,7 @@ public class LevelManager : MonoBehaviour
 
         foreach(Ball t in BallsToStart.GetComponentsInChildren<Ball>())
         {
+            t.FindRenderer();
             crowd.AddBall(t);
         }
 

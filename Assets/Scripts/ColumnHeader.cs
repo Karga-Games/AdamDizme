@@ -23,7 +23,7 @@ public class ColumnHeader : MonoBehaviour
         Lance lance = collision.gameObject.GetComponent<Lance>();
         if (lance != null)
         {
-            lance.ColumnEntered(this);
+            //lance.ColumnEntered(this);
         }
     }
 
@@ -32,7 +32,7 @@ public class ColumnHeader : MonoBehaviour
         Lance lance = collision.gameObject.GetComponent<Lance>();
         if (lance != null)
         {
-            lance.ColumnExited(this);
+            //lance.ColumnExited(this);
         }
     }
 }
