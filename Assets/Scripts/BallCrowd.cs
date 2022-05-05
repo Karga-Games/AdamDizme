@@ -11,6 +11,10 @@ public class BallCrowd : MonoBehaviour
 
     public Gradient CrowdColorGradient;
 
+    public GameObject Indicators;
+    public Indicator IndicatorPrefab;
+
+
     public GameObject Columns;
     public CrowdColumn ColumnPrefab;
     protected List<CrowdColumn> ColumnList;
@@ -223,6 +227,82 @@ public class BallCrowd : MonoBehaviour
     }
 
 
+    public void ClearIndicators()
+    {
+
+        foreach(Transform t in Indicators.transform)
+        {
+            t.GetComponent<Indicator>().DestroyIndicator();
+        }
+    }
+
+    public void GenerateIndicator(SplineComputer _spline)
+    {
+        ClearIndicators();
+
+        float splineLength = _spline.CalculateLength();
+
+        splineLength = Mathf.FloorToInt(splineLength / HorizontalDistanceBetweenBalls) * HorizontalDistanceBetweenBalls;
+
+        float currentDistance = 0;
+
+        int ballCount = BallList.Count;
+
+        List<Indicator> generatedIndicators = new List<Indicator>();
+
+        if (splineLength >= HorizontalDistanceBetweenBalls)
+        {
+            for (int i = 0; i < ballCount; i++)
+            {
+
+                if (Mathf.Abs(currentDistance - splineLength) > 0.01 && currentDistance < splineLength)
+                {
+                    Indicator indicator = CreateIndicator(_spline);
+
+                    float distanceOnSpline = currentDistance % splineLength;
+
+                    if (Mathf.Abs(distanceOnSpline - splineLength) < 0.01)
+                    {
+                        distanceOnSpline = 0;
+                    }
+
+                    indicator.SetDistance(distanceOnSpline);
+
+                    generatedIndicators.Add(indicator);
+
+                    currentDistance += HorizontalDistanceBetweenBalls;
+
+                }
+                else
+                {
+                    break;
+                }
+            }
+
+        }
+        else
+        {
+            Indicator indicator = CreateIndicator(_spline);
+
+            indicator.SetDistance(0);
+
+            generatedIndicators.Add(indicator);
+
+        }
+
+        Indicator.MinHitZ = 9999;
+
+
+        foreach (Indicator indicator in generatedIndicators)
+        {
+            indicator.CalculateHitZ();
+        }
+
+        foreach (Indicator indicator in generatedIndicators)
+        {
+            indicator.SpawnIndicator();
+        }
+    }
 
     public List<CrowdColumn> GenerateColumnsOnSpline(SplineComputer _spline)
     {
@@ -288,6 +368,15 @@ public class BallCrowd : MonoBehaviour
 
     }
 
+
+    public Indicator CreateIndicator(SplineComputer spline = null)
+    {
+        Indicator newIndicator = Instantiate(IndicatorPrefab, Indicators.transform);
+        newIndicator.SetupPositioner();
+        newIndicator.SetupSpline(spline);
+        return newIndicator;
+    }
+
     public CrowdColumn CreateColumn()
     {
         CrowdColumn newColumn = Instantiate(ColumnPrefab,Columns.transform);
@@ -305,6 +394,7 @@ public class BallCrowd : MonoBehaviour
 
             crowdSpline.RebuildImmediate();
 
+            GenerateIndicator(crowdSpline);
 
             if (updateCrowd)
             {

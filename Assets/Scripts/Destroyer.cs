@@ -19,7 +19,7 @@ public class Destroyer : MonoBehaviour
     public void OnTriggerEnter(Collider other)
     {
 
-        Stickman stickman = other.GetComponent<Stickman>();
-        stickman.Dead();
+        Ball ball = other.GetComponent<Ball>();
+        ball.Dead();
     }
 }

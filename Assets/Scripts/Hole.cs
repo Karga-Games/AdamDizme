@@ -24,11 +24,11 @@ public class Hole : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
 
-        Stickman stickman = other.GetComponent<Stickman>();
+        Ball ball = other.GetComponent<Ball>();
 
-        if(stickman != null)
+        if(ball != null)
         {
-            stickman.InHole(transform.position-stickman.transform.position);
+            //ball.InHole(transform.position- ball.transform.position);
         }
 
         LeanTween.scale(HoleText,size * 1.5f,0.1f).setEase(LeanTweenType.easeInOutQuad);

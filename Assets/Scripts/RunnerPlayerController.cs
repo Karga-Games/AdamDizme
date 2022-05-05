@@ -5,7 +5,6 @@ using UnityEngine;
 public class RunnerPlayerController : DreamteckRoadPlayerController
 {
     public bool levelend = false;
-    CrowdController crowdController;
     GameSceneManager gameSceneManager;
     // Start is called before the first frame update
     public override void Start()

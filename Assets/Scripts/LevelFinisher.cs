@@ -18,7 +18,7 @@ public class LevelFinisher : MonoBehaviour
     GameObject drawingUI;
 
     CameraController cameraController;
-    CrowdController crowdController;
+    BallCrowd crowdController;
 
     public bool passed = false;
 
@@ -47,7 +47,7 @@ public class LevelFinisher : MonoBehaviour
         drawingUI = GameObject.FindGameObjectWithTag("DrawingArea");
 
         cameraController = FindObjectOfType<CameraController>();
-        crowdController = FindObjectOfType<CrowdController>();
+        crowdController = FindObjectOfType<BallCrowd>();
     }
 
     // Update is called once per frame
@@ -75,7 +75,7 @@ public class LevelFinisher : MonoBehaviour
         
         //splineGenerator.GenerateSplineFromPointList(posList);
 
-        crowdController.Spread();
+        //crowdController.Spread();
 
     }
 

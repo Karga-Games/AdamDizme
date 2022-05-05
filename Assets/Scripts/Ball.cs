@@ -94,15 +94,19 @@ public class Ball : MonoBehaviour
 
     public void SetColumn(CrowdColumn column, int coordinate)
     {
-        this.column = column;
-        columnCoordinate = coordinate;
+        if(column != null)
+        {
+            this.column = column;
+            columnCoordinate = coordinate;
 
-        desiredPosition = column.transform.localPosition;
-        desiredPosition.y = columnCoordinate * column.crowd.VerticalDistanceBetweenBalls;
+            desiredPosition = column.transform.localPosition;
+            desiredPosition.y = columnCoordinate * column.crowd.VerticalDistanceBetweenBalls;
 
-        ChangeColor(FindCrowdColor());
+            ChangeColor(FindCrowdColor());
 
-        TweenToDesiredPosition();
+            TweenToDesiredPosition();
+
+        }
 
     }
 
