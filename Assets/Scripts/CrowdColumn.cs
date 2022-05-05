@@ -10,6 +10,8 @@ public class CrowdColumn : MonoBehaviour
     public int coordinate;
 
     protected SplinePositioner positioner;
+
+    protected static float HitZ;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,7 +23,34 @@ public class CrowdColumn : MonoBehaviour
     {
         
     }
-    
+
+    private void FixedUpdate()
+    {
+        RaycastHit hit;
+
+        int layermask = 1 << 9;
+        // Does the ray intersect any objects excluding the player layer
+        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.up), out hit, Mathf.Infinity, layermask))
+        {
+
+            Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.up) * hit.distance, Color.yellow);
+            Debug.Log("Did hit: " +hit.transform.gameObject.name);
+
+            if(hit.point.z < HitZ)
+            {
+                HitZ = hit.point.z;
+            }
+
+        }
+        else
+        {
+
+            Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.up) * 1000, Color.white);
+            Debug.Log("Did not Hit");
+
+        }
+    }
+
 
     public void ResetColumn()
     {
