@@ -133,7 +133,7 @@ public class Ball : MonoBehaviour
 
     public void LerpToDesiredPosition()
     {
-        transform.localPosition = Vector3.Lerp(transform.localPosition, desiredPosition, Time.deltaTime * movementSpeed);
+        //transform.localPosition = Vector3.Lerp(transform.localPosition, desiredPosition, Time.deltaTime * movementSpeed);
         
     }
 

@@ -126,11 +126,11 @@ public class Lance : MonoBehaviour
         {
             if(MultiplyFactor > 1)
             {
-                crowd.AddBallsToColumn(interaction.Key, (int)(interaction.Value * MultiplyFactor),false);
+                crowd.AddBallsToColumn(interaction.Key, (int)(interaction.Value * MultiplyFactor),true);
             }
             else
             {
-                crowd.KillBallsFromColumn(interaction.Key, (int)(interaction.Value * MultiplyFactor),false);
+                crowd.KillBallsFromColumn(interaction.Key, (int)(interaction.Value * MultiplyFactor),true);
             }
         }
 
