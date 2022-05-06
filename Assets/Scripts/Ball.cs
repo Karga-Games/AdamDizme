@@ -7,7 +7,8 @@ public class Ball : MonoBehaviour
     public float movementSpeed;
     public Vector3 desiredPosition;
     public GameObject MeshHolder;
-
+    public Color LanceGoodColor;
+    public Color LanceBadColor;
     [Header("Collectable Settings")]
     public Vector3 CollectableSize;
     public Material CollectableMaterial;
@@ -27,6 +28,7 @@ public class Ball : MonoBehaviour
     [Header("Column Data")]
     public CrowdColumn column;
     public int columnCoordinate;
+
 
 
     protected SkinnedMeshRenderer _srenderer;
@@ -112,7 +114,7 @@ public class Ball : MonoBehaviour
 
     public void LanceGlow()
     {
-        Color initialColor;
+        Color initialColor = Color.white;
 
         if(_renderer != null)
         {
@@ -125,6 +127,30 @@ public class Ball : MonoBehaviour
         }
 
 
+        LeanTween.value(gameObject, 0, 1, 0.5f).setOnUpdate((float val) => {
+            ChangeColor(Color.Lerp(LanceGoodColor, initialColor, val));
+        });
+
+    }
+
+    public void LanceBadGlow()
+    {
+        Color initialColor = Color.white;
+
+        if (_renderer != null)
+        {
+            initialColor = _renderer.material.color;
+        }
+
+        if (_srenderer != null)
+        {
+            initialColor = _srenderer.material.color;
+        }
+
+
+        LeanTween.value(gameObject, 0, 1, 0.5f).setOnUpdate((float val) => {
+            ChangeColor(Color.Lerp(LanceBadColor, initialColor, val));
+        });
     }
 
     public Color FindCrowdColor()
@@ -217,7 +243,6 @@ public class Ball : MonoBehaviour
     {
         gameObject.layer = layer;
     }
-
 
     private void OnCollisionEnter(Collision collision)
     {

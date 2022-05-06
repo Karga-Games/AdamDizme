@@ -54,6 +54,8 @@ MonoBehaviour:
   movementSpeed: 5
   desiredPosition: {x: 0, y: 0, z: 0}
   MeshHolder: {fileID: 2238861434531714295}
+  LanceGoodColor: {r: 0.4017414, g: 1, b: 0, a: 1}
+  LanceBadColor: {r: 1, g: 0, b: 0, a: 1}
   CollectableSize: {x: 0.7, y: 0.7, z: 0.7}
   CollectableMaterial: {fileID: 2100000, guid: 8503d2e0863af664eac9dc1050862d52, type: 2}
   CollectableBallLayerIndex: 3

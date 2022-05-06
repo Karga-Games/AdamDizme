@@ -70,7 +70,7 @@ public class Indicator : MonoBehaviour
         int layermask = obstacleLayer | indicatorPlaneLayer;
 
 
-        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity, layermask))
+        if (Physics.SphereCast(transform.position, 0.2f ,transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity, layermask))
         {
             Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
             HitPoint = hit.point;
@@ -88,9 +88,9 @@ public class Indicator : MonoBehaviour
 
             }
 
-            if (HitPoint.z < MinHitZ)
+            if (HitPoint.z-0.1f < MinHitZ)
             {
-                MinHitZ = HitPoint.z;
+                MinHitZ = HitPoint.z-0.1f;
             }
 
         }

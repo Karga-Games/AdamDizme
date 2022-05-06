@@ -25,7 +25,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5459765309764176321}
-  m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: -11.455264, y: 11.799097, z: 37.442135}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -93,7 +93,7 @@ GameObject:
   - component: {fileID: 7580629602674887571}
   - component: {fileID: 7580629602674887581}
   - component: {fileID: 7580629602674887570}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Text (TMP) (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -266,7 +266,7 @@ GameObject:
   - component: {fileID: 6993196671319018765}
   - component: {fileID: 8712705599149935331}
   - component: {fileID: 8712705599149935330}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: StarLensPlane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -370,6 +370,4 @@ MonoBehaviour:
   goodMaterial: {fileID: 2100000, guid: 02964ad7da6e7d14b9f727ce171e2587, type: 2}
   badMaterial: {fileID: 2100000, guid: 4a9b7eb8d3e83934bab6420fa7ebfd56, type: 2}
   planeRenderer: {fileID: 6993196671319018765}
-  columnsToAdd: []
-  triggeringCount: 0
-  triggered: 0
+  InteractedBalls: []

@@ -8,8 +8,6 @@ public class Lance : MonoBehaviour
     public int AdditionValue;
     public float MultiplyFactor;
 
-    public int LanceHeightForMultiply;
-
     public TextMeshPro lanceText;
 
     public Material goodMaterial;
@@ -19,6 +17,7 @@ public class Lance : MonoBehaviour
 
     public List<Ball> InteractedBalls;
 
+    bool good;
     private void OnValidate()
     {
         if (isActiveAndEnabled)
@@ -49,11 +48,13 @@ public class Lance : MonoBehaviour
             {
                 prefix = "x";
                 planeRenderer.material = goodMaterial;
+                good = true;
             }
             else
             {
                 prefix = "x";
                 planeRenderer.material = badMaterial;
+                good = false;
             }
             lanceText.text = prefix + MultiplyFactor.ToString();
         }
@@ -147,6 +148,16 @@ public class Lance : MonoBehaviour
 
                 if (ball != null)
                 {
+                    if (good)
+                    {
+
+                        ball.LanceGlow();
+                    }
+                    else
+                    {
+
+                        ball.LanceBadGlow();
+                    }
                     InteractedBalls.Add(ball);
                 }
 

@@ -311,7 +311,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 02964ad7da6e7d14b9f727ce171e2587, type: 2}
+  - {fileID: 2100000, guid: 1623397940d6e784c8e6d99e141b5e49, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -344,7 +344,7 @@ GameObject:
   - component: {fileID: 7768811173487090666}
   - component: {fileID: 7768811173487090667}
   - component: {fileID: 7768811173487090664}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Lance
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -358,7 +358,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7768811173487090669}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.76, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -385,10 +385,10 @@ MonoBehaviour:
   MultiplyFactor: 0
   LanceHeightForMultiply: 6
   lanceText: {fileID: 7768811171567571798}
-  goodMaterial: {fileID: 2100000, guid: 02964ad7da6e7d14b9f727ce171e2587, type: 2}
-  badMaterial: {fileID: 2100000, guid: 4a9b7eb8d3e83934bab6420fa7ebfd56, type: 2}
+  goodMaterial: {fileID: 2100000, guid: 1623397940d6e784c8e6d99e141b5e49, type: 2}
+  badMaterial: {fileID: 2100000, guid: 14dd09926bbc47248affd937b29c59d5, type: 2}
   planeRenderer: {fileID: 7768811173052766386}
-  columnsToAdd: []
+  InteractedBalls: []
 --- !u!65 &7768811173487090664
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -397,7 +397,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7768811173487090669}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 3.5486813, y: 1.9428799, z: 0.20572472}

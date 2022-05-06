@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 193827054379404284}
   - component: {fileID: 193827054379404286}
   - component: {fileID: 193827054379404287}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Text (TMP) (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -184,7 +184,7 @@ GameObject:
   - component: {fileID: 3696517354284899409}
   - component: {fileID: 3025754732352378932}
   - component: {fileID: 3025754732352378935}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: HalfCricleLensPlane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -288,9 +288,7 @@ MonoBehaviour:
   goodMaterial: {fileID: 2100000, guid: 02964ad7da6e7d14b9f727ce171e2587, type: 2}
   badMaterial: {fileID: 2100000, guid: 4a9b7eb8d3e83934bab6420fa7ebfd56, type: 2}
   planeRenderer: {fileID: 3696517354284899409}
-  columnsToAdd: []
-  triggeringCount: 0
-  triggered: 0
+  InteractedBalls: []
 --- !u!1 &6109689193616632361
 GameObject:
   m_ObjectHideFlags: 0
@@ -316,7 +314,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6109689193616632361}
-  m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 0.12813663, y: -0.2409029, z: 27.06}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:

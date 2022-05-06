@@ -406,7 +406,7 @@ GameObject:
   - component: {fileID: 1100942544953268479}
   - component: {fileID: 8116519533443003648}
   - component: {fileID: 5592957824605890430}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cylinder.004
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -515,7 +515,7 @@ GameObject:
   - component: {fileID: 8665496695847732824}
   - component: {fileID: 4900660742597215321}
   - component: {fileID: 4900660742597215326}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cylinder.005
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -619,9 +619,7 @@ MonoBehaviour:
   goodMaterial: {fileID: 2100000, guid: 02964ad7da6e7d14b9f727ce171e2587, type: 2}
   badMaterial: {fileID: 2100000, guid: 4a9b7eb8d3e83934bab6420fa7ebfd56, type: 2}
   planeRenderer: {fileID: 8665496695847732824}
-  columnsToAdd: []
-  triggeringCount: 0
-  triggered: 0
+  InteractedBalls: []
 --- !u!1 &8819527392506530179
 GameObject:
   m_ObjectHideFlags: 0

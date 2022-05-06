@@ -31,7 +31,6 @@ public class BallCrowd : MonoBehaviour
     void Start()
     {
         SetupCrowd();
-        ActionQueue.StartLoop();
     }
 
 
@@ -39,6 +38,7 @@ public class BallCrowd : MonoBehaviour
     {
 
         ActionQueue = new CoroutineQueue(this);
+        ActionQueue.StartLoop();
 
         crowdSpline = GetComponent<SplineComputer>();
 

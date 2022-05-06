@@ -21,6 +21,10 @@ public class SplineGenerator : SplineByDrawing
     public bool inverseX;
     public bool inverseY;
 
+    public float drawingTimeScale;
+    protected float desiredTimeScale;
+    protected float currentTimeScale;
+
     // Start is called before the first frame update
     public override void Start()
     {
@@ -32,6 +36,20 @@ public class SplineGenerator : SplineByDrawing
     public override void Update()
     {
         base.Update();
+        currentTimeScale = Mathf.Lerp(currentTimeScale,desiredTimeScale,Time.unscaledDeltaTime*5f);
+        Time.timeScale = currentTimeScale;  
+    }
+
+    public override void Draw()
+    {
+        base.Draw();
+        desiredTimeScale = drawingTimeScale;
+    }
+
+    public override void DrawingFinished()
+    {
+        base.DrawingFinished();
+        desiredTimeScale = 1;
     }
 
     public void SetCrowd(BallCrowd crowd)
