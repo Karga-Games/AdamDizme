@@ -1,7 +1,5 @@
 {
   "dependencies": {
-    "com.coffee.ui-effect": "https://github.com/mob-sakai/UIEffect.git",
-    "com.coffee.ui-particle": "https://github.com/mob-sakai/ParticleEffectForUGUI.git",
     "com.unity.animation.rigging": "1.0.3",
     "com.unity.collab-proxy": "1.15.12",
     "com.unity.device-simulator": "3.0.2-preview",
